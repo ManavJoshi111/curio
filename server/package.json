@@ -4,6 +4,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
@@ -15,7 +16,6 @@
   "version": "1.0.0",
   "description": "This is a backend of the project <project-name> created by Manav H Joshi for the FSEP(Full Semester External Project)",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "start": "node --env-file=./config/dev.env src/index.js",
     "dev": "nodemon --env-file=./config/dev.env src/index.js",
