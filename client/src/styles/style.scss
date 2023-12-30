@@ -1,0 +1,12 @@
+@import "../../node_modules/bootswatch/dist/lux/bootstrap.min.css";
+
+$border-color: red !default;
+
+// Required
+@import "../../node_modules/bootswatch/dist/lux/variables";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
