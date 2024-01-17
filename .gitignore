@@ -13,7 +13,7 @@ node_modules/
 /client/config/dev.env
 /client/config/test.env
 /server/config/dev.env
-/server/config/test.env
+/server/config/prod.env
 
 # Logs
 *.log
