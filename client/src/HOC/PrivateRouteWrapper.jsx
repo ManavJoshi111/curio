@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Login from "../components/Login";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { getUserData } from "../redux/actions/thunk";
 
-const PrivateRouteWrapper = ({ component: Component, ...rest }) => {
-  const dispatch = useDispatch();
+const PrivateRouteWrapper = ({ component: Component, path, ...rest }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const { user, loading, error } = useSelector((state) => state.user);
+  console.log("state: ", user, loading, error);
   const getUser = () => {
     try {
       dispatch(getUserData());
@@ -24,14 +25,31 @@ const PrivateRouteWrapper = ({ component: Component, ...rest }) => {
     }
   }, []);
 
+  if (loading) {
+    return (
+      <>
+        <h1>Loading...</h1>
+      </>
+    );
+  }
   if (user) {
+    if (path === "/login" || path === "/signup") {
+      return <Navigate to="/" />;
+    }
     return (
       <>
         <Component {...rest} />
       </>
     );
   } else {
-    return <Login />;
+    if (path === "/login" || path === "/signup") {
+      return (
+        <>
+          <Component {...rest} />
+        </>
+      );
+    }
+    return <Navigate to="/login" />;
   }
 };
 

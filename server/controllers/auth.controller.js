@@ -21,7 +21,6 @@ exports.getVerificationOTP = async (req, res) => {
     }
 
     let user = await User.findOne({ email });
-    console.log("found user: ", user);
     if (user) {
       if (!user.verified) {
         const userOtp = generateOTP(6);
@@ -123,7 +122,6 @@ exports.login = async (req, res) => {
         .json({ success: false, error: error.details[0].message });
     }
     const user = await User.findOne({ email });
-    console.log("user: ", user);
     if (!user) {
       return res
         .status(400)

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Loading from "../utils/Loading";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import { SuccessToast, ErrorToast } from "../utils/CustomToast";
 import { post } from "../utils/axios";
 
@@ -14,6 +15,10 @@ const Login = () => {
 
   const navigate = useNavigate();
   const { email, password } = formData;
+  const { user } = useSelector((state) => state.user);
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   const handleLogin = async () => {
     try {
