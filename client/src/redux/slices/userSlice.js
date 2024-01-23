@@ -5,7 +5,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: null,
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {},
@@ -17,7 +17,7 @@ const userSlice = createSlice({
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.user = action.payload.user;
       })
       .addCase(getUserData.rejected, (state, action) => {
         state.loading = false;

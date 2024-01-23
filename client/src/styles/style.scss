@@ -1,10 +1,19 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../../node_modules/bootswatch/dist/lux/bootstrap.min.css";
 
-$border-color: black !default;
+$border-color: #333333;
+$body-color: #333333;
+.form-control:focus {
+  box-shadow: none;
+  background-color: #3333332a;
+}
+.btn:hover {
+  background-color: #222222;
+}
 
 // Required
-@import "../../node_modules/bootswatch/dist/lux/variables";
 @import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootswatch/dist/lux/variables";
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/variables-dark";
 @import "../../node_modules/bootstrap/scss/maps";

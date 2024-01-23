@@ -13,10 +13,12 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    password: "",
   });
 
   const navigate = useNavigate();
-  const { name, email } = formData;
+  const { name, email, password } = formData;
+
   const handleGetOtp = async () => {
     setLoading(true);
     try {
@@ -25,6 +27,7 @@ const Signup = () => {
         {
           name,
           email,
+          password,
         }
       );
       setLoading(false);
@@ -40,6 +43,7 @@ const Signup = () => {
   const handleOtpChange = (e) => {
     setOtp(e.target.value);
   };
+
   const handleSignIn = async () => {
     try {
       setLoading(true);
@@ -48,6 +52,7 @@ const Signup = () => {
         {
           name,
           email,
+          password,
           otp,
         }
       );
@@ -55,6 +60,7 @@ const Signup = () => {
       alert(data.message);
       localStorage.setItem("token", data.token);
       navigate("/");
+      setShowOtp(false);
     } catch (err) {
       alert(err.error);
     }
@@ -82,7 +88,7 @@ const Signup = () => {
         <Col col="4" md="6">
           <>
             <Form.Group className="mb-2 fw-bold">
-              <Form.Label>Name</Form.Label>
+              <Form.Label className="mb-1">Name</Form.Label>
               <Form.Control
                 type="text"
                 className="border border-2"
@@ -93,8 +99,8 @@ const Signup = () => {
                 disabled={showOtp}
               />
             </Form.Group>
-            <Form.Group className=" mb-2 fw-bold">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className="pt-2 mb-2 fw-bold">
+              <Form.Label className="mb-1">Email</Form.Label>
               <Form.Control
                 type="email"
                 className="border border-2"
@@ -105,39 +111,50 @@ const Signup = () => {
                 disabled={showOtp}
               />
             </Form.Group>
-            <p className={(showOtp ? "d-none " : "") + `mb-1`}>
-              Already have an account? &nbsp;
-              <Link to="/login">Login</Link>
-            </p>
-            <Button
-              className={(showOtp ? "d-none " : "") + `mb-4 w-100`}
-              size="md"
-              onClick={handleGetOtp}
-            >
-              {loading ? <Loading /> : "Get verification code"}
-            </Button>
-          </>
-          {showOtp && (
-            <>
-              <Form.Group className=" mb-2 fw-bold">
-                <Form.Label>Enter Code: </Form.Label>
-                <Form.Control
-                  type="number"
-                  className="border border-2"
-                  size="sm"
-                  name="otp"
-                  onChange={handleOtpChange}
-                />
-              </Form.Group>
-              <p className="mb-1">
-                Resend OTP
-                {/* Add logic to resend OTP */}
-              </p>
-              <Button className="mb-4 w-100" size="md" onClick={handleSignIn}>
-                Sign in
+            <Form.Group className="pt-2 mb-2 fw-bold">
+              <Form.Label className="mb-1">Password</Form.Label>
+              <Form.Control
+                type="password"
+                className="border border-2"
+                size="sm"
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            {showOtp && (
+              <>
+                <Form.Group className=" mb-2 fw-bold">
+                  <Form.Label>Enter Code: </Form.Label>
+                  <Form.Control
+                    type="number"
+                    className="border border-2"
+                    size="sm"
+                    name="otp"
+                    onChange={handleOtpChange}
+                  />
+                </Form.Group>
+                <p className="mb-1">
+                  Resend OTP
+                  {/* Add logic to resend OTP */}
+                </p>
+                <Button className="mb-4 w-100" size="md" onClick={handleSignIn}>
+                  Sign in
+                </Button>
+              </>
+            )}
+            {!showOtp && (
+              <Button
+                className={
+                  (showOtp ? "d-none " : "") + `mb-4 w-100 btn btn-primary`
+                }
+                size="md"
+                onClick={handleGetOtp}
+              >
+                {loading ? <Loading /> : "Get verification code"}
               </Button>
-            </>
-          )}
+            )}
+          </>
         </Col>
       </Row>
     </Container>
