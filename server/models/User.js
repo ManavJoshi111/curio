@@ -1,28 +1,72 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    min: [2, "Name should have at least 2 characters!"],
-    max: 255,
-    required: true,
+// const userSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     min: [2, "Name should have at least 2 characters!"],
+//     max: 255,
+//     required: true,
+//   },
+//   email: {
+//     type: String,
+//     required: true,
+//   },
+//   otp: {
+//     type: String,
+//   },
+//   isVerified: {
+//     type: Boolean,
+//     default: false,
+//   },
+// });
+
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      min: [2, "Name should have at least 2 characters!"],
+      max: 255,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    otp: {
+      type: String
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    profilePic: {
+      type: String,
+      default: null
+    },
+    bio: {
+      type: String
+    },
+    topics: [
+      {
+        topicId: mongoose.Types.ObjectId,
+        ref: "topics",
+        topicName: {
+          type: String
+        }
+      }
+    ],
+    role: {
+      type: String,
+      enum: ["user", "moderator", "admin"],
+      default: "user"
+    },
+    isVerified: {
+      type: Boolean,
+      default: false
+    }
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: [true, "Password is required!"],
-  },
-  otp: {
-    type: String,
-  },
-  verified: {
-    type: Boolean,
-    default: false,
-  },
-});
+  { timestamps: true }
+);
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
