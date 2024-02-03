@@ -1,21 +1,51 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import Loading from "../utils/Loading";
+import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { SuccessToast, ErrorToast } from "../utils/CustomToast";
+import { post } from "../utils/axios";
 
 const Login = () => {
-  const [showOtp, setShowOtp] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  // check if the user is logged in or not and set the state accordingly
-  const handleGetOtp = () => {
-    // Add logic to request OTP (e.g., through an API call)
-    setShowOtp(true);
+  const navigate = useNavigate();
+  const { email, password } = formData;
+  const { user } = useSelector((state) => state.user);
+  if (user) {
+    return <Navigate to="/" />;
+  }
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const data = await post(
+        `${import.meta.env.VITE_SERVER_URL}/api/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
+      setLoading(false);
+      alert(data.message);
+      localStorage.setItem("token", data.token);
+      navigate("/");
+    } catch (err) {
+      setLoading(false);
+      alert(err.error);
+    }
   };
 
-  const handleSignIn = () => {
-    // Add logic to handle sign-in
-    console.log("Sign in logic");
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -31,65 +61,32 @@ const Login = () => {
         </Col>
         <Col col="4" md="6">
           <>
-            <Form.Group className="mb-2 fw-bold">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                className="border border-2"
-                size="sm"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                disabled={showOtp}
-              />
-            </Form.Group>
-            <Form.Group className=" mb-2 fw-bold">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className="pt-2 mb-2 fw-bold">
+              <Form.Label className="mb-1">Email</Form.Label>
               <Form.Control
                 type="email"
                 className="border border-2"
                 size="sm"
+                name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={showOtp}
+                onChange={handleInputChange}
               />
             </Form.Group>
-            <p className={(showOtp ? "d-none " : "") + `mb-1`}>
-              Don't have an account?
-              <Link to="/register">Register</Link>
-            </p>
-            <Button
-              className={(showOtp ? "d-none " : "") + `mb-4 w-100`}
-              size="md"
-              onClick={handleGetOtp}
-            >
-              Get OTP
+            <Form.Group className="pt-2 mb-2 fw-bold">
+              <Form.Label className="mb-1">Password</Form.Label>
+              <Form.Control
+                type="password"
+                className="border border-2"
+                size="sm"
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Button className="mb-4 w-100" size="md" onClick={handleLogin}>
+              {loading ? <Loading /> : "Login"}
             </Button>
           </>
-          {showOtp && (
-            <>
-              <p className="mb-3 fw-bold">Enter OTP</p>
-              <Row>
-                {[1, 2, 3, 4, 5, 6].map((digit) => (
-                  <Col key={digit} xs="auto" className="mb-2">
-                    <Form.Control
-                      type="text"
-                      className="text-center border border-2"
-                      maxLength="1"
-                      size="sm"
-                      style={{ width: "2rem" }}
-                    />
-                  </Col>
-                ))}
-              </Row>
-              <p className="mb-1">
-                Resend OTP
-                {/* Add logic to resend OTP */}
-              </p>
-              <Button className="mb-4 w-100" size="md" onClick={handleSignIn}>
-                Sign in
-              </Button>
-            </>
-          )}
         </Col>
       </Row>
     </Container>

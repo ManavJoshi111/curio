@@ -1,0 +1,50 @@
+.card {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none
+}
+
+.jumping-dots-loader {
+    border-radius: 100%;
+}
+
+.jumping-dots-loader span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: white;
+    margin-right: 5px;
+}
+
+.jumping-dots-loader span:nth-child(1) {
+    animation: bounce 1s ease-in-out infinite
+}
+
+.jumping-dots-loader span:nth-child(2) {
+    animation: bounce 1s ease-in-out 0.33s infinite
+}
+
+.jumping-dots-loader span:nth-child(3) {
+    animation: bounce 1s ease-in-out 0.66s infinite
+}
+
+@keyframes bounce {
+
+    0%,
+    75%,
+    100% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0)
+    }
+
+    25% {
+        -webkit-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+        -o-transform: translateY(-10px);
+        transform: translateY(-10px)
+    }
+}

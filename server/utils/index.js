@@ -1,6 +1,5 @@
+const jwt = require("jsonwebtoken");
 const generateOTP = (otp_length) => {
-  // Declare a digits variable
-  // which stores all digits
   var digits = "0123456789";
   let OTP = "";
   for (let i = 0; i < otp_length; i++) {
@@ -9,4 +8,17 @@ const generateOTP = (otp_length) => {
   return OTP;
 };
 
-module.exports = { generateOTP };
+const generateToken = async (_id) => {
+  const token = await jwt.sign({ _id }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+  console.log("generated token: ", token);
+  return token;
+};
+
+const verifyToken = async (token) => {
+  const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+  return decoded;
+};
+
+module.exports = { generateOTP, generateToken, verifyToken };
