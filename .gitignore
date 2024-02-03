@@ -5,6 +5,9 @@ node_modules/
 /frontend/build
 /frontend/dist
 
+# documentation
+/documentation/
+
 # Backend build
 /backend/node_modules/
 /backend/build
