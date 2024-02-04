@@ -1,4 +1,4 @@
-### Project Description
+### Curio - Spark Your Curiosity
 
 Curio is a platform designed to spark curiosity by enabling users to ask questions, share knowledge, and engage in meaningful discussions. It features authentication functionalities, question and answer creation, upvoting, liking, commenting, and a badge system to recognize user participation and expertise.
 
