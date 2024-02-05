@@ -8,7 +8,6 @@ const PrivateRouteWrapper = ({ component: Component, path, ...rest }) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const { user, loading, error } = useSelector((state) => state.user);
-  console.log("state: ", user, loading, error);
   const getUser = () => {
     try {
       dispatch(getUserData());
@@ -32,15 +31,18 @@ const PrivateRouteWrapper = ({ component: Component, path, ...rest }) => {
       </>
     );
   }
+  if (error) {
+    return (
+      <>
+        <h1>Error...</h1>
+      </>
+    );
+  }
   if (user) {
     if (path === "/login" || path === "/signup") {
       return <Navigate to="/" />;
     }
-    return (
-      <>
-        <Component {...rest} />
-      </>
-    );
+    return <Component {...rest} />;
   } else {
     if (path === "/login" || path === "/signup") {
       return (

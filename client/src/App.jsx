@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import Home from "./pages/Home";
+import Login from "./features/auth/Login";
+import Signup from "./features/auth/Signup";
 import PrivateRouteWrapper from "./HOC/PrivateRouteWrapper";
 
 const App = () => {

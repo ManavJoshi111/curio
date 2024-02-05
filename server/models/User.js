@@ -26,44 +26,44 @@ const userSchema = new mongoose.Schema(
       type: String,
       min: [2, "Name should have at least 2 characters!"],
       max: 255,
-      required: true
+      required: true,
     },
     email: {
       type: String,
-      required: true
+      required: true,
     },
     otp: {
-      type: String
+      type: String,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     profilePic: {
       type: String,
-      default: null
+      default: null,
     },
     bio: {
-      type: String
+      type: String,
     },
     topics: [
       {
         topicId: mongoose.Types.ObjectId,
         ref: "topics",
         topicName: {
-          type: String
-        }
-      }
+          type: String,
+        },
+      },
     ],
     role: {
       type: String,
       enum: ["user", "moderator", "admin"],
-      default: "user"
+      default: "user",
     },
     isVerified: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   { timestamps: true }
 );

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Loading from "../utils/Loading";
+import Loading from "../../utils/Loading";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { SuccessToast, ErrorToast } from "../utils/CustomToast";
-import { post } from "../utils/axios";
+import { SuccessToast, ErrorToast } from "../../utils/CustomToast";
+import { post } from "../../utils/axios";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
