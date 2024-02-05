@@ -48,10 +48,14 @@ const userSchema = new mongoose.Schema(
     },
     topics: [
       {
-        topicId: mongoose.Types.ObjectId,
-        ref: "topics",
+        topicId: {
+          type: mongoose.Types.ObjectId,
+          ref: "Topic",
+          required: true,
+        },
         topicName: {
           type: String,
+          required: true,
         },
       },
     ],
