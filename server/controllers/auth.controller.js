@@ -22,7 +22,7 @@ exports.getVerificationOTP = async (req, res) => {
 
     let user = await User.findOne({ email });
     if (user) {
-      if (!user.verified) {
+      if (!user.isVerified) {
         const userOtp = generateOTP(6);
         user.otp = userOtp;
         await user.save();
@@ -97,7 +97,7 @@ exports.verifyOTP = async (req, res) => {
   const userFound = await User.findOne({ email, otp });
   if (userFound) {
     userFound.otp = null;
-    userFound.verified = true;
+    userFound.isVerified = true;
     const token = await generateToken(userFound._id);
     await userFound.save();
     return res
@@ -127,7 +127,7 @@ exports.login = async (req, res) => {
         .status(400)
         .json({ success: false, error: "User doesn't exists!" });
     }
-    if (!user.verified) {
+    if (!user.isVerified) {
       return res
         .status(400)
         .json({ success: false, error: "User is not verified!" });

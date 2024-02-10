@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Loading from "../../utils/Loading";
-import { useSelector } from "react-redux";
+import ButtonLoader from "../../utils/ButtonLoader";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { SuccessToast, ErrorToast } from "../../utils/CustomToast";
 import { post } from "../../utils/axios";
+import { NavLink } from "react-router-dom";
+import { getUserData } from "./actions/userActions";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -14,6 +16,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { email, password } = formData;
   const { user } = useSelector((state) => state.user);
   if (user) {
@@ -33,6 +36,7 @@ const Login = () => {
       setLoading(false);
       alert(data.message);
       localStorage.setItem("token", data.token);
+      dispatch(getUserData());
       navigate("/");
     } catch (err) {
       setLoading(false);
@@ -83,8 +87,12 @@ const Login = () => {
                 onChange={handleInputChange}
               />
             </Form.Group>
+            <p className="text-end m-0 p-1">
+              Dont' Have an Account? &nbsp;
+              <NavLink to="/signup">Create Account</NavLink>
+            </p>
             <Button className="mb-4 w-100" size="md" onClick={handleLogin}>
-              {loading ? <Loading /> : "Login"}
+              {loading ? <ButtonLoader /> : "Login"}
             </Button>
           </>
         </Col>

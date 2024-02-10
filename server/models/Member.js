@@ -5,18 +5,18 @@ const memberSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     spaceId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Space",
-      required: true
+      required: true,
     },
     role: {
       type: String,
       enum: ["admin", "content reviewer", "moderator", "contributor"],
-      required: true
-    }
+      required: true,
+    },
   },
   { timestamps: true }
 );

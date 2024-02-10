@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/loading.css";
+import "../styles/buttonLoader.css";
 
-const Loading = () => {
+const ButtonLoader = () => {
   return (
     <div className="row container d-flex justify-content-center">
       <div className="col-md-4 col-sm-6 grid-margin stretch-card">
@@ -13,4 +13,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default ButtonLoader;
