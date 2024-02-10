@@ -9,6 +9,14 @@ const instance = axios.create({
   },
 });
 
+instance.interceptors.request.use((config) => {
+  config.headers = {
+    ...config.headers,
+    Authorization: "Bearer " + localStorage.getItem("token"),
+  };
+  return config;
+});
+
 export const get = async (url, params = {}) => {
   try {
     const response = await instance.get(url, { params });

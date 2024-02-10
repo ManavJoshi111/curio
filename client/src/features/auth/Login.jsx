@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import ButtonLoader from "../../utils/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,9 +19,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const { email, password } = formData;
   const { user } = useSelector((state) => state.user);
-  if (user) {
-    return <Navigate to="/" />;
-  }
+
+  if (user) return <Navigate to="/" />;
 
   const handleLogin = async () => {
     try {
@@ -34,13 +33,14 @@ const Login = () => {
         }
       );
       setLoading(false);
-      alert(data.message);
+      console.log("Data: ", data);
       localStorage.setItem("token", data.token);
       dispatch(getUserData());
+      SuccessToast(data.message);
       navigate("/");
     } catch (err) {
       setLoading(false);
-      alert(err.error);
+      ErrorToast(err.error);
     }
   };
 

@@ -2,28 +2,37 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import ReactNavbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <ReactNavbar data-bs-theme="dark" expand="lg" className="bg-body-tertiary">
-      <Container>
-        <ReactNavbar.Brand href="#home">React-Bootstrap</ReactNavbar.Brand>
+    <ReactNavbar expand="lg" className="bg-body-tertiary mt-0 pt-2">
+      <Container fluid={true}>
+        <ReactNavbar.Brand as={NavLink}>
+          <img
+            src="/assets/Curio-Logo.png"
+            style={{ height: "3rem", marginTop: "0", paddingTop: "0" }}
+          ></img>
+        </ReactNavbar.Brand>
         <ReactNavbar.Toggle aria-controls="basic-navbar-nav" />
         <ReactNavbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+          <Nav className="d-flex align-items-center w-100">
+            <Nav.Link className="px-3 fs-5" as={NavLink} to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link className="px-3 fs-5" as={NavLink} to="/add-question">
+              Add Question
+            </Nav.Link>
+            <Nav.Link className="px-3 fs-5" as={NavLink} to="/add-question">
+              Add Answer
+            </Nav.Link>
+            <Nav.Link
+              className="px-3 fs-5 ms-auto me-2"
+              as={NavLink}
+              to="/profile"
+            >
+              <i class="far fa-user-circle fw-bold fs-3"></i>
+            </Nav.Link>
           </Nav>
         </ReactNavbar.Collapse>
       </Container>

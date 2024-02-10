@@ -4,6 +4,10 @@
   box-shadow: none;
   background-color: #3333332a; }
 
+.btn:focus {
+  box-shadow: none;
+  outline: none; }
+
 .btn:hover {
   background-color: #222222; }
 

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import Loading from "../../utils/ButtonLoader";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SuccessToast, ErrorToast } from "../../utils/CustomToast";
 import { getUserData } from "./actions/userActions";
 import { post } from "../../utils/axios";
@@ -20,8 +20,10 @@ const Signup = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const { name, email, password } = formData;
 
+  if (user) return <Navigate to="/" />;
   const handleGetOtp = async () => {
     setLoading(true);
     try {
@@ -35,12 +37,10 @@ const Signup = () => {
       );
       setLoading(false);
       setShowOtp(true);
-      alert(data.message);
-      dispatch(getUserData());
-      navigate("/");
+      SuccessToast(data.message);
     } catch (err) {
       setLoading(false);
-      alert(err.error);
+      ErrorToast(err.error);
       console.log("caught: ", err);
     }
   };
@@ -62,12 +62,13 @@ const Signup = () => {
         }
       );
       setLoading(false);
-      alert(data.message);
+      SuccessToast(data.message);
       localStorage.setItem("token", data.token);
+      dispatch(getUserData());
       navigate("/");
       setShowOtp(false);
     } catch (err) {
-      alert(err.error);
+      ErrorToast(err.error);
     }
   };
 
