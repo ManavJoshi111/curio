@@ -11,11 +11,13 @@ const authenticate = async (req, res, next) => {
     if (!token) {
       return res.status(401).json({ error: "Unauthorized" });
     }
-
     const decodedToken = jwt.verify(token, JWT_SECRET);
-    req.user = await User.findById(decodedToken._id);
-    console.log("user: ", req.user);
 
+    const user = await User.findById(decodedToken._id);
+    if (!user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    req.user = user;
     next();
   } catch (err) {
     if (err instanceof jwt.JsonWebTokenError) {

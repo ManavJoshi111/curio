@@ -113,7 +113,6 @@ exports.verifyOTP = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("req.body", req.body);
     const { error, value } = LoginValidator.validate(req.body);
     if (error) {
       console.error("Validation Error: ", error);
@@ -123,9 +122,10 @@ exports.login = async (req, res) => {
     }
     const user = await User.findOne({ email });
     if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, error: "User doesn't exists!" });
+      return res.status(400).json({
+        success: false,
+        error: "Invalid credentials or you don't have any account!",
+      });
     }
     if (!user.isVerified) {
       return res
@@ -136,7 +136,10 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res
         .status(400)
-        .json({ success: false, error: "Invalid credentials!" });
+        .json({
+          success: false,
+          error: "Invalid credentials or you don't have any account!",
+        });
     }
     const token = await generateToken(user._id);
     return res

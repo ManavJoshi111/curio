@@ -3,6 +3,7 @@
 
 $border-color: #333333;
 $body-color: #333333;
+$body-bg-color: #333333;
 
 .form-control:focus {
   box-shadow: none;
@@ -14,6 +15,14 @@ $body-color: #333333;
 }
 .btn:hover {
   background-color: #222222;
+}
+
+#texteditor {
+  font-family: "fira code";
+  background-color: rgba(128, 128, 128, 0.2);
+  padding: 0.3rem;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 // Required

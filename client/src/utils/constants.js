@@ -5,3 +5,9 @@ export const ROLES = {
   MODERATOR: "moderator",
   CONTRIBUTOR: "contributor",
 };
+export const HotKeys = {
+  "mod+b": "bold",
+  "mod+i": "italic",
+  "mod+u": "underline",
+  "mod+`": "code",
+};
