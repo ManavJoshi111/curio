@@ -15,10 +15,9 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
   - [ ] Answer Questions
   - [ ] Request Answers from Other Users
 
-- [ ] Upvote, Like & Comment Module:
+- [ ] Upvote & Comment Module:
 
   - [ ] Upvote Answers
-  - [ ] Like Answers
   - [ ] Comment on Answers
 
 - [ ] Badge System Module:
