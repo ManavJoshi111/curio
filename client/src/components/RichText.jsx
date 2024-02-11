@@ -13,6 +13,7 @@ import isHotkey from "is-hotkey";
 
 const RichText = () => {
   const [editor] = useState(() => withReact(createEditor()));
+  const [question, setQuestion] = useState(null);
   const initialValue = [
     {
       type: "paragraph",
@@ -50,7 +51,6 @@ const RichText = () => {
 
   const Element = ({ attributes, children, element }) => {
     const style = { textAlign: element.align };
-    console.log("Element; ", element.type);
     switch (element.type) {
       case "block-quote":
         return (
@@ -64,13 +64,13 @@ const RichText = () => {
             {children}
           </ul>
         );
-      case "heading-one":
+      case "chevron-up":
         return (
           <h1 style={style} {...attributes}>
             {children}
           </h1>
         );
-      case "heading-two":
+      case "chevron-down":
         return (
           <h2 style={style} {...attributes}>
             {children}
@@ -158,7 +158,19 @@ const RichText = () => {
 
   return (
     <div id="texteditor">
-      <Slate editor={editor} initialValue={initialValue}>
+      <Slate
+        editor={editor}
+        initialValue={initialValue}
+        onChange={(value) => {
+          const isAstChange = editor.operations.some(
+            (op) => "set_selection" !== op.type
+          );
+          if (isAstChange) {
+            const content = JSON.stringify(value);
+            setQuestion(content);
+          }
+        }}
+      >
         <Toolbar
           toggleMark={toggleMark}
           isMarkActive={isMarkActive}
