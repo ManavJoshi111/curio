@@ -18,7 +18,23 @@ $body-bg-color: #333333;
 }
 
 #texteditor {
-  font-family: "fira code";
+  font-family: "Fira Code", monospace;
+  background-color: rgba(128, 128, 128, 0.2);
+  padding: 0.3rem;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+code {
+  font-family: "Fira Code", monospace;
   background-color: rgba(128, 128, 128, 0.2);
   padding: 0.3rem;
   margin-left: 0;

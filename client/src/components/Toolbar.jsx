@@ -1,13 +1,18 @@
 import React from "react";
 import isHotKey from "is-hotkey";
 import { useSlate } from "slate-react";
+import { HOTKEYS } from "../utils/constants";
 
-const Toolbar = () => {
+const Toolbar = ({ toggleMark, isMarkActive }) => {
   const editor = useSlate();
-  const isActive = (btn) => {
-    return false;
-  };
-  const iconClassNames = ["underline", "bold", "italic", "strikethrough"];
+  const iconClassNames = [
+    "underline",
+    "bold",
+    "italic",
+    "strikethrough",
+    "code",
+  ];
+
   const buttonsData = {
     classNames: "btn m-1 p-1 border-0 rounded-0 fw-normal btn-secondary",
     onBtnMouseOver: (e) => {
@@ -29,10 +34,14 @@ const Toolbar = () => {
                 type="button"
                 className={
                   buttonsData.classNames +
-                  (isActive(icon) ? " text-light bg-dark" : "")
+                  (isMarkActive(editor, icon) ? " text-light bg-dark" : "")
                 }
                 onMouseOver={(e) => buttonsData.onBtnMouseOver(e.target)}
                 onMouseOut={(e) => buttonsData.onBtnMouseOut(e.target)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleMark(editor, icon);
+                }}
               >
                 <i className={`fas fa-${icon}`}></i>
               </button>
