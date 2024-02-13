@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    contactNo: {
+      type: String,
+      required: true,
+    },
     otp: {
       type: String,
     },
@@ -42,6 +46,10 @@ const userSchema = new mongoose.Schema(
     profilePic: {
       type: String,
       default: null,
+    },
+    isOnboarded: {
+      type: Boolean,
+      default: false,
     },
     bio: {
       type: String,

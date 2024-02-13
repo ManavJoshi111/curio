@@ -7,7 +7,11 @@ import { NavLink, Outlet } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <ReactNavbar expand="lg" className="bg-body-tertiary mt-0 pt-1">
+      <ReactNavbar
+        expand="lg"
+        className="bg-body-tertiary mt-0 pt-1 pb-1"
+        sticky="top"
+      >
         <Container fluid={true}>
           <ReactNavbar.Brand as={NavLink}>
             <img
