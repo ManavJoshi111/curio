@@ -5,16 +5,16 @@ const notificationSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     activityType: {
       type: String,
-      required: true
+      required: true,
     },
     entityId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true
-    }
+      required: true,
+    },
   },
   { timestamps: true }
 );

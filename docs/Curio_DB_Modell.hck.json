@@ -1,0 +1,2334 @@
+{
+    "modelName": "New Model",
+    "collections": [
+        {
+            "collectionName": "answers",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": true,
+                    "GUID": "d1b3f28e-764d-4143-af17-859084a437e8",
+                    "required": true,
+                    "childRelationships": [
+                        "cb1e4bbf-d3f3-46b3-ad88-480e1026b50e"
+                    ],
+                    "hackoladeMeta": {},
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {}
+                },
+                {
+                    "name": "comments",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "7042968c-ca05-4c38-aef6-21185b0ef2a2",
+                            "arrayItem": true,
+                            "foreignCollection": "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+                            "foreignField": [
+                                "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+                                "41b5eba3-96a4-4cc5-9399-e5f598d53100"
+                            ],
+                            "relationshipType": "Foreign Key",
+                            "parentRelationship": "ae51d27f-0ec5-4d54-b186-40fc24977152",
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "error": {},
+                    "GUID": "6d0dd5a8-48c6-477a-bdab-aa071d927014"
+                },
+                {
+                    "name": "content",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "a609fda7-cdf7-4baa-8cc0-74bf2416d1a7",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "userId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "7903bccb-f4fd-4f4b-8125-4b74ba0a09a4",
+                    "foreignCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "foreignField": [
+                        "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "53e65df8-5c15-4236-bc27-05e897b1ca12",
+                    "error": {}
+                },
+                {
+                    "name": "topicId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "aae77deb-de19-4437-a4de-5624d9383829",
+                    "foreignCollection": "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                    "foreignField": [
+                        "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                        "ac864625-830d-407b-8499-2e79faef06ed"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "13d908d2-46ee-4935-825c-12525f1d9a33",
+                    "error": {}
+                },
+                {
+                    "name": "spaceId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "a76f12b4-aa41-4d9a-838f-9f4b747e69b1",
+                    "foreignCollection": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                    "foreignField": [
+                        "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                        "e0a71955-a024-4734-82a1-7f548a7124cf"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "0bad65fc-4c61-4a75-bc0f-db29cbb84d2f",
+                    "error": {}
+                },
+                {
+                    "name": "upVotes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "GUID": "8e3124af-3d4f-49ba-9c17-412393baf23f",
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "downVotes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "GUID": "8140059a-a70f-4701-84e0-6255fdf71e2b",
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "views",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "GUID": "22d6e7e2-76f9-44ca-b196-efd845cb0f46",
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "timeStamps",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "575afbfc-5a96-44bf-9b45-e38c3484840c",
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "4e1abe93-735f-4e80-a208-cff2a40019dd",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {
+                "validationErrors": {}
+            }
+        },
+        {
+            "collectionName": "comments",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": false,
+                    "GUID": "41b5eba3-96a4-4cc5-9399-e5f598d53100",
+                    "required": true,
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "childRelationships": [
+                        "ae51d27f-0ec5-4d54-b186-40fc24977152"
+                    ],
+                    "hackoladeMeta": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "userId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "c711bfd0-ea3b-43ac-ae38-3e3b314fb722",
+                    "foreignCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "foreignField": [
+                        "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "e0ab4707-f242-4c7b-8120-d2b57ecb1bd2",
+                    "error": {}
+                },
+                {
+                    "name": "answerId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "c7d6a5d6-292a-4094-b90d-9882d9d2f15c",
+                    "foreignCollection": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                    "foreignField": [
+                        "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                        "d1b3f28e-764d-4143-af17-859084a437e8"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "cb1e4bbf-d3f3-46b3-ad88-480e1026b50e",
+                    "error": {}
+                },
+                {
+                    "name": "content",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "0ded50a0-b62f-48bb-acab-4b7100feeb73",
+                    "error": {}
+                },
+                {
+                    "name": "timeStamps",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "76a7e600-b655-416b-a567-76b8e811980d",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "foreignCollection": "",
+                    "foreignField": []
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "5bff92bc-65b3-4009-8f20-f61ce7b0b3d9",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {}
+        },
+        {
+            "collectionName": "followers",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": false,
+                    "GUID": "1c74a804-9e4c-4dfd-8530-d8bc79e84af2",
+                    "required": true,
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "childRelationships": [],
+                    "hackoladeMeta": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "userId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "9bd8c4a9-c5d2-43e7-9436-342765154af4",
+                    "foreignCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "foreignField": [
+                        "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "1d91e73d-c0aa-4750-89d0-ba81540380cb",
+                    "error": {}
+                },
+                {
+                    "name": "entitiyId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "error": {},
+                    "GUID": "693dc270-c30c-40a5-b0a5-4b0afb66fb7f"
+                },
+                {
+                    "name": "entityType",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "a954eedb-9386-461c-81b4-c263842053dd",
+                    "error": {}
+                },
+                {
+                    "name": "timeStamps",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "bdf2b1ca-89fb-4cce-9e6f-1a69df018b0f",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "foreignCollection": "",
+                    "foreignField": []
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "8c15620c-c5b6-4e4d-9cee-9ad51cc2763c",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "2f580349-0bb9-4c07-842e-c96b7ca005e1",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {
+                "validationErrors": {}
+            }
+        },
+        {
+            "collectionName": "members",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": false,
+                    "GUID": "78273735-eaa5-462f-9717-e9446c0875b1",
+                    "required": true,
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "childRelationships": [],
+                    "hackoladeMeta": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "userId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "8b07d6a7-4e5c-42b3-87ae-a96ef7e27d8d",
+                    "foreignCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "foreignField": [
+                        "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "08d9134b-a180-4e00-89ef-604265329b2c",
+                    "error": {}
+                },
+                {
+                    "name": "spaceId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "84c153c2-aa12-4ac3-8f52-c71ddcf712a5",
+                    "foreignCollection": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                    "foreignField": [
+                        "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                        "e0a71955-a024-4734-82a1-7f548a7124cf"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "c59cbfd5-1d8b-4d39-b7c1-96f6dcfa0333",
+                    "error": {}
+                },
+                {
+                    "name": "role",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "error": {},
+                    "GUID": "84228f5d-5d10-4d6b-86ca-66d1dc1b058d"
+                },
+                {
+                    "name": "timeStamps",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "d614216e-2413-4227-a26b-7a772c55aa5b",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "foreignCollection": "",
+                    "foreignField": []
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "86677018-5325-4bea-b0e3-b2e4a046a6e9",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "50a39bc3-abd7-4904-9145-4a1d51ee9be8",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {
+                "validationErrors": {}
+            }
+        },
+        {
+            "collectionName": "notifications",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": false,
+                    "GUID": "84d27e6a-4987-4ac8-93f6-d8b372694e3e",
+                    "required": true,
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "childRelationships": [],
+                    "hackoladeMeta": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "userId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "9b921710-1a34-46a8-b2b1-72822e31c891",
+                    "foreignCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "foreignField": [
+                        "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "c8ca3d9d-ce6f-48e0-a30b-4dfae737fcd4",
+                    "error": {}
+                },
+                {
+                    "name": "activityType",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "error": {},
+                    "GUID": "9d385139-119e-490f-babd-b156c20820b6"
+                },
+                {
+                    "name": "entityId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "error": {},
+                    "GUID": "e83e830a-53ac-44f3-83d8-a49566b8889a"
+                },
+                {
+                    "name": "timeStamps",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "bc056956-3ec1-411a-9da2-801059832854",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "beaec122-f2a8-4722-9e00-5669f0f63f2e",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "170725fc-7f6b-4c1f-8f02-7038cff34e8e",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {}
+        },
+        {
+            "collectionName": "spaces",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": true,
+                    "GUID": "e0a71955-a024-4734-82a1-7f548a7124cf",
+                    "required": true,
+                    "error": {},
+                    "childRelationships": [
+                        "c59cbfd5-1d8b-4d39-b7c1-96f6dcfa0333",
+                        "8b302349-460a-4801-b438-efe3597fed76",
+                        "0bad65fc-4c61-4a75-bc0f-db29cbb84d2f"
+                    ]
+                },
+                {
+                    "code": "",
+                    "name": "name",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "c5fe5668-e611-46ca-973a-4473e42b0fb3",
+                    "required": true,
+                    "sample": "Sample space name",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "description",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "feb95da7-567d-4f67-a3af-80cdad380321",
+                    "required": true,
+                    "sample": "Sample space description",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "totalFollowers",
+                    "isActivated": true,
+                    "type": "numeric",
+                    "primaryKey": false,
+                    "GUID": "10f66bd2-9192-4e2d-9649-6c5ec5f6e87c",
+                    "required": true,
+                    "mode": "integer32",
+                    "sample": 0,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "totalQuestions",
+                    "isActivated": true,
+                    "type": "numeric",
+                    "primaryKey": false,
+                    "GUID": "d71c7413-4b55-4cb9-be76-275e7c6b1f8b",
+                    "required": true,
+                    "mode": "integer32",
+                    "sample": 0,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "members",
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [],
+                    "additionalItems": true,
+                    "primaryKey": false,
+                    "GUID": "94a93c5b-c3d1-49b1-967f-40bbb0148e89",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "rules",
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [],
+                    "additionalItems": true,
+                    "primaryKey": false,
+                    "GUID": "2bb85702-d66b-4f6d-95d0-84c6b21ddcbc",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "createdAt",
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "be0ccbde-1196-4faa-81ed-c404693cd2c5",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "updatedAt",
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "7a370173-b0c4-4268-88c4-96d276fc0d0d",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "__v",
+                    "isActivated": true,
+                    "type": "numeric",
+                    "primaryKey": false,
+                    "GUID": "37453ed4-81ba-4a2f-9d8b-f94fd0507249",
+                    "required": true,
+                    "mode": "integer32",
+                    "sample": 0,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "59eeee94-e362-4b58-afff-b6bb71f65678",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [
+                {
+                    "key": [
+                        {
+                            "keyId": "e0a71955-a024-4734-82a1-7f548a7124cf",
+                            "type": "ascending"
+                        }
+                    ],
+                    "name": "_id_",
+                    "GUID": "5dee12ec-63d9-49cf-b7ae-bd08b39427f2"
+                }
+            ],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {
+                "validationErrors": {}
+            }
+        },
+        {
+            "collectionName": "topics",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": true,
+                    "GUID": "ac864625-830d-407b-8499-2e79faef06ed",
+                    "required": true,
+                    "error": {},
+                    "childRelationships": [
+                        "5491f2b6-776f-4688-be1e-10ff502e0d1b",
+                        "13d908d2-46ee-4935-825c-12525f1d9a33"
+                    ]
+                },
+                {
+                    "code": "",
+                    "name": "name",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "e5ea95a4-afcb-4411-bb49-4800c1fcc126",
+                    "required": true,
+                    "sample": "Sample topic name",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "description",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "b4421eef-d24d-4f86-b971-53c1ceaf5192",
+                    "required": true,
+                    "sample": "Sample topic description",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "createdAt",
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "2097f26d-5834-4be7-8eb3-570a1e221a22",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "updatedAt",
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "8ebf423c-89ea-492c-a10b-ab92e4a439c8",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "__v",
+                    "isActivated": true,
+                    "type": "numeric",
+                    "primaryKey": false,
+                    "GUID": "3c874da4-fc74-4db3-8617-83d963103b1a",
+                    "required": true,
+                    "mode": "integer32",
+                    "sample": 0,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "77fd81d8-5d5f-4c08-8a74-9118bf5906f7",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [
+                {
+                    "key": [
+                        {
+                            "keyId": "ac864625-830d-407b-8499-2e79faef06ed",
+                            "type": "ascending"
+                        }
+                    ],
+                    "name": "_id_",
+                    "GUID": "81e80cd8-e846-4407-8090-21dc0b8f17fe"
+                }
+            ],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {
+                "validationErrors": {}
+            }
+        },
+        {
+            "collectionName": "users",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "error": {},
+                    "primaryKey": true,
+                    "code": "",
+                    "required": true,
+                    "GUID": "83bbec2b-05e4-4a2c-9a80-80017322cdeb",
+                    "childRelationships": [
+                        "1d91e73d-c0aa-4750-89d0-ba81540380cb",
+                        "08d9134b-a180-4e00-89ef-604265329b2c",
+                        "c8ca3d9d-ce6f-48e0-a30b-4dfae737fcd4",
+                        "e0ab4707-f242-4c7b-8120-d2b57ecb1bd2",
+                        "1bc8c481-cf6b-4f95-8acd-4c012ccd3584",
+                        "95a33bae-5f56-432f-830f-5a673bfd825c",
+                        "53e65df8-5c15-4236-bc27-05e897b1ca12"
+                    ]
+                },
+                {
+                    "code": "",
+                    "name": "name",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "f5ec00f3-29eb-4fb7-afb7-0647bd5b823a",
+                    "required": true,
+                    "sample": "Sample user name",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "email",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "f74fcf24-e4a7-4bee-8515-41d6432b096d",
+                    "required": true,
+                    "sample": "user@example.com",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "otp",
+                    "isActivated": true,
+                    "type": "null",
+                    "primaryKey": false,
+                    "GUID": "4ec18418-f543-4c01-89fc-32673057d980",
+                    "sample": null,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "password",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "e5639eb9-60cf-425e-a4a6-9f2ab152840e",
+                    "required": true,
+                    "sample": "password",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "profilePic",
+                    "isActivated": true,
+                    "type": "null",
+                    "primaryKey": false,
+                    "GUID": "e8e7dd70-4e0b-4302-bd3b-b10f85bd3aed",
+                    "sample": null,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "role",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "29460a8a-e4af-47ca-ae8c-35c3afcb7b06",
+                    "required": true,
+                    "sample": "user",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "isVerified",
+                    "isActivated": true,
+                    "type": "boolean",
+                    "primaryKey": false,
+                    "GUID": "c32e0e2d-3ab9-4fbf-9d27-c94970d9f393",
+                    "required": true,
+                    "sample": false,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "topics",
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [],
+                    "additionalItems": true,
+                    "primaryKey": false,
+                    "GUID": "d3bb0f97-c52b-4647-bedc-96a3823d50c0",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "createdAt",
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "9bd4a9ca-898e-4c05-886c-6b25da86475f",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "updatedAt",
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "e829f9b4-2a9e-4f17-b27d-6c6ed4093270",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "__v",
+                    "isActivated": true,
+                    "type": "numeric",
+                    "primaryKey": false,
+                    "GUID": "a2f75ace-6d7a-4435-bca4-a0603b3e7a86",
+                    "required": true,
+                    "mode": "integer32",
+                    "sample": 0,
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "contactNo",
+                    "isActivated": true,
+                    "type": "string",
+                    "primaryKey": false,
+                    "GUID": "06c7c943-5a1b-4ca3-8dbb-99bfbbbebf98",
+                    "required": false,
+                    "sample": "1234567890",
+                    "error": {}
+                },
+                {
+                    "code": "",
+                    "name": "isOnboarded",
+                    "isActivated": true,
+                    "type": "boolean",
+                    "primaryKey": false,
+                    "GUID": "5a3b3397-b39b-4d61-a523-07a667b112ae",
+                    "required": false,
+                    "sample": false,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "35d31ef3-3b42-4392-b32d-66bdcabdc3b9",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [
+                {
+                    "key": [
+                        {
+                            "keyId": "83bbec2b-05e4-4a2c-9a80-80017322cdeb",
+                            "type": "ascending"
+                        }
+                    ],
+                    "name": "_id_",
+                    "GUID": "dfc8bc1a-944e-4d48-92f8-59520263cb1b"
+                }
+            ],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {
+                "validationErrors": {}
+            }
+        },
+        {
+            "collectionName": "votes",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": true,
+                    "GUID": "06b207f9-36fc-436d-b8c9-441cf4650bd6",
+                    "required": true,
+                    "childRelationships": [],
+                    "hackoladeMeta": {},
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {}
+                },
+                {
+                    "name": "userId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "e9817f3b-b373-4229-a7b4-53be2bdb4d1d",
+                    "foreignCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "foreignField": [
+                        "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "95a33bae-5f56-432f-830f-5a673bfd825c",
+                    "error": {}
+                },
+                {
+                    "name": "entityId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "error": {},
+                    "GUID": "606600d6-60f6-45cf-a902-1d17b5a3c87d"
+                },
+                {
+                    "name": "voteType",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "error": {},
+                    "GUID": "0d11d3d1-5d09-4060-b6a3-2cc92c038db9"
+                },
+                {
+                    "name": "timeStamps",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "a808a6ee-eb02-4c2e-84f3-da7794a37a39",
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "GUID": "d9d7be14-f7ce-4ca2-b308-4723ba4c0475",
+                "properties": []
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "7bf7e4b3-1b69-41ac-96ac-43c8dca95ab5",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "code": "",
+            "hackoladeMeta": {
+                "validationErrors": {}
+            }
+        },
+        {
+            "collectionName": "questions",
+            "type": "object",
+            "properties": [
+                {
+                    "code": "",
+                    "name": "_id",
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": false,
+                    "GUID": "ba3b3840-61ea-4677-a099-066785fb5754",
+                    "required": true,
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "childRelationships": [],
+                    "hackoladeMeta": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "content",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "7f3bf7f9-17bb-49ce-bd37-75375d5d4064",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "userId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "b6bdc713-258d-4673-83f3-5eb285d06c82",
+                    "foreignCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "foreignField": [
+                        "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "1bc8c481-cf6b-4f95-8acd-4c012ccd3584",
+                    "error": {}
+                },
+                {
+                    "name": "topicId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "52cad485-3feb-4441-ab55-c55a950c7b95",
+                    "foreignCollection": "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                    "foreignField": [
+                        "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                        "ac864625-830d-407b-8499-2e79faef06ed"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "5491f2b6-776f-4688-be1e-10ff502e0d1b",
+                    "error": {}
+                },
+                {
+                    "name": "spaceId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "a4e9e307-c06d-4c95-97c8-c6e114351429",
+                    "foreignCollection": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                    "foreignField": [
+                        "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                        "e0a71955-a024-4734-82a1-7f548a7124cf"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "8b302349-460a-4801-b438-efe3597fed76",
+                    "error": {}
+                },
+                {
+                    "name": "upVotes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "GUID": "694ce39c-616f-42bb-b90d-685ba2212d43",
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "downVotes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "GUID": "9b0d85a2-17d9-4951-94a3-66e362d78e94",
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "views",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    },
+                    "GUID": "8bef17a7-f142-4a5c-92a5-b155fd56bc51",
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "timeStamps",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "a8fd8a2b-6956-49d1-aa0f-9f19ac38df31",
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "d7e4218b-cfca-45af-b519-645917e69b8b"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "28f90b8c-5c61-4794-903c-6024e1009def",
+            "bucketId": "a5021937-b0c0-427a-9e3c-ab27186e68d0"
+        }
+    ],
+    "buckets": [
+        {
+            "name": "curio",
+            "type": "bucket",
+            "collectionIds": [
+                "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+                "2f580349-0bb9-4c07-842e-c96b7ca005e1",
+                "50a39bc3-abd7-4904-9145-4a1d51ee9be8",
+                "170725fc-7f6b-4c1f-8f02-7038cff34e8e",
+                "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                "7bf7e4b3-1b69-41ac-96ac-43c8dca95ab5",
+                "28f90b8c-5c61-4794-903c-6024e1009def"
+            ],
+            "backgroundColor": {
+                "r": 216,
+                "g": 0,
+                "b": 115,
+                "a": 1
+            },
+            "show": true,
+            "isActivated": true,
+            "GUID": "a5021937-b0c0-427a-9e3c-ab27186e68d0",
+            "hackoladeMeta": {},
+            "code": ""
+        }
+    ],
+    "views": [],
+    "relationships": [
+        {
+            "name": "New Relationship",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "bee9c83c-833b-44f7-840c-aa405bb721c1"
+        },
+        {
+            "name": "New Relationship(1)",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "4aff750e-c15d-4872-bba5-cb11a59b8070"
+        },
+        {
+            "name": "New Relationship(2)",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "26e5d491-62a2-429a-9e60-5a0a247f24b0"
+        },
+        {
+            "name": "fk followers.userId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "2f580349-0bb9-4c07-842e-c96b7ca005e1",
+                    "9bd8c4a9-c5d2-43e7-9436-342765154af4"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "1d91e73d-c0aa-4750-89d0-ba81540380cb",
+            "parentCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "childCollection": "2f580349-0bb9-4c07-842e-c96b7ca005e1",
+            "hackoladeStyles": {
+                "GUID": "d0ef5899-c1cf-4d4f-ba9b-f99bf79c444e",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 2244.3999999999996,
+                        "y": 1270.233337402344
+                    },
+                    {
+                        "x": 1922.2999999999995,
+                        "y": 1270.233337402344
+                    },
+                    {
+                        "x": 1922.2999999999995,
+                        "y": 1261.233337402344
+                    },
+                    {
+                        "x": 1600.1999999999994,
+                        "y": 1261.233337402344
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk members.userId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "50a39bc3-abd7-4904-9145-4a1d51ee9be8",
+                    "8b07d6a7-4e5c-42b3-87ae-a96ef7e27d8d"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "08d9134b-a180-4e00-89ef-604265329b2c",
+            "parentCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "childCollection": "50a39bc3-abd7-4904-9145-4a1d51ee9be8",
+            "hackoladeStyles": {
+                "GUID": "ef816806-ab0d-48d6-9143-dd174b4add3e",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 2232.1999999999985,
+                        "y": 1714.7333374023422
+                    },
+                    {
+                        "x": 1916.199999999999,
+                        "y": 1714.7333374023422
+                    },
+                    {
+                        "x": 1916.199999999999,
+                        "y": 1451.233337402344
+                    },
+                    {
+                        "x": 1600.1999999999994,
+                        "y": 1451.233337402344
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk members.spaceId to spaces._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                    "e0a71955-a024-4734-82a1-7f548a7124cf"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "50a39bc3-abd7-4904-9145-4a1d51ee9be8",
+                    "84c153c2-aa12-4ac3-8f52-c71ddcf712a5"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "c59cbfd5-1d8b-4d39-b7c1-96f6dcfa0333",
+            "parentCollection": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+            "childCollection": "50a39bc3-abd7-4904-9145-4a1d51ee9be8",
+            "hackoladeStyles": {
+                "GUID": "39ad297f-4a2d-4964-91d9-85c3c4bf07b7",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 2343.1999999999985,
+                        "y": 1654.7333374023422
+                    },
+                    {
+                        "x": 2343.1999999999985,
+                        "y": 1615.5333353678375
+                    },
+                    {
+                        "x": 2342.366666666665,
+                        "y": 1615.5333353678375
+                    },
+                    {
+                        "x": 2342.366666666665,
+                        "y": 1576.3333333333328
+                    }
+                ],
+                "sides": [
+                    "top",
+                    "bottom"
+                ]
+            }
+        },
+        {
+            "name": "fk notifications.userId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "170725fc-7f6b-4c1f-8f02-7038cff34e8e",
+                    "9b921710-1a34-46a8-b2b1-72822e31c891"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "c8ca3d9d-ce6f-48e0-a30b-4dfae737fcd4",
+            "parentCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "childCollection": "170725fc-7f6b-4c1f-8f02-7038cff34e8e",
+            "hackoladeStyles": {
+                "GUID": "55be3529-aadd-42df-a0d5-98287c8511a8",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1587.9999999999986,
+                        "y": 1578.633337402344
+                    },
+                    {
+                        "x": 1625.1999999999994,
+                        "y": 1578.633337402344
+                    },
+                    {
+                        "x": 1625.1999999999994,
+                        "y": 1403.733337402344
+                    },
+                    {
+                        "x": 1600.1999999999994,
+                        "y": 1403.733337402344
+                    }
+                ],
+                "sides": [
+                    "right",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk comments.userId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+                    "c711bfd0-ea3b-43ac-ae38-3e3b314fb722"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "e0ab4707-f242-4c7b-8120-d2b57ecb1bd2",
+            "parentCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "childCollection": "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+            "hackoladeStyles": {
+                "GUID": "6526dc29-1aa9-4b2e-a7e9-3572c33a61dc",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1477.1999999999994,
+                        "y": 1664.733337402344
+                    },
+                    {
+                        "x": 1477.1999999999994,
+                        "y": 1581.733337402344
+                    },
+                    {
+                        "x": 1425.5333333333326,
+                        "y": 1581.733337402344
+                    },
+                    {
+                        "x": 1425.5333333333326,
+                        "y": 1498.733337402344
+                    }
+                ],
+                "sides": [
+                    "top",
+                    "bottom"
+                ]
+            }
+        },
+        {
+            "name": "fk comments.answerId to answers._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                    "d1b3f28e-764d-4143-af17-859084a437e8"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+                    "c7d6a5d6-292a-4094-b90d-9882d9d2f15c"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "cb1e4bbf-d3f3-46b3-ad88-480e1026b50e",
+            "parentCollection": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+            "childCollection": "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+            "hackoladeStyles": {
+                "GUID": "dfce6eb8-4ef6-42de-b986-1a4e009b463d",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1586.1999999999994,
+                        "y": 1746.733337402344
+                    },
+                    {
+                        "x": 1695.5333333333324,
+                        "y": 1746.733337402344
+                    },
+                    {
+                        "x": 1695.5333333333324,
+                        "y": 1617.6500040690114
+                    },
+                    {
+                        "x": 1804.8666666666657,
+                        "y": 1617.6500040690114
+                    }
+                ],
+                "sides": [
+                    "right",
+                    "left"
+                ]
+            }
+        },
+        {
+            "name": "fk answers.comments.[0] to comments._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+                    "41b5eba3-96a4-4cc5-9399-e5f598d53100"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                    "6d0dd5a8-48c6-477a-bdab-aa071d927014",
+                    "7042968c-ca05-4c38-aef6-21185b0ef2a2"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "ae51d27f-0ec5-4d54-b186-40fc24977152",
+            "parentCollection": "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+            "childCollection": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+            "hackoladeStyles": {
+                "GUID": "8435ad6c-063f-490e-a7db-ad7b3d16b4f1",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1804.8666666666657,
+                        "y": 1559.9000040690114
+                    },
+                    {
+                        "x": 1695.5333333333324,
+                        "y": 1559.9000040690114
+                    },
+                    {
+                        "x": 1695.5333333333324,
+                        "y": 1705.733337402344
+                    },
+                    {
+                        "x": 1586.1999999999994,
+                        "y": 1705.733337402344
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk questions.userId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "28f90b8c-5c61-4794-903c-6024e1009def",
+                    "b6bdc713-258d-4673-83f3-5eb285d06c82"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "1bc8c481-cf6b-4f95-8acd-4c012ccd3584",
+            "parentCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "childCollection": "28f90b8c-5c61-4794-903c-6024e1009def",
+            "hackoladeStyles": {
+                "GUID": "c3d260b1-42b7-4c05-a818-dbd37c059b26",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1805.8000325520834,
+                        "y": 1310.0333374023453
+                    },
+                    {
+                        "x": 1703.0000162760414,
+                        "y": 1310.0333374023453
+                    },
+                    {
+                        "x": 1703.0000162760414,
+                        "y": 1308.733337402344
+                    },
+                    {
+                        "x": 1600.1999999999994,
+                        "y": 1308.733337402344
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk questions.topicId to topics._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                    "ac864625-830d-407b-8499-2e79faef06ed"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "28f90b8c-5c61-4794-903c-6024e1009def",
+                    "52cad485-3feb-4441-ab55-c55a950c7b95"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "5491f2b6-776f-4688-be1e-10ff502e0d1b",
+            "parentCollection": "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+            "childCollection": "28f90b8c-5c61-4794-903c-6024e1009def",
+            "hackoladeStyles": {
+                "GUID": "8234acb0-73ad-4dfe-8f26-32635c0a7cdf",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1914.8000325520834,
+                        "y": 1407.5333374023453
+                    },
+                    {
+                        "x": 1914.8000325520834,
+                        "y": 1630.1000020345055
+                    },
+                    {
+                        "x": 1991.3999999999992,
+                        "y": 1630.1000020345055
+                    },
+                    {
+                        "x": 1991.3999999999992,
+                        "y": 1852.6666666666654
+                    }
+                ],
+                "sides": [
+                    "bottom",
+                    "top"
+                ]
+            }
+        },
+        {
+            "name": "fk questions.spaceId to spaces._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                    "e0a71955-a024-4734-82a1-7f548a7124cf"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "28f90b8c-5c61-4794-903c-6024e1009def",
+                    "a4e9e307-c06d-4c95-97c8-c6e114351429"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "8b302349-460a-4801-b438-efe3597fed76",
+            "parentCollection": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+            "childCollection": "28f90b8c-5c61-4794-903c-6024e1009def",
+            "hackoladeStyles": {
+                "GUID": "37bc67de-512b-48da-b8b1-dbf6a250ea48",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 2023.8000325520834,
+                        "y": 1310.0333374023453
+                    },
+                    {
+                        "x": 2115.333349609374,
+                        "y": 1310.0333374023453
+                    },
+                    {
+                        "x": 2115.333349609374,
+                        "y": 1436.9999999999995
+                    },
+                    {
+                        "x": 2206.866666666665,
+                        "y": 1436.9999999999995
+                    }
+                ],
+                "sides": [
+                    "right",
+                    "left"
+                ]
+            }
+        },
+        {
+            "name": "fk votes.userId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "7bf7e4b3-1b69-41ac-96ac-43c8dca95ab5",
+                    "e9817f3b-b373-4229-a7b4-53be2bdb4d1d"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "95a33bae-5f56-432f-830f-5a673bfd825c",
+            "parentCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "childCollection": "7bf7e4b3-1b69-41ac-96ac-43c8dca95ab5",
+            "hackoladeStyles": {
+                "GUID": "9de16e17-5848-4b3f-bb3d-0c7a29c88a34",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1677.1999999999996,
+                        "y": 1959.3333333333335
+                    },
+                    {
+                        "x": 1677.1999999999996,
+                        "y": 1729.0333353678388
+                    },
+                    {
+                        "x": 1512.866666666666,
+                        "y": 1729.0333353678388
+                    },
+                    {
+                        "x": 1512.866666666666,
+                        "y": 1498.733337402344
+                    }
+                ],
+                "sides": [
+                    "top",
+                    "bottom"
+                ]
+            }
+        },
+        {
+            "name": "fk answers.userId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                    "83bbec2b-05e4-4a2c-9a80-80017322cdeb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                    "7903bccb-f4fd-4f4b-8125-4b74ba0a09a4"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "53e65df8-5c15-4236-bc27-05e897b1ca12",
+            "parentCollection": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+            "childCollection": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+            "hackoladeStyles": {
+                "GUID": "2ef83f46-9f8c-4b9d-b95a-c29a44575161",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1804.8666666666657,
+                        "y": 1559.9000040690114
+                    },
+                    {
+                        "x": 1702.5333333333324,
+                        "y": 1559.9000040690114
+                    },
+                    {
+                        "x": 1702.5333333333324,
+                        "y": 1356.233337402344
+                    },
+                    {
+                        "x": 1600.1999999999994,
+                        "y": 1356.233337402344
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk answers.topicId to topics._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                    "ac864625-830d-407b-8499-2e79faef06ed"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                    "aae77deb-de19-4437-a4de-5624d9383829"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "13d908d2-46ee-4935-825c-12525f1d9a33",
+            "parentCollection": "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+            "childCollection": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+            "hackoladeStyles": {
+                "GUID": "d7d2c5df-67fd-408e-ad5e-0128cfd7f429",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1914.3666666666657,
+                        "y": 1675.4000040690114
+                    },
+                    {
+                        "x": 1914.3666666666657,
+                        "y": 1764.0333353678384
+                    },
+                    {
+                        "x": 1907.7333333333327,
+                        "y": 1764.0333353678384
+                    },
+                    {
+                        "x": 1907.7333333333327,
+                        "y": 1852.6666666666654
+                    }
+                ],
+                "sides": [
+                    "bottom",
+                    "top"
+                ]
+            }
+        },
+        {
+            "name": "fk answers.spaceId to spaces._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                    "e0a71955-a024-4734-82a1-7f548a7124cf"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                    "a76f12b4-aa41-4d9a-838f-9f4b747e69b1"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "0bad65fc-4c61-4a75-bc0f-db29cbb84d2f",
+            "parentCollection": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+            "childCollection": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+            "hackoladeStyles": {
+                "GUID": "5686f6c4-58fb-47cb-b1dc-1a4c38bc8a6e",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 2023.8666666666657,
+                        "y": 1559.9000040690114
+                    },
+                    {
+                        "x": 2115.3666666666654,
+                        "y": 1559.9000040690114
+                    },
+                    {
+                        "x": 2115.3666666666654,
+                        "y": 1506.666666666666
+                    },
+                    {
+                        "x": 2206.866666666665,
+                        "y": 1506.666666666666
+                    }
+                ],
+                "sides": [
+                    "right",
+                    "left"
+                ]
+            }
+        }
+    ],
+    "users": [],
+    "diagramViews": [],
+    "idToNameHashTable": {
+        "a5021937-b0c0-427a-9e3c-ab27186e68d0": "curio",
+        "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154": "answers",
+        "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da": "comments",
+        "2f580349-0bb9-4c07-842e-c96b7ca005e1": "followers",
+        "50a39bc3-abd7-4904-9145-4a1d51ee9be8": "members",
+        "170725fc-7f6b-4c1f-8f02-7038cff34e8e": "notifications",
+        "e0a71955-a024-4734-82a1-7f548a7124cf": "_id",
+        "c5fe5668-e611-46ca-973a-4473e42b0fb3": "name",
+        "feb95da7-567d-4f67-a3af-80cdad380321": "description",
+        "10f66bd2-9192-4e2d-9649-6c5ec5f6e87c": "totalFollowers",
+        "d71c7413-4b55-4cb9-be76-275e7c6b1f8b": "totalQuestions",
+        "94a93c5b-c3d1-49b1-967f-40bbb0148e89": "members",
+        "2bb85702-d66b-4f6d-95d0-84c6b21ddcbc": "rules",
+        "be0ccbde-1196-4faa-81ed-c404693cd2c5": "createdAt",
+        "7a370173-b0c4-4268-88c4-96d276fc0d0d": "updatedAt",
+        "37453ed4-81ba-4a2f-9d8b-f94fd0507249": "__v",
+        "aed8996e-965a-4e93-a64d-5f52b29b01de": "spaces",
+        "ac864625-830d-407b-8499-2e79faef06ed": "_id",
+        "e5ea95a4-afcb-4411-bb49-4800c1fcc126": "name",
+        "b4421eef-d24d-4f86-b971-53c1ceaf5192": "description",
+        "2097f26d-5834-4be7-8eb3-570a1e221a22": "createdAt",
+        "8ebf423c-89ea-492c-a10b-ab92e4a439c8": "updatedAt",
+        "3c874da4-fc74-4db3-8617-83d963103b1a": "__v",
+        "ea37869e-23ca-4ac8-95cc-8649aa4e262e": "topics",
+        "f5ec00f3-29eb-4fb7-afb7-0647bd5b823a": "name",
+        "f74fcf24-e4a7-4bee-8515-41d6432b096d": "email",
+        "4ec18418-f543-4c01-89fc-32673057d980": "otp",
+        "e5639eb9-60cf-425e-a4a6-9f2ab152840e": "password",
+        "e8e7dd70-4e0b-4302-bd3b-b10f85bd3aed": "profilePic",
+        "29460a8a-e4af-47ca-ae8c-35c3afcb7b06": "role",
+        "c32e0e2d-3ab9-4fbf-9d27-c94970d9f393": "isVerified",
+        "d3bb0f97-c52b-4647-bedc-96a3823d50c0": "topics",
+        "9bd4a9ca-898e-4c05-886c-6b25da86475f": "createdAt",
+        "e829f9b4-2a9e-4f17-b27d-6c6ed4093270": "updatedAt",
+        "a2f75ace-6d7a-4435-bca4-a0603b3e7a86": "__v",
+        "06c7c943-5a1b-4ca3-8dbb-99bfbbbebf98": "contactNo",
+        "5a3b3397-b39b-4d61-a523-07a667b112ae": "isOnboarded",
+        "f38ac6ca-05d4-4d28-bee3-2db067ccea34": "users",
+        "7bf7e4b3-1b69-41ac-96ac-43c8dca95ab5": "votes",
+        "9bd8c4a9-c5d2-43e7-9436-342765154af4": "userId",
+        "693dc270-c30c-40a5-b0a5-4b0afb66fb7f": "entitiyId",
+        "a954eedb-9386-461c-81b4-c263842053dd": "entityType",
+        "8b07d6a7-4e5c-42b3-87ae-a96ef7e27d8d": "userId",
+        "84c153c2-aa12-4ac3-8f52-c71ddcf712a5": "spaceId",
+        "84228f5d-5d10-4d6b-86ca-66d1dc1b058d": "role",
+        "9b921710-1a34-46a8-b2b1-72822e31c891": "userId",
+        "9d385139-119e-490f-babd-b156c20820b6": "activityType",
+        "e83e830a-53ac-44f3-83d8-a49566b8889a": "entityId",
+        "bc056956-3ec1-411a-9da2-801059832854": "timeStamps",
+        "d614216e-2413-4227-a26b-7a772c55aa5b": "timeStamps",
+        "bdf2b1ca-89fb-4cce-9e6f-1a69df018b0f": "timeStamps",
+        "c711bfd0-ea3b-43ac-ae38-3e3b314fb722": "userId",
+        "c7d6a5d6-292a-4094-b90d-9882d9d2f15c": "answerId",
+        "0ded50a0-b62f-48bb-acab-4b7100feeb73": "content",
+        "76a7e600-b655-416b-a567-76b8e811980d": "timeStamps",
+        "6d0dd5a8-48c6-477a-bdab-aa071d927014": "comments",
+        "a609fda7-cdf7-4baa-8cc0-74bf2416d1a7": "content",
+        "7903bccb-f4fd-4f4b-8125-4b74ba0a09a4": "userId",
+        "aae77deb-de19-4437-a4de-5624d9383829": "topicId",
+        "a76f12b4-aa41-4d9a-838f-9f4b747e69b1": "spaceId",
+        "8e3124af-3d4f-49ba-9c17-412393baf23f": "upVotes",
+        "8140059a-a70f-4701-84e0-6255fdf71e2b": "downVotes",
+        "22d6e7e2-76f9-44ca-b196-efd845cb0f46": "views",
+        "575afbfc-5a96-44bf-9b45-e38c3484840c": "timeStamps",
+        "e9817f3b-b373-4229-a7b4-53be2bdb4d1d": "userId",
+        "606600d6-60f6-45cf-a902-1d17b5a3c87d": "entityId",
+        "0d11d3d1-5d09-4060-b6a3-2cc92c038db9": "voteType",
+        "a808a6ee-eb02-4c2e-84f3-da7794a37a39": "timeStamps",
+        "28f90b8c-5c61-4794-903c-6024e1009def": "questions",
+        "7f3bf7f9-17bb-49ce-bd37-75375d5d4064": "content",
+        "b6bdc713-258d-4673-83f3-5eb285d06c82": "userId",
+        "52cad485-3feb-4441-ab55-c55a950c7b95": "topicId",
+        "a4e9e307-c06d-4c95-97c8-c6e114351429": "spaceId",
+        "694ce39c-616f-42bb-b90d-685ba2212d43": "upVotes",
+        "9b0d85a2-17d9-4951-94a3-66e362d78e94": "downVotes",
+        "8bef17a7-f142-4a5c-92a5-b155fd56bc51": "views",
+        "a8fd8a2b-6956-49d1-aa0f-9f19ac38df31": "timeStamps",
+        "bee9c83c-833b-44f7-840c-aa405bb721c1": "New Relationship",
+        "4aff750e-c15d-4872-bba5-cb11a59b8070": "New Relationship(1)",
+        "26e5d491-62a2-429a-9e60-5a0a247f24b0": "New Relationship(2)",
+        "1d91e73d-c0aa-4750-89d0-ba81540380cb": "fk followers.userId to users._id",
+        "08d9134b-a180-4e00-89ef-604265329b2c": "fk members.userId to users._id",
+        "c59cbfd5-1d8b-4d39-b7c1-96f6dcfa0333": "fk members.spaceId to spaces._id",
+        "c8ca3d9d-ce6f-48e0-a30b-4dfae737fcd4": "fk notifications.userId to users._id",
+        "83bbec2b-05e4-4a2c-9a80-80017322cdeb": "_id",
+        "1c74a804-9e4c-4dfd-8530-d8bc79e84af2": "_id",
+        "78273735-eaa5-462f-9717-e9446c0875b1": "_id",
+        "84d27e6a-4987-4ac8-93f6-d8b372694e3e": "_id",
+        "e0ab4707-f242-4c7b-8120-d2b57ecb1bd2": "fk comments.userId to users._id",
+        "cb1e4bbf-d3f3-46b3-ad88-480e1026b50e": "fk comments.answerId to answers._id",
+        "41b5eba3-96a4-4cc5-9399-e5f598d53100": "_id",
+        "d1b3f28e-764d-4143-af17-859084a437e8": "_id",
+        "ae51d27f-0ec5-4d54-b186-40fc24977152": "fk answers.comments.[0] to comments._id",
+        "ba3b3840-61ea-4677-a099-066785fb5754": "_id",
+        "1bc8c481-cf6b-4f95-8acd-4c012ccd3584": "fk questions.userId to users._id",
+        "5491f2b6-776f-4688-be1e-10ff502e0d1b": "fk questions.topicId to topics._id",
+        "8b302349-460a-4801-b438-efe3597fed76": "fk questions.spaceId to spaces._id",
+        "95a33bae-5f56-432f-830f-5a673bfd825c": "fk votes.userId to users._id",
+        "06b207f9-36fc-436d-b8c9-441cf4650bd6": "_id",
+        "53e65df8-5c15-4236-bc27-05e897b1ca12": "fk answers.userId to users._id",
+        "13d908d2-46ee-4935-825c-12525f1d9a33": "fk answers.topicId to topics._id",
+        "0bad65fc-4c61-4a75-bc0f-db29cbb84d2f": "fk answers.spaceId to spaces._id"
+    },
+    "definitions": {
+        "type": "definitions",
+        "properties": [],
+        "GUID": "4748804c-15c8-40eb-88f7-4cb543b138cc"
+    },
+    "polyglotDefinitions": {
+        "type": "polyglotDefinitions",
+        "properties": [],
+        "GUID": "e333aef8-6352-4df1-b894-86805cdc50a1"
+    },
+    "externalDefinitions": {
+        "type": "externalDefinitions",
+        "properties": [],
+        "GUID": "20d5c820-b168-4eac-924b-eda8adaa18c3"
+    },
+    "sources": [],
+    "decorativeSymbols": [],
+    "dbVersion": "v5.0",
+    "dbVendor": "MongoDB",
+    "appTarget": "MONGODB",
+    "creationTS": "2024-02-18T04:54:02.347Z",
+    "GUID": "d5d468c5-e738-461c-9b4b-2dc1df5bb424",
+    "isLineageEnabled": false,
+    "lastModifTS": "2024-02-18T07:40:32.051Z",
+    "persistenceSchemaVersion": "7",
+    "isCreatedByPlugin": true,
+    "pluginInformation": {
+        "pluginEngineVersion": "1.0.0"
+    },
+    "applicationInformation": {
+        "version": "7.1.0"
+    },
+    "hackoladeMeta": {},
+    "settings": {
+        "centralPane": {
+            "dbLevel": {
+                "erd": [
+                    {
+                        "GUID": "2d1e8c36-43a2-48d0-b8d0-d7b4a21c2154",
+                        "x": 1804.8666666666657,
+                        "y": 1444.4000040690114,
+                        "width": 219,
+                        "height": 231,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "8c2e8ac3-d65c-42e9-ab5b-d39ad04a08da",
+                        "x": 1368.1999999999994,
+                        "y": 1664.733337402344,
+                        "width": 218,
+                        "height": 123,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "2f580349-0bb9-4c07-842e-c96b7ca005e1",
+                        "x": 2244.3999999999996,
+                        "y": 1209.733337402344,
+                        "width": 212,
+                        "height": 121,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "50a39bc3-abd7-4904-9145-4a1d51ee9be8",
+                        "x": 2232.1999999999985,
+                        "y": 1654.7333374023422,
+                        "width": 222,
+                        "height": 120,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "170725fc-7f6b-4c1f-8f02-7038cff34e8e",
+                        "x": 1369.9999999999986,
+                        "y": 1517.133337402344,
+                        "width": 218,
+                        "height": 123,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "aed8996e-965a-4e93-a64d-5f52b29b01de",
+                        "x": 2206.866666666665,
+                        "y": 1367.3333333333328,
+                        "width": 271,
+                        "height": 209,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "ea37869e-23ca-4ac8-95cc-8649aa4e262e",
+                        "x": 1824.066666666666,
+                        "y": 1852.6666666666654,
+                        "width": 251,
+                        "height": 137,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "f38ac6ca-05d4-4d28-bee3-2db067ccea34",
+                        "x": 1338.1999999999994,
+                        "y": 1213.733337402344,
+                        "width": 262,
+                        "height": 285,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "7bf7e4b3-1b69-41ac-96ac-43c8dca95ab5",
+                        "x": 1568.1999999999996,
+                        "y": 1959.3333333333335,
+                        "width": 218,
+                        "height": 123,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "28f90b8c-5c61-4794-903c-6024e1009def",
+                        "x": 1805.8000325520834,
+                        "y": 1212.5333374023453,
+                        "width": 218,
+                        "height": 195,
+                        "color": {}
+                    }
+                ],
+                "erdDefinitions": {
+                    "erd": [],
+                    "rootPath": [],
+                    "entities": [],
+                    "decorativeSymbols": []
+                },
+                "buckets": [
+                    {
+                        "x": 1298.1999999999994,
+                        "y": 1169.733337402344,
+                        "GUID": "a5021937-b0c0-427a-9e3c-ab27186e68d0"
+                    }
+                ],
+                "collapsedNodes": [],
+                "activeRelationship": "",
+                "activeRelationshipFields": {
+                    "childField": [],
+                    "parentField": []
+                },
+                "selectedCollections": [],
+                "displayColorPicker": false,
+                "graphView": {
+                    "erd": [],
+                    "buckets": [],
+                    "decorativeSymbols": [],
+                    "forceLayout": true,
+                    "defaultLinkLength": 300
+                },
+                "diagramViews": [],
+                "decorativeSymbols": [],
+                "nestedCollectionsLayout": "horizontal",
+                "options": [
+                    {
+                        "autoWidth": false,
+                        "autoHeight": false,
+                        "GUID": "2f580349-0bb9-4c07-842e-c96b7ca005e1"
+                    },
+                    {
+                        "autoWidth": false,
+                        "autoHeight": false,
+                        "GUID": "50a39bc3-abd7-4904-9145-4a1d51ee9be8"
+                    }
+                ],
+                "relationshipUpdateDisabled": false,
+                "displayOptions": {}
+            },
+            "collectionLevel": {},
+            "changed": false
+        },
+        "dtDiagram": {
+            "collapsedNodes": [],
+            "shouldDistributeCollections": false
+        }
+    }
+}
