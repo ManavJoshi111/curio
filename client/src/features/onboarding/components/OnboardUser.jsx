@@ -1,39 +1,15 @@
-import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  Form,
-  InputGroup,
-} from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { PREFERENCES as availablePreferences } from "../../../utils/constants";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import Select from "react-select";
+import { SERVER_URL } from "../../../utils/constants";
+import { ErrorToast } from "../../../utils/CustomToast";
+import { get } from "../../../utils/axios";
 
 const OnboardUser = () => {
-  const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [userData, setUserData] = useState({}); // Lifted state up
-
-  useEffect(() => {
-    window.location.hash = `#${getPageId(page)}`;
-  }, [page]);
-
-  const getPageId = (page) => {
-    switch (page) {
-      case 1:
-        return "welcome";
-      case 2:
-        return "user-details";
-      case 3:
-        return "user-preferences";
-      default:
-        return "";
-    }
-  };
+  const [userDetails, setUserDetails] = useState({});
+  const [additionalDetails, setAdditionalDetails] = useState({});
+  const [userPreferences, setUserPreferences] = useState([]);
 
   const handlePrevClick = () => {
     if (page > 1) {
@@ -47,199 +23,178 @@ const OnboardUser = () => {
     }
   };
 
-  const handleFormDataChange = (newData) => {
-    console.log("newdata: ", newData);
-    setUserData({ ...userData, ...newData });
-  };
-
   const handleFormSubmit = () => {
-    // Handle form submission logic
-    // You can use userData to submit the form data
-    console.log("Submitting form data:", userData);
+    const formData = {
+      userDetails: userDetails,
+      additionalDetails: additionalDetails,
+      userPreferences: userPreferences.map((pref) => pref.value),
+    };
+
+    console.log("Submitting form data:", formData);
     // Example: navigate to another page after submission
     // navigate('/success');
   };
+
+  // Fetch preferences asynchronously on component mount
+  useEffect(() => {
+    const fetchPreferences = async () => {
+      try {
+        const { preferences } = await get(`${SERVER_URL}/api/preferences`);
+        setUserPreferences(
+          preferences.map((pref) => ({ value: pref.name, label: pref.name }))
+        );
+      } catch (error) {
+        console.error("Error fetching preferences:", error);
+        ErrorToast("An error occurred, please try again after sometime");
+      }
+    };
+    fetchPreferences();
+  }, []);
 
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
         <Col xs={12} md={8}>
-          {page === 1 && <Welcome user={user} />}
+          {page === 1 && <Welcome nextPage={handleNextClick} />}
           {page === 2 && (
             <UserAdditionalDetails
-              user={user}
-              onChange={handleFormDataChange}
+              userDetails={userDetails}
+              onUserDetailsChange={setUserDetails}
+              additionalDetails={additionalDetails}
+              onAdditionalDetailsChange={setAdditionalDetails}
+              prevPage={handlePrevClick}
+              nextPage={handleNextClick}
             />
           )}
           {page === 3 && (
             <UserPreferences
-              availablePreferences={availablePreferences}
-              onChange={handleFormDataChange}
+              additionalDetails={additionalDetails}
+              userPreferences={userPreferences}
+              onUserPreferencesChange={setUserPreferences}
+              prevPage={handlePrevClick}
+              onSubmit={handleFormSubmit}
             />
           )}
-
-          <div className="d-flex justify-content-between mt-3">
-            <Button
-              variant="secondary"
-              disabled={page === 1}
-              onClick={handlePrevClick}
-            >
-              Prev
-            </Button>
-            <Button
-              variant="primary"
-              className={page === 3 ? "d-none" : ""}
-              disabled={page === 3}
-              onClick={handleNextClick}
-            >
-              Next
-            </Button>
-            <Button
-              variant="primary"
-              className={page !== 3 ? "d-none" : ""}
-              onClick={handleFormSubmit}
-            >
-              Submit
-            </Button>
-          </div>
         </Col>
       </Row>
     </Container>
   );
 };
 
-const Welcome = ({ user }) => {
+const Welcome = ({ nextPage }) => {
   return (
     <Card className="text-center mb-5 border-0 shadow-lg" id="welcome">
       <Card.Body>
-        <Card.Title className="fs-1">
-          Welcome {user.name.split(" ")[0]}🤩!
-        </Card.Title>
+        <Card.Title className="fs-1">Welcome!</Card.Title>
         <Card.Text className="lead">
           Thank you for choosing our platform.
         </Card.Text>
+        <Button variant="primary" onClick={nextPage}>
+          Next
+        </Button>
       </Card.Body>
     </Card>
   );
 };
 
-const UserAdditionalDetails = ({ user, onChange }) => {
+const UserAdditionalDetails = ({
+  userDetails,
+  onUserDetailsChange,
+  additionalDetails,
+  onAdditionalDetailsChange,
+  prevPage,
+  nextPage,
+}) => {
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    onChange({ [id]: value });
+    if (id === "profilePic") {
+      onUserDetailsChange({ ...userDetails, [id]: value }); // Update userDetails for file input
+    } else {
+      onAdditionalDetailsChange({ ...additionalDetails, [id]: value }); // Update additionalDetails for other inputs
+    }
   };
 
   return (
-    <Card className="text-center mb-5 border-0 shadow-lg" id="user-details">
-      <Card.Body>
-        <Card.Title className="display-6">
-          Just a few more details✨!
-        </Card.Title>
-        <Card.Text className="lead" as="div">
-          <Form>
-            <Form.Group
-              controlId="profilePic"
-              className="d-flex justify-content-start flex-column mb-3"
-            >
-              <Form.Label className="text-start">Upload your image</Form.Label>
-              <Form.Control type="file" onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group
-              controlId="bio"
-              className="d-flex justify-content-start flex-column mb-3"
-            >
-              <Form.Label className="text-start">
-                Tell us something about yourself!
-              </Form.Label>
-              <Form.Control as="textarea" onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group
-              controlId="contactNo"
-              className="d-flex justify-content-start flex-column mb-3"
-            >
-              <Form.Label className="text-start">
-                Enter your mobile number
-              </Form.Label>
-              <Form.Control
-                type="tel"
-                placeholder="Mobile Number"
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-          </Form>
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <>
+      <Card.Title className="display-6">Just a few more details!</Card.Title>
+      <Card.Text className="lead" as="div">
+        <Form>
+          <Form.Group
+            controlId="profilePic"
+            className="d-flex justify-content-start flex-column mb-3"
+          >
+            <Form.Label className="text-start">Upload your image</Form.Label>
+            <Form.Control type="file" onChange={handleInputChange} />
+          </Form.Group>
+          <Form.Group
+            controlId="bio"
+            className="d-flex justify-content-start flex-column mb-3"
+          >
+            <Form.Label className="text-start">
+              Tell us something about yourself!
+            </Form.Label>
+            <Form.Control as="textarea" onChange={handleInputChange} />
+          </Form.Group>
+          <Form.Group
+            controlId="contactNo"
+            className="d-flex justify-content-start flex-column mb-3"
+          >
+            <Form.Label className="text-start">
+              Enter your mobile number
+            </Form.Label>
+            <Form.Control
+              type="tel"
+              placeholder="Mobile Number"
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+        </Form>
+      </Card.Text>
+      <div className="d-flex justify-content-between mt-3">
+        <Button variant="secondary" onClick={prevPage}>
+          Prev
+        </Button>
+        <Button variant="primary" onClick={nextPage}>
+          Next
+        </Button>
+      </div>
+    </>
   );
 };
 
-const UserPreferences = ({ availablePreferences }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPreferences, setSelectedPreferences] = useState([]);
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const handlePreferenceAdd = (preference) => {
-    setSelectedPreferences([...selectedPreferences, preference]);
-    setSearchQuery("");
-    onChange({ preferences: selectedPreferences });
-  };
-
-  const handlePreferenceRemove = (preference) => {
-    setSelectedPreferences(selectedPreferences.filter((p) => p !== preference));
-    onChange({ preferences: selectedPreferences });
-  };
-
-  const filterPreferences = () => {
-    return availablePreferences.filter(
-      (p) =>
-        p.toLowerCase().startsWith(searchQuery.toLowerCase()) &&
-        !selectedPreferences.includes(p)
-    );
-  };
-
+const UserPreferences = ({
+  additionalDetails,
+  userPreferences,
+  onUserPreferencesChange,
+  prevPage,
+  onSubmit,
+}) => {
   return (
     <Card className="text-center mb-5 border-0 shadow-lg" id="user-preferences">
       <Card.Body>
         <Card.Title className="display-6">Preferences</Card.Title>
-        <Form>
-          <InputGroup className="mb-3">
-            <Form.Control
-              placeholder="Search preferences..."
-              aria-label="Search preferences"
-              aria-describedby="basic-addon2"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-          </InputGroup>
-          {filterPreferences().map((preference) => (
-            <button
-              className="btn me-2 btn-outline-dark btn-sm"
-              key={preference}
-              onClick={() => handlePreferenceAdd(preference)}
-            >
-              {preference}
-            </button>
-          ))}
-          {selectedPreferences.length > 0 && (
-            <div className="mt-3">
-              <ul className="list-unstyled">
-                {selectedPreferences.map((preference) => (
-                  <Button
-                    key={preference}
-                    className="btn btn-sm ms-2"
-                    onClick={() => handlePreferenceRemove(preference)}
-                  >
-                    {preference}
-                    <i className="fas fa-times ml-2 ms-2" />
-                  </Button>
-                ))}
-              </ul>
-            </div>
-          )}
-        </Form>
+        <div className="container border border-dark p-0">
+          <Form className="m-0 p-2">
+            {userPreferences.length > 0 && (
+              <Select
+                options={userPreferences}
+                // value={userPreferences}
+                onChange={(selectedOptions) =>
+                  onUserPreferencesChange(selectedOptions)
+                }
+                isMulti
+              />
+            )}
+          </Form>
+        </div>
+        <div className="d-flex justify-content-between mt-3">
+          <Button variant="secondary" onClick={prevPage}>
+            Prev
+          </Button>
+          <Button variant="primary" onClick={onSubmit}>
+            Submit
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
