@@ -29,12 +29,6 @@ const OnboardUser = () => {
   };
 
   const handleFormSubmit = () => {
-    // const formData = {
-    //   userDetails: userDetails,
-    //   additionalDetails: additionalDetails,
-    //   userPreferences: userPreferences.map((pref) => pref.value),
-    // };
-
     console.log("Submitting form data:", additionalDetails);
     // Example: navigate to another page after submission
     // navigate('/success');
@@ -126,7 +120,16 @@ const UserAdditionalDetails = ({
               className="d-flex justify-content-start flex-column mb-3"
             >
               <Form.Label className="text-start">Upload your image</Form.Label>
-              {/* <Form.Control type="file" onChange={handleInputChange} /> */}
+              {/* preview of image if profilePic is not null */}
+              {additionalDetails?.profilePic && (
+                <img
+                  src={additionalDetails?.profilePic}
+                  alt="img"
+                  height={100}
+                  width={100}
+                  style={{ borderRadius: "50%" }}
+                ></img>
+              )}
               <ImageUpload setAdditionalDetails={setAdditionalDetails} />
             </Form.Group>
             <Form.Group
@@ -150,7 +153,7 @@ const UserAdditionalDetails = ({
                 Enter your mobile number
               </Form.Label>
               <Form.Control
-                type="tel"
+                type="number"
                 placeholder="Mobile Number"
                 onChange={handleInputChange}
                 value={additionalDetails.contactNo}
@@ -186,7 +189,10 @@ const UserPreferences = ({
           {userPreferences.length > 0 ? (
             <Select
               options={userPreferences}
-              // value={userPreferences}
+              value={additionalDetails.preferences.map((pref) => ({
+                value: pref,
+                label: pref,
+              }))}
               onChange={(selectedOptions) => {
                 setAdditionalDetails({
                   ...additionalDetails,

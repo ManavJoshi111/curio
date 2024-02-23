@@ -10,20 +10,20 @@ const ImageUpload = ({ setAdditionalDetails }) => {
       {
         cloudName: CLOUDINARY_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+        multiple: false,
+        // maxFiles: 1,
       },
       (_, res) => {
         if (res.event === "success") {
           setAdditionalDetails((prevState) => ({
             ...prevState,
-            imgUrls: res.info.secure_url,
+            profilePic: res.info.secure_url,
           }));
         } else {
-          console.log("error: ", res);
+          console.log("error: ", _);
         }
-        console.log("error: ", _);
       }
     );
-    console.log("Current: ", widgetRef.current);
   }, []);
   return (
     <>
