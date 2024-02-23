@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "is-hotkey": "^0.2.0",
-    "mongoose-erd": "^1.0.1",
-    "slate-history": "^0.100.0"
-  }
-}

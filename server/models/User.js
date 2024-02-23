@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema(
     },
     contactNo: {
       type: String,
-      required: true,
     },
     otp: {
       type: String,
