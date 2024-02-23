@@ -1,7 +1,9 @@
 const authController = require("./auth.controller");
-const preferencesController = require("./preferences.controller");
+const topicsController = require("./topics.controller");
+const userController = require("./user.controller");
 
 module.exports = {
   authController,
-  preferencesController,
+  topicsController,
+  userController,
 };

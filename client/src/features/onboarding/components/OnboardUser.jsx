@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import Select from "react-select";
 import { SERVER_URL } from "../../../utils/constants";
-import { ErrorToast } from "../../../utils/CustomToast";
-import { get } from "../../../utils/axios";
+import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
+import { get, post } from "../../../utils/axios";
 import ImageUpload from "../../../components/ImageUpload";
 
 const OnboardUser = () => {
   const [page, setPage] = useState(1);
-  const [userPreferences, setUserPreferences] = useState([]);
+  const [userTopics, setUserTopics] = useState([]);
   const [additionalDetails, setAdditionalDetails] = useState({
     bio: "",
     contactNo: "",
     profilePic: "",
-    preferences: [],
+    topics: [],
   });
 
   const handlePrevClick = () => {
@@ -28,26 +28,38 @@ const OnboardUser = () => {
     }
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     console.log("Submitting form data:", additionalDetails);
-    // Example: navigate to another page after submission
-    // navigate('/success');
+    try {
+      const data = await post(
+        `${SERVER_URL}/api/user/additional-details`,
+        additionalDetails
+      );
+      console.log("Data: ", data);
+      SuccessToast(data.message);
+    } catch (err) {
+      console.log("Err: ", err);
+      ErrorToast(err.error);
+    }
   };
 
-  // Fetch preferences asynchronously on component mount
+  // Fetch topics asynchronously on component mount
   useEffect(() => {
-    const fetchPreferences = async () => {
+    const fetchTopics = async () => {
       try {
-        const { preferences } = await get(`${SERVER_URL}/api/preferences`);
-        setUserPreferences(
-          preferences.map((pref) => ({ value: pref.name, label: pref.name }))
+        const { topics } = await get(`${SERVER_URL}/api/topics`);
+        setUserTopics(
+          topics.map((topic) => ({
+            value: topic.topicId,
+            label: topic.topicName,
+          }))
         );
       } catch (error) {
-        console.error("Error fetching preferences:", error);
+        console.error("Error fetching topics:", error);
         ErrorToast("An error occurred, please try again after sometime");
       }
     };
-    fetchPreferences();
+    fetchTopics();
   }, []);
 
   return (
@@ -64,12 +76,12 @@ const OnboardUser = () => {
             />
           )}
           {page === 3 && (
-            <UserPreferences
+            <UserTopics
               setAdditionalDetails={setAdditionalDetails}
               additionalDetails={additionalDetails}
               prevPage={handlePrevClick}
               onSubmit={handleFormSubmit}
-              userPreferences={userPreferences}
+              userTopics={userTopics}
             />
           )}
         </Col>
@@ -174,35 +186,40 @@ const UserAdditionalDetails = ({
   );
 };
 
-const UserPreferences = ({
+const UserTopics = ({
   setAdditionalDetails,
   additionalDetails,
   prevPage,
   onSubmit,
-  userPreferences,
+  userTopics,
 }) => {
   return (
-    <Card className="text-center mb-5 border-0 shadow-lg" id="user-preferences">
+    <Card className="text-center mb-5 border-0 shadow-lg" id="user-topics">
       <Card.Body>
         <Card.Title className="fs-1">What intersts you?</Card.Title>
         <Form className="m-0 p-2">
-          {userPreferences.length > 0 ? (
+          {userTopics.length > 0 ? (
             <Select
-              options={userPreferences}
-              value={additionalDetails.preferences.map((pref) => ({
-                value: pref,
-                label: pref,
+              options={userTopics}
+              value={additionalDetails.topics.map((topic) => ({
+                value: topic.topicId,
+                label: topic.topicName,
               }))}
               onChange={(selectedOptions) => {
                 setAdditionalDetails({
                   ...additionalDetails,
-                  preferences: selectedOptions.map((pref) => pref.value),
+                  topics: selectedOptions.map((topic) => {
+                    return {
+                      topicId: topic.value,
+                      topicName: topic.label,
+                    };
+                  }),
                 });
               }}
               isMulti
             />
           ) : (
-            <p>Loading preferences...</p>
+            <p>Loading topics...</p>
           )}
         </Form>
         <div className="d-flex justify-content-between mt-3">
