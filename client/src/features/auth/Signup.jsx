@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SuccessToast, ErrorToast } from "../../utils/CustomToast";
 import { getUserData } from "./actions/userActions";
 import { post } from "../../utils/axios";
+import { SERVER_URL } from "../../utils/constants";
 
 const Signup = () => {
   const [showOtp, setShowOtp] = useState(false);
@@ -27,14 +28,11 @@ const Signup = () => {
   const handleGetOtp = async () => {
     setLoading(true);
     try {
-      const data = await post(
-        `${import.meta.env.VITE_SERVER_URL}/api/auth/get-otp`,
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const data = await post(`${SERVER_URL}/api/auth/get-otp`, {
+        name,
+        email,
+        password,
+      });
       setLoading(false);
       setShowOtp(true);
       SuccessToast(data.message);
@@ -52,15 +50,12 @@ const Signup = () => {
   const handleSignIn = async () => {
     try {
       setLoading(true);
-      const data = await post(
-        `${import.meta.env.VITE_SERVER_URL}/api/auth/verify-otp`,
-        {
-          name,
-          email,
-          password,
-          otp,
-        }
-      );
+      const data = await post(`${SERVER_URL}/api/auth/verify-otp`, {
+        name,
+        email,
+        password,
+        otp,
+      });
       setLoading(false);
       SuccessToast(data.message);
       localStorage.setItem("token", data.token);

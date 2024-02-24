@@ -1,24 +1,5 @@
 const mongoose = require("mongoose");
 const { ROLES } = require("../utils/constants");
-// const userSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     min: [2, "Name should have at least 2 characters!"],
-//     max: 255,
-//     required: true,
-//   },
-//   email: {
-//     type: String,
-//     required: true,
-//   },
-//   otp: {
-//     type: String,
-//   },
-//   isVerified: {
-//     type: Boolean,
-//     default: false,
-//   },
-// });
 
 const userSchema = new mongoose.Schema(
   {
@@ -32,6 +13,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    contactNo: {
+      type: String,
+    },
     otp: {
       type: String,
     },
@@ -42,6 +26,10 @@ const userSchema = new mongoose.Schema(
     profilePic: {
       type: String,
       default: null,
+    },
+    isOnboarded: {
+      type: Boolean,
+      default: false,
     },
     bio: {
       type: String,

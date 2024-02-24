@@ -4,34 +4,34 @@ const spaceSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     description: {
-      type: String
+      type: String,
     },
     totalFollowers: {
       type: Number,
-      default: 0
+      default: 0,
     },
     totalQuestions: {
       type: Number,
-      default: 0
+      default: 0,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
     },
     members: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Member"
-      }
+        ref: "Member",
+      },
     ],
     rules: [
       {
-        type: String
-      }
-    ]
+        type: String,
+      },
+    ],
   },
   { timestamps: true }
 );

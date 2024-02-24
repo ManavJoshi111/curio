@@ -6,6 +6,7 @@ import Signup from "../features/auth/Signup";
 import Navbar from "../components/Navbar";
 import Home from "../pages/Home";
 import AddQuestion from "../features/questions/components/AddQuestion";
+import ErrorPage from "../pages/ErrorPage";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
           <Route path="" element={<Home />} />
           <Route path="add-question" element={<AddQuestion />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );

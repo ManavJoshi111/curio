@@ -5,17 +5,17 @@ const voteSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     entityId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true
+      required: true,
     },
     voteType: {
       type: String,
       enum: ["upvote", "downvote"],
-      required: true
-    }
+      required: true,
+    },
   },
   { timestamps: true }
 );

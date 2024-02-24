@@ -1,29 +1,49 @@
 const sendResponse = require("../handlers/response.handler");
 const Answer = require("../models/Answer");
+const { answerValidator } = require("../validators");
 
 // Get all answers
-exports.getAnswersByUser = async (req, res) => {
-  const { _id: userId } = req.user;
-  try {
-    const answers = await Answer.find({ userId });
-    sendResponse(
-      res,
-      200,
-      true,
-      "Fetched answers by user successfully!!!",
-      answers
-    );
-  } catch (err) {
-    console.log(err);
-    sendResponse(res, 500, false, "Failed to fetch answers!!!");
-  }
-};
+// exports.getAnswersByUser = async (req, res) => {
+//   const { _id: userId } = req.user;
+//   try {
+//     const answers = await Answer.find({ userId });
+//     sendResponse(
+//       res,
+//       200,
+//       true,
+//       "Fetched answers by user successfully!!!",
+//       answers
+//     );
+//   } catch (err) {
+//     console.log(err);
+//     sendResponse(res, 500, false, "Failed to fetch answers!!!");
+//   }
+// };
 
-exports.getAnswerByQuestion = async (req, res) => {
-  const { questionId } = req.params;
+exports.getAnswers = async (req, res) => {
+  const { questionId, userId, skip, limit } = req.query;
+
+  const filter = {};
+
+  if (!questionId && !userId) {
+    return sendResponse(res, 400, false, "questionId or userId is required!!!");
+  }
+
+  if (questionId && questionId.trim() !== "") {
+    Object.assign(filter, { questionId });
+  }
+
+  if (userId && userId.trim() !== "") {
+    Object.assign(filter, { userId });
+  }
+
   try {
-    const answers = await Answer.find({ questionId });
-    sendResponse(
+    const answers = await Answer.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(parseInt(skip))
+      .limit(parseInt(limit));
+
+    return sendResponse(
       res,
       200,
       true,
@@ -32,7 +52,7 @@ exports.getAnswerByQuestion = async (req, res) => {
     );
   } catch (err) {
     console.log(err);
-    sendResponse(res, 500, false, "Failed to fetch answers!!!");
+    return sendResponse(res, 500, false, "Failed to fetch answers!!!");
   }
 };
 
@@ -53,8 +73,16 @@ exports.getAnswer = async (req, res) => {
 
 // Add a new answer
 exports.addAnswer = async (req, res) => {
+  const { error } = answerValidator.validate(req.body);
+
+  if (error) {
+    console.error("Validation Error: ", error);
+    return sendResponse(res, 400, false, error.details[0].message);
+  }
+
   const { content, questionId } = req.body;
   const { _id: userId } = req.user;
+
   try {
     const answer = new Answer({ content, questionId, userId });
     const newAnswer = await answer.save();
@@ -67,6 +95,13 @@ exports.addAnswer = async (req, res) => {
 
 // Update a answer by ID
 exports.updateAnswer = async (req, res) => {
+  const { error } = answerValidator.validate(req.body);
+
+  if (error) {
+    console.error("Validation Error: ", error);
+    return sendResponse(res, 400, false, error.details[0].message);
+  }
+
   const { id } = req.params;
   const { content, questionId } = req.body;
   const { _id: userId } = req.user;

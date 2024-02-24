@@ -7,6 +7,7 @@ import { SuccessToast, ErrorToast } from "../../utils/CustomToast";
 import { post } from "../../utils/axios";
 import { NavLink } from "react-router-dom";
 import { getUserData } from "./actions/userActions";
+import { SERVER_URL } from "../../utils/constants";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -25,13 +26,10 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const data = await post(
-        `${import.meta.env.VITE_SERVER_URL}/api/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const data = await post(`${SERVER_URL}/api/auth/login`, {
+        email,
+        password,
+      });
       setLoading(false);
       console.log("Data: ", data);
       localStorage.setItem("token", data.token);
