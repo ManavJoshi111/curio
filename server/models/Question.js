@@ -21,15 +21,18 @@ const questionSchema = new mongoose.Schema(
     },
     upVotes: {
       type: Number,
-      default: 0
+      default: 0,
+      min: 0
     },
     downVotes: {
       type: Number,
-      default: 0
+      default: 0,
+      min: 0
     },
     views: {
       type: Number,
-      default: 0
+      default: 0,
+      min: 0
     }
   },
   { timestamps: true }
