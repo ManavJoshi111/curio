@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { SERVER_URL } from "../../../utils/constants";
 import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
@@ -7,6 +9,7 @@ import { get, post } from "../../../utils/axios";
 import ImageUpload from "../../../components/ImageUpload";
 
 const OnboardUser = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [userTopics, setUserTopics] = useState([]);
   const [additionalDetails, setAdditionalDetails] = useState({
@@ -37,6 +40,7 @@ const OnboardUser = () => {
       );
       console.log("Data: ", data);
       SuccessToast(data.message);
+      navigate("/");
     } catch (err) {
       console.log("Err: ", err);
       ErrorToast(err.error);
@@ -91,10 +95,13 @@ const OnboardUser = () => {
 };
 
 const Welcome = ({ nextPage }) => {
+  const { user } = useSelector((state) => state.user);
   return (
     <Card className="text-center mb-5 border-0 shadow-lg" id="welcome">
       <Card.Body>
-        <Card.Title className="fs-1">Welcome!</Card.Title>
+        <Card.Title className="fs-1">
+          🤩Welcome {user.name.split(" ")[0]}🤩
+        </Card.Title>
         <Card.Text className="lead">
           Thank you for choosing our platform.
         </Card.Text>
@@ -123,7 +130,10 @@ const UserAdditionalDetails = ({
 
   return (
     <>
-      <Card className="text-center mb-5 border-0 p-2 shadow-lg" id="welcome">
+      <Card
+        className="text-center mb-5 border-0 p-2 shadow-lg"
+        id="additional-details"
+      >
         <Card.Title className="fs-1">Just a few more details!</Card.Title>
         <Card.Text className="lead" as="div">
           <Form>
@@ -196,7 +206,7 @@ const UserTopics = ({
   return (
     <Card className="text-center mb-5 border-0 shadow-lg" id="user-topics">
       <Card.Body>
-        <Card.Title className="fs-1">What intersts you?</Card.Title>
+        <Card.Title className="fs-1">What interests you?</Card.Title>
         <Form className="m-0 p-2">
           {userTopics.length > 0 ? (
             <Select

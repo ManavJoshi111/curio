@@ -16,6 +16,7 @@ exports.uploadAdditionalDetails = async (req, res) => {
       {
         $set: {
           ...req.body,
+          isOnboarded: true,
         },
       }
     );

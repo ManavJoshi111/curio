@@ -13,7 +13,7 @@ const Navbar = () => {
         sticky="top"
       >
         <Container fluid={true}>
-          <ReactNavbar.Brand as={NavLink}>
+          <ReactNavbar.Brand as={NavLink} to="/">
             <img
               src="/assets/Curio-Logo.png"
               style={{ height: "3rem", marginTop: "0", paddingTop: "0" }}
