@@ -2,6 +2,7 @@ const ejs = require("ejs");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
 const { User } = require("../models");
+const sendResponse = require("../handlers/response.handler");
 const {
   authValidator: { SignupValidator, LoginValidator },
 } = require("../validators");
@@ -15,9 +16,7 @@ exports.getVerificationOTP = async (req, res) => {
     const { error, value } = SignupValidator.validate(req.body);
     if (error) {
       console.error("Validation Error: ", error);
-      return res
-        .status(400)
-        .json({ success: false, error: error.details[0].message });
+      return sendResponse(res, 400, false, error.details[0].message);
     }
 
     let user = await User.findOne({ email });
@@ -38,16 +37,14 @@ exports.getVerificationOTP = async (req, res) => {
           renderedTemplate
         );
 
-        return res.status(200).json({
-          success: true,
-          message:
-            "A verification code has been sent to you via email, please enter to continue creating your account!",
-        });
+        return sendResponse(
+          res,
+          200,
+          true,
+          "A verification code has been sent to you via email, please enter to continue creating your account!"
+        );
       } else {
-        return res.status(400).json({
-          success: false,
-          error: "User already exists and is verified!",
-        });
+        return sendResponse(res, 400, false, "User already exists!");
       }
     }
 
@@ -71,17 +68,15 @@ exports.getVerificationOTP = async (req, res) => {
       null,
       renderedTemplate
     );
-    return res.status(200).json({
-      success: true,
-      message:
-        "A verification code has been sent to you via email, please enter to continue creating your account!",
-    });
+    return sendResponse(
+      res,
+      200,
+      true,
+      "A verification code has been sent to you via email, please enter to continue creating your account!"
+    );
   } catch (error) {
     console.error("Error in getVerificationOTP: ", error);
-    return res.status(500).json({
-      success: false,
-      error: "Internal Server Error, please try again after some time!",
-    });
+    return sendResponse(res, 500, false, "Internal Server Error");
   }
 };
 
@@ -90,9 +85,7 @@ exports.verifyOTP = async (req, res) => {
   const { error, value } = SignupValidator.validate(req.body);
   if (error) {
     console.log("error in verifyOTP: ", error);
-    return res
-      .status(400)
-      .json({ success: false, error: error.details[0].message });
+    return sendResponse(res, 400, false, error.details[0].message);
   }
   const userFound = await User.findOne({ email, otp });
   if (userFound) {
@@ -100,13 +93,20 @@ exports.verifyOTP = async (req, res) => {
     userFound.isVerified = true;
     const token = await generateToken(userFound._id);
     await userFound.save();
-    return res
-      .status(200)
-      .json({ success: true, message: "Account verified successfully", token });
+    return sendResponse(
+      res,
+      200,
+      true,
+      "Account verified successfully!",
+      token
+    );
   } else {
-    return res
-      .status(400)
-      .json({ success: false, error: "Incorrect OTP or user doesn't exists!" });
+    return sendResponse(
+      res,
+      400,
+      false,
+      "Invalid OTP or email, please try again!"
+    );
   }
 };
 
@@ -116,41 +116,39 @@ exports.login = async (req, res) => {
     const { error, value } = LoginValidator.validate(req.body);
     if (error) {
       console.error("Validation Error: ", error);
-      return res
-        .status(400)
-        .json({ success: false, error: error.details[0].message });
+      return sendResponse(res, 400, false, error.details[0].message);
     }
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({
-        success: false,
-        error: "Invalid credentials or you don't have any account!",
-      });
+      return sendResponse(
+        res,
+        400,
+        false,
+        "Invalid credentials or you don't have any account!"
+      );
     }
     if (!user.isVerified) {
-      return res
-        .status(400)
-        .json({ success: false, error: "User is not verified!" });
+      return sendResponse(res, 400, false, "Your account is not verified!");
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          error: "Invalid credentials or you don't have any account!",
-        });
+      return sendResponse(
+        res,
+        400,
+        false,
+        "Invalid credentials or you don't have any account!"
+      );
     }
     const token = await generateToken(user._id);
-    return res
-      .status(200)
-      .json({ success: true, message: "Logged in successfully!", token });
+    return sendResponse(res, 200, true, "Logged in successfully!", token);
   } catch (error) {
     console.error("Error in login: ", error);
-    return res.status(500).json({
-      success: false,
-      error: "Internal Server Error, please try again after some time!",
-    });
+    return sendResponse(
+      res,
+      500,
+      false,
+      "Internal Server Error, please try again after some time!"
+    );
   }
 };
 
@@ -158,12 +156,14 @@ exports.getUser = async (req, res) => {
   try {
     const { _id } = req.user;
     const user = await User.findById(_id).select("-password");
-    return res.status(200).json({ success: true, user });
+    return sendResponse(res, 200, true, "User fetched successfully!", user);
   } catch (err) {
     console.error("Error in getUser: ", err);
-    return res.status(500).json({
-      success: false,
-      error: "Internal Server Error, please try again after some time!",
-    });
+    return sendResponse(
+      res,
+      500,
+      false,
+      "Internal Server Error, please try again after some time!"
+    );
   }
 };

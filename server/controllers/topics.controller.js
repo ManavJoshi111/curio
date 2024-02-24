@@ -1,3 +1,4 @@
+const sendResponse = require("../handlers/response.handler");
 const Topic = require("../models/Topic");
 
 exports.getTopics = async (req, res) => {
@@ -11,10 +12,15 @@ exports.getTopics = async (req, res) => {
         },
       },
     ]);
-
-    res.status(200).json({ message: "Topics fetched successfully", topics });
+    return sendResponse(
+      res,
+      200,
+      true,
+      "Fetched topics successfully!!!",
+      topics
+    );
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Server Error" });
+    return sendResponse(res, 500, false, "Failed to fetch topics!!!");
   }
 };

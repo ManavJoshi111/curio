@@ -1,3 +1,4 @@
+const sendResponse = require("../handlers/response.handler");
 const User = require("../models/User");
 const { userValidator } = require("../validators/");
 
@@ -7,9 +8,7 @@ exports.uploadAdditionalDetails = async (req, res) => {
       req.body
     );
     if (error) {
-      return res
-        .status(400)
-        .json({ success: false, error: error.details[0].message });
+      return sendResponse(res, 400, false, error.details[0].message);
     }
     await User.updateOne(
       { _id: req.user._id },
@@ -20,9 +19,14 @@ exports.uploadAdditionalDetails = async (req, res) => {
         },
       }
     );
-    res.status(200).send({ message: "Details uploaded successfully" });
+    return sendResponse(
+      res,
+      200,
+      true,
+      "Additional details added successfully"
+    );
   } catch (err) {
     console.log("Err: ", err);
-    res.status(500).send({ error: "Internal server error" });
+    return sendResponse(res, 500, false, "Failed to add additional details");
   }
 };
