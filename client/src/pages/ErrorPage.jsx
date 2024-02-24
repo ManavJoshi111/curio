@@ -16,13 +16,11 @@ const ErrorPage = () => {
           className="error-image"
         />
       </div>
-      <div className="error-navigation">
+      <div className="d-flex justify-content-center align-items-center p-2 flex-column">
         <h3>Want to get back on track?</h3>
-        <ul>
-          <li>
-            <a href="/">Go back to Home</a>
-          </li>
-        </ul>
+        <a href="/" className="btn btn-primary text-white text-decoration-none">
+          Go back to Home
+        </a>
       </div>
       <footer>
         <p>&copy; 2024 Curio</p>
