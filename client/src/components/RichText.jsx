@@ -11,23 +11,16 @@ import { TOOLBAR_BUTTONS } from "../utils/constants";
 import React from "react";
 import isHotkey from "is-hotkey";
 
-const RichText = () => {
+const RichText = ({ data, setData }) => {
   const [editor] = useState(() => withReact(createEditor()));
-  const [question, setQuestion] = useState(null);
-  const initialValue = [
-    {
-      type: "paragraph",
-      children: [
-        {
-          text: "",
-        },
-      ],
-    },
-  ];
 
   useEffect(() => {
     ReactEditor.focus(editor);
   }, []);
+
+  useEffect(() => {
+    console.log("rendering editor");
+  });
 
   const LIST_TYPES = ["list-ul", "list-ol"];
   const Leaf = ({ attributes, children, leaf }) => {
@@ -160,14 +153,14 @@ const RichText = () => {
     <div id="texteditor">
       <Slate
         editor={editor}
-        initialValue={initialValue}
+        initialValue={data}
         onChange={(value) => {
           const isAstChange = editor.operations.some(
             (op) => "set_selection" !== op.type
           );
           if (isAstChange) {
             const content = JSON.stringify(value);
-            setQuestion(content);
+            setData(content);
           }
         }}
       >

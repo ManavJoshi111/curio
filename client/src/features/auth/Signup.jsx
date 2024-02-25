@@ -28,14 +28,14 @@ const Signup = () => {
   const handleGetOtp = async () => {
     setLoading(true);
     try {
-      const data = await post(`${SERVER_URL}/api/auth/get-otp`, {
+      const response = await post(`${SERVER_URL}/api/auth/get-otp`, {
         name,
         email,
         password,
       });
       setLoading(false);
       setShowOtp(true);
-      SuccessToast(data.message);
+      SuccessToast(response.message);
     } catch (err) {
       setLoading(false);
       ErrorToast(err.error);
@@ -50,15 +50,15 @@ const Signup = () => {
   const handleSignIn = async () => {
     try {
       setLoading(true);
-      const data = await post(`${SERVER_URL}/api/auth/verify-otp`, {
+      const response = await post(`${SERVER_URL}/api/auth/verify-otp`, {
         name,
         email,
         password,
         otp,
       });
       setLoading(false);
-      SuccessToast(data.message);
-      localStorage.setItem("token", data.token);
+      SuccessToast(response.message);
+      localStorage.setItem("token", response.data);
       dispatch(getUserData());
       navigate("/");
       setShowOtp(false);

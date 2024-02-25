@@ -34,12 +34,12 @@ const OnboardUser = () => {
   const handleFormSubmit = async () => {
     console.log("Submitting form data:", additionalDetails);
     try {
-      const data = await post(
+      const response = await post(
         `${SERVER_URL}/api/user/additional-details`,
         additionalDetails
       );
-      console.log("Data: ", data);
-      SuccessToast(data.message);
+      console.log("Data: ", response);
+      SuccessToast(response.message);
       navigate("/");
     } catch (err) {
       console.log("Err: ", err);
@@ -51,7 +51,8 @@ const OnboardUser = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const { topics } = await get(`${SERVER_URL}/api/topics`);
+        const response = await get(`${SERVER_URL}/api/topics`);
+        const topics = response?.data;
         setUserTopics(
           topics.map((topic) => ({
             value: topic.topicId,

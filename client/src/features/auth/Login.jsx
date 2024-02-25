@@ -26,15 +26,15 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const data = await post(`${SERVER_URL}/api/auth/login`, {
+      const response = await post(`${SERVER_URL}/api/auth/login`, {
         email,
         password,
       });
       setLoading(false);
-      console.log("Data: ", data);
-      localStorage.setItem("token", data.token);
+      console.log("Data: ", response);
+      localStorage.setItem("token", response.data);
       dispatch(getUserData());
-      SuccessToast(data.message);
+      SuccessToast(response.message);
       navigate("/");
     } catch (err) {
       setLoading(false);
