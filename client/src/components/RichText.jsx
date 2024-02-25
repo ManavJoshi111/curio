@@ -12,11 +12,10 @@ import React from "react";
 import isHotkey from "is-hotkey";
 
 const RichText = ({ data, setData }) => {
-  const [editor] = useState(() => withReact(createEditor()));
   useEffect(() => {
-    ReactEditor.focus(editor);
-  }, []);
-
+    console.log("rendering rich text");
+  });
+  const [editor] = useState(() => withReact(createEditor()));
   const LIST_TYPES = ["list-ul", "list-ol"];
   const Leaf = ({ attributes, children, leaf }) => {
     if (leaf.bold) {
@@ -145,48 +144,46 @@ const RichText = ({ data, setData }) => {
   };
 
   return (
-    <div id="texteditor">
-      <Slate
-        editor={editor}
-        initialValue={data}
-        onChange={(value) => {
-          const isAstChange = editor.operations.some(
-            (op) => "set_selection" !== op.type
-          );
-          if (isAstChange) {
-            setData(value);
+    <Slate
+      editor={editor}
+      initialValue={data}
+      onChange={(value) => {
+        const isAstChange = editor.operations.some(
+          (op) => "set_selection" !== op.type
+        );
+        if (isAstChange) {
+          setData(value);
+        }
+      }}
+    >
+      <Toolbar
+        toggleMark={toggleMark}
+        isMarkActive={isMarkActive}
+        toggleBlock={toggleBlock}
+        isBlockActive={isBlockActive}
+      />
+      <Editable
+        placeholder="Your text goes here..."
+        renderPlaceholder={({ children, attributes }) => (
+          <div {...attributes}>
+            <p style={{ color: "black" }}>{children}</p>
+          </div>
+        )}
+        renderLeaf={renderLeaf}
+        renderElement={renderElement}
+        style={{
+          outline: "none",
+        }}
+        onKeyDown={(event) => {
+          for (let { key, mark } of TOOLBAR_BUTTONS) {
+            if (key && isHotkey(key, event)) {
+              event.preventDefault();
+              toggleMark(editor, mark);
+            }
           }
         }}
-      >
-        <Toolbar
-          toggleMark={toggleMark}
-          isMarkActive={isMarkActive}
-          toggleBlock={toggleBlock}
-          isBlockActive={isBlockActive}
-        />
-        <Editable
-          placeholder="Your text goes here..."
-          renderPlaceholder={({ children, attributes }) => (
-            <div {...attributes}>
-              <p style={{ color: "black" }}>{children}</p>
-            </div>
-          )}
-          renderLeaf={renderLeaf}
-          renderElement={renderElement}
-          style={{
-            outline: "none",
-          }}
-          onKeyDown={(event) => {
-            for (let { key, mark } of TOOLBAR_BUTTONS) {
-              if (key && isHotkey(key, event)) {
-                event.preventDefault();
-                toggleMark(editor, mark);
-              }
-            }
-          }}
-        />
-      </Slate>
-    </div>
+      />
+    </Slate>
   );
 };
 

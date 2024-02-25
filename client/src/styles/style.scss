@@ -18,6 +18,10 @@ $body-bg-color: #333333;
   color: white;
 }
 
+#question-title {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
 #texteditor {
   font-family: "Fira Code", monospace;
   background-color: rgba(128, 128, 128, 0.2);

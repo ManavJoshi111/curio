@@ -69,7 +69,7 @@ exports.getQuestion = async (req, res) => {
 
 // Add a new question
 exports.addQuestion = async (req, res) => {
-  const { content } = req.body;
+  const { title, content } = req.body;
   const { _id: userId } = req.user;
 
   const { error } = questionValidator.validate(req.body);
@@ -80,7 +80,7 @@ exports.addQuestion = async (req, res) => {
   }
 
   try {
-    const question = new Question({ content, userId });
+    const question = new Question({ title, content, userId });
 
     await question.save();
 
@@ -92,7 +92,6 @@ exports.addQuestion = async (req, res) => {
       "Question added successfully",
       question
     );
-    
   } catch (err) {
     console.error(err);
     return sendResponse(res, 500, false, "Failed to add question");
@@ -106,7 +105,7 @@ exports.updateQuestion = async (req, res) => {
   try {
     const question = await Question.findOneAndUpdate(
       { _id: id, userId },
-      { content: req.body.content },
+      { title: req.body.content, content: req.body.content },
       { returnDocument: "after" }
     );
     if (!question) {

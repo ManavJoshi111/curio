@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import Home from "../pages/Home";
 import AddQuestion from "../features/questions/components/AddQuestion";
 import ErrorPage from "../pages/ErrorPage";
+import Profile from "../features/profile/components/profile";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Route path="/" element={<PrivateRoutes component={Navbar} />}>
           <Route path="" element={<Home />} />
           <Route path="add-question" element={<AddQuestion />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
