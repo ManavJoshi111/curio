@@ -9,7 +9,5 @@ export default defineConfig({
   plugins: [react(), sass()],
 });
 if (import.meta.hot) {
-  import.meta.hot.dispose(() => {
-    console.clear();
-  });
+  console.clear();
 }

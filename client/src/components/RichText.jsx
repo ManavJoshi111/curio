@@ -13,14 +13,9 @@ import isHotkey from "is-hotkey";
 
 const RichText = ({ data, setData }) => {
   const [editor] = useState(() => withReact(createEditor()));
-
   useEffect(() => {
     ReactEditor.focus(editor);
   }, []);
-
-  useEffect(() => {
-    console.log("rendering editor");
-  });
 
   const LIST_TYPES = ["list-ul", "list-ol"];
   const Leaf = ({ attributes, children, leaf }) => {
@@ -159,8 +154,7 @@ const RichText = ({ data, setData }) => {
             (op) => "set_selection" !== op.type
           );
           if (isAstChange) {
-            const content = JSON.stringify(value);
-            setData(content);
+            setData(value);
           }
         }}
       >
