@@ -4,24 +4,48 @@ const { questionValidator } = require("../validators/");
 
 // Get all questions of user
 // exports.getQuestionsByUser = async (req, res) => {
-//   const { _id: userId } = req.query;
-//   try {
-//     const questions = await Question.find({ userId })
-//       .sort({ createdAt: -1 })
-//       .skip(skip)
-//       .limit(limit);
-//     sendResponse(
-//       res,
-//       200,
-//       true,
-//       "Fetched questions successfully!!!",
-//       questions
-//     );
-//   } catch (err) {
-//     console.log(err);
-//     sendResponse(res, 500, false, "Failed to fetch questions!!!");
-//   }
+// const { _id: userId } = req.query;
+// try {
+//   const questions = await Question.find({ userId })
+//     .sort({ createdAt: -1 })
+//     .skip(skip)
+//     .limit(limit);
+//   sendResponse(
+//     res,
+//     200,
+//     true,
+//     "Fetched questions successfully!!!",
+//     questions
+//   );
+// } catch (err) {
+//   console.log(err);
+//   sendResponse(res, 500, false, "Failed to fetch questions!!!");
+// }
 // };
+
+// Get question titles by user
+exports.getQuestionTitlesByUser = async (req, res) => {
+  const { skip, limit } = req.query;
+  try {
+    const questions = await Question.find(
+      { userId: req.user._id },
+      { title: 1, createdAt: 1 }
+    )
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+    sendResponse(
+      res,
+      200,
+      true,
+      "Fetched question titles successfully!!!",
+      questions
+    );
+  } catch (err) {
+    console.log(err);
+    sendResponse(res, 500, false, "Failed to fetch question titles!!!");
+  }
+};
 
 // Get all questions
 exports.getQuestions = async (req, res) => {

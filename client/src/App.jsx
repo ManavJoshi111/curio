@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserData } from "./features/auth/actions/userActions";
 import Router from "./routes/Router";
 import Loading from "./components/Loading";
+import { ErrorToast } from "./utils/CustomToast";
 import ConnectionDown from "./pages/ConnectionDown";
+import { Navigate } from "react-router-dom";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -45,8 +47,11 @@ const App = () => {
       );
     }
     if (error) {
-      return <h1>Some error occurred...</h1>;
+      ErrorToast(error);
+      localStorage.removeItem("token");
+      window.location.reload();
     }
+
     if (!token || user) {
       return <Router />;
     } else {

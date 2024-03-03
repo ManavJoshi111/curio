@@ -6,7 +6,8 @@ const { authenticate } = require("../middlewares");
 
 router.post("/", authenticate, questionController.addQuestion);
 router.get("/", questionController.getQuestions);
-router.post("/:id", questionController.getQuestion);
+router.get("/titles", authenticate, questionController.getQuestionTitlesByUser);
+router.get("/:id", questionController.getQuestion);
 router.put("/:id", authenticate, questionController.updateQuestion);
 router.delete("/:id", authenticate, questionController.deleteQuestion);
 

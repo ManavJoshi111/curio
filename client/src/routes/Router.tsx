@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import AddQuestion from "../features/questions/components/AddQuestion";
 import ErrorPage from "../pages/ErrorPage";
 import Profile from "../features/profile/components/profile";
+import Question from "../features/questions/components/Question";
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/" element={<PrivateRoutes component={Navbar} />}>
           <Route path="" element={<Home />} />
           <Route path="add-question" element={<AddQuestion />} />
+          <Route path="question/:id" element={<Question />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />

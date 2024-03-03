@@ -20,7 +20,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const { email, password } = formData;
   const { user } = useSelector((state) => state.user);
-
   if (user) return <Navigate to="/" />;
 
   const handleLogin = async () => {
@@ -38,7 +37,7 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       setLoading(false);
-      ErrorToast(err.error);
+      ErrorToast(err.message);
     }
   };
 

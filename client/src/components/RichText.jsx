@@ -11,10 +11,7 @@ import { TOOLBAR_BUTTONS } from "../utils/constants";
 import React from "react";
 import isHotkey from "is-hotkey";
 
-const RichText = ({ data, setData }) => {
-  useEffect(() => {
-    console.log("rendering rich text");
-  });
+const RichText = ({ data, setData, readOnly = false }) => {
   const [editor] = useState(() => withReact(createEditor()));
   const LIST_TYPES = ["list-ul", "list-ol"];
   const Leaf = ({ attributes, children, leaf }) => {
@@ -156,14 +153,17 @@ const RichText = ({ data, setData }) => {
         }
       }}
     >
-      <Toolbar
-        toggleMark={toggleMark}
-        isMarkActive={isMarkActive}
-        toggleBlock={toggleBlock}
-        isBlockActive={isBlockActive}
-      />
+      {!readOnly && (
+        <Toolbar
+          toggleMark={toggleMark}
+          isMarkActive={isMarkActive}
+          toggleBlock={toggleBlock}
+          isBlockActive={isBlockActive}
+        />
+      )}
       <Editable
         placeholder="Your text goes here..."
+        readOnly={readOnly}
         renderPlaceholder={({ children, attributes }) => (
           <div {...attributes}>
             <p style={{ color: "black" }}>{children}</p>
@@ -183,6 +183,22 @@ const RichText = ({ data, setData }) => {
           }
         }}
       />
+      {/* {readOnly ? (
+        <div>
+          {data.map((node, index) => (
+            <Element key={index} attributes={{}}>
+              {node.children.map((text, textIndex) => (
+                <Leaf key={textIndex} attributes={{}}>
+                  {text.text}
+                </Leaf>
+              ))}
+            </Element>
+          ))}
+        </div>
+      ) : (
+        <>
+        </>
+      )} */}
     </Slate>
   );
 };
