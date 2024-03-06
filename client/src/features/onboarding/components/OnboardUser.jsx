@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { getTopics } from "../actions/topicActions";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { SERVER_URL } from "../../../utils/constants";
@@ -11,7 +12,6 @@ import ImageUpload from "../../../components/ImageUpload";
 const OnboardUser = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [userTopics, setUserTopics] = useState([]);
   const [additionalDetails, setAdditionalDetails] = useState({
     bio: "",
     contactNo: "",
@@ -42,30 +42,9 @@ const OnboardUser = () => {
       SuccessToast(response.message);
       navigate("/");
     } catch (err) {
-      console.log("Err: ", err);
-      ErrorToast(err.error);
+      ErrorToast(err.message);
     }
   };
-
-  // Fetch topics asynchronously on component mount
-  useEffect(() => {
-    const fetchTopics = async () => {
-      try {
-        const response = await get(`${SERVER_URL}/api/topics`);
-        const topics = response?.data;
-        setUserTopics(
-          topics.map((topic) => ({
-            value: topic.topicId,
-            label: topic.topicName,
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching topics:", error);
-        ErrorToast("An error occurred, please try again after sometime");
-      }
-    };
-    fetchTopics();
-  }, []);
 
   return (
     <Container className="mt-5">
@@ -86,7 +65,6 @@ const OnboardUser = () => {
               additionalDetails={additionalDetails}
               prevPage={handlePrevClick}
               onSubmit={handleFormSubmit}
-              userTopics={userTopics}
             />
           )}
         </Col>
@@ -202,16 +180,29 @@ const UserTopics = ({
   additionalDetails,
   prevPage,
   onSubmit,
-  userTopics,
 }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTopics());
+  }, []);
+  const { loading, error, topics } = useSelector((state) => state.topics);
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return ErrorToast(error);
+  }
   return (
     <Card className="text-center mb-5 border-0 shadow-lg" id="user-topics">
       <Card.Body>
         <Card.Title className="fs-1">What interests you?</Card.Title>
         <Form className="m-0 p-2">
-          {userTopics.length > 0 ? (
+          {topics.length > 0 ? (
             <Select
-              options={userTopics}
+              options={topics.map((topic) => ({
+                value: topic.topicId,
+                label: topic.topicName,
+              }))}
               value={additionalDetails.topics.map((topic) => ({
                 value: topic.topicId,
                 label: topic.topicName,
