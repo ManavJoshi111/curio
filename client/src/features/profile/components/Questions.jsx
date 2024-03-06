@@ -46,7 +46,7 @@ const Questions = () => {
           >
             <CardBody>
               <CardText className="question-title">
-                <span className="fw-bold fs-3">{title}</span>
+                <span className="fw-bold">{title}</span>
               </CardText>
               <CardText className="question-metadata">
                 <div className="text-muted">{formatDate(createdAt)}</div>

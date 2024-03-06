@@ -5,6 +5,15 @@ $border-color: #333333;
 $body-color: #333333;
 $body-bg-color: #333333;
 
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar width */
+  background: transparent; /* Set the background color of the scrollbar */
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none; /* Remove scrollbar in Firefox */
+}
 .form-control:focus {
   box-shadow: none;
   background-color: #3333332a;

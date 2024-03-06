@@ -31,6 +31,9 @@ const Navbar = () => {
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/add-answer">
                 Add Answer
               </Nav.Link>
+              <Nav.Link className="px-3 fs-5" as={NavLink} to="/logout">
+                Logout
+              </Nav.Link>
               <Nav.Link
                 className="px-3 fs-5 ms-auto me-2"
                 as={NavLink}
