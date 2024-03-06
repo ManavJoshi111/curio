@@ -36,5 +36,6 @@ exports.getQuestionsByCondition = (
       }
     );
   }
+  console.dir({ pipeline }, { depth: null });
   return Question.aggregate(pipeline);
 };

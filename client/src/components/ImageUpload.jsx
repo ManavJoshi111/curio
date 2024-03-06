@@ -20,7 +20,7 @@ const ImageUpload = ({ setAdditionalDetails }) => {
             profilePic: res.info.secure_url,
           }));
         } else {
-          console.log("error: ", _);
+          // ignore
         }
       }
     );

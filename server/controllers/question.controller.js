@@ -102,8 +102,8 @@ exports.getQuestionByTopics = async (req, res) => {
     const { page, limit } = req.query;
     const { topics } = req.body;
     const condition = {
-      topicId: {
-        $in: topics.map((topic) => generateObjectId(topic.topicId)),
+      topicIds: {
+        $in: topics.map((topic) => generateObjectId(topic)),
       },
     };
     const [queryData, queryCount] = await Promise.all([

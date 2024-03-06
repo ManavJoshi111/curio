@@ -32,13 +32,11 @@ const OnboardUser = () => {
   };
 
   const handleFormSubmit = async () => {
-    console.log("Submitting form data:", additionalDetails);
     try {
       const response = await post(
         `${SERVER_URL}/api/user/additional-details`,
         additionalDetails
       );
-      console.log("Data: ", response);
       SuccessToast(response.message);
       navigate("/");
     } catch (err) {

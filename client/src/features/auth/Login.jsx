@@ -30,7 +30,6 @@ const Login = () => {
         password,
       });
       setLoading(false);
-      console.log("Data: ", response);
       localStorage.setItem("token", response.data);
       dispatch(getUserData());
       SuccessToast(response.message);

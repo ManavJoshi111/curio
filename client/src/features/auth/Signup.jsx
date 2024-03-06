@@ -39,7 +39,6 @@ const Signup = () => {
     } catch (err) {
       setLoading(false);
       ErrorToast(err.error);
-      console.log("caught: ", err);
     }
   };
 

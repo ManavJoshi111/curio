@@ -31,7 +31,6 @@ const App = () => {
     window.addEventListener(
       "offline",
       function (e) {
-        console.log("Connection is down.");
         setOnline(false);
       },
       false
