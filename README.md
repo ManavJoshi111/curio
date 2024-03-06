@@ -11,7 +11,7 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
 
 - [ ] Question & Answers Module:
 
-  - [ ] Create Questions
+  - [x] Create Questions
   - [ ] Answer Questions
   - [ ] Request Answers from Other Users
 
