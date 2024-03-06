@@ -17,8 +17,8 @@ const questionSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    topicId: {
-      type: mongoose.Schema.Types.ObjectId,
+    topicIds: {
+      type: [mongoose.Schema.Types.ObjectId],
       ref: "Topic",
     },
     spaceId: {

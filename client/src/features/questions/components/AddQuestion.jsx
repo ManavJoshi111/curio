@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import Select from "react-select";
+import Loading from "../../../components/Loading";
 import RichText from "../../../components/RichText";
+import { getTopics } from "../../onboarding/actions/topicActions";
 import { SuccessToast, ErrorToast } from "../../../utils/CustomToast";
 import { post } from "../../../utils/axios";
 import { SERVER_URL } from "../../../utils/constants";
 
 const AddQuestion = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error, topics } = useSelector((state) => state.topics);
   const titleInputRef = useRef(null);
+  const [selectedTopics, setSelectedTopics] = useState([]);
   const [question, setQuestion] = useState([
     {
       type: "paragraph",
@@ -22,11 +29,13 @@ const AddQuestion = () => {
 
   useEffect(() => {
     titleInputRef.current?.focus();
+    if (topics.length === 0) {
+      dispatch(getTopics());
+    }
   }, []);
 
   const handleAddQuestion = async () => {
     const questionTitle = titleInputRef.current.value;
-    console.log("Adding question: ", questionTitle);
     if (!questionTitle.trim()) {
       ErrorToast("Question title cannot be empty");
       return;
@@ -38,6 +47,7 @@ const AddQuestion = () => {
     const res = await post(`${SERVER_URL}/api/questions/`, {
       title: questionTitle,
       content: JSON.stringify(question),
+      topicIds: selectedTopics,
     });
     if (res.success) {
       SuccessToast(res.message);
@@ -46,6 +56,9 @@ const AddQuestion = () => {
       ErrorToast(res.message);
     }
   };
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="container border border-dark">
@@ -63,6 +76,26 @@ const AddQuestion = () => {
             placeholder="Write a clear and concise title for your question e.g. (How to revert a commit in git?)"
           />
         </div>
+        <div className="d-flex flex-column mb-3 align-items-start pt-1">
+          <Select
+            isMulti
+            options={topics.map((topic) => ({
+              value: topic.topicId,
+              label: topic.topicName,
+            }))}
+            className="w-100"
+            onChange={(currentTopics) => {
+              setSelectedTopics(
+                currentTopics.map((topic) => {
+                  return {
+                    topicId: topic.value,
+                  };
+                })
+              );
+            }}
+          />
+        </div>
+
         <div id="texteditor">
           <RichText data={question} setData={setQuestion} />
         </div>

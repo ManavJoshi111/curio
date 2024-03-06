@@ -1,5 +1,6 @@
 const sendResponse = require("../handlers/response.handler");
 const Question = require("../models/Question");
+const { generateObjectId } = require("../utils/index");
 const { questionValidator } = require("../validators/");
 
 // Get all questions of user
@@ -93,7 +94,7 @@ exports.getQuestion = async (req, res) => {
 
 // Add a new question
 exports.addQuestion = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, topicIds } = req.body;
   const { _id: userId } = req.user;
 
   const { error } = questionValidator.validate(req.body);
@@ -104,11 +105,14 @@ exports.addQuestion = async (req, res) => {
   }
 
   try {
-    const question = new Question({ title, content, userId });
+    const question = new Question({
+      title,
+      content,
+      userId,
+      topicIds: topicIds.map((topic) => generateObjectId(topic.topicId)),
+    });
 
     await question.save();
-
-    console.log("after saving...", question);
     return sendResponse(
       res,
       201,

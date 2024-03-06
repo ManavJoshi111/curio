@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("./constants");
+const mongoose = require("mongoose");
+
 const generateOTP = (otp_length) => {
   var digits = "0123456789";
   let OTP = "";
@@ -22,4 +24,8 @@ const verifyToken = async (token) => {
   return decoded;
 };
 
-module.exports = { generateOTP, generateToken, verifyToken };
+const generateObjectId = (id) => {
+  return new mongoose.Types.ObjectId(id);
+};
+
+module.exports = { generateOTP, generateToken, verifyToken, generateObjectId };
