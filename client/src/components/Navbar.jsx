@@ -25,10 +25,10 @@ const Navbar = () => {
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link className="px-3 fs-5" as={NavLink} to="/add-question">
+              <Nav.Link className="px-3 fs-5" as={NavLink} to="/question">
                 Add Question
               </Nav.Link>
-              <Nav.Link className="px-3 fs-5" as={NavLink} to="/add-answer">
+              <Nav.Link className="px-3 fs-5" as={NavLink} to="/answer">
                 Add Answer
               </Nav.Link>
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/logout">

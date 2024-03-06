@@ -77,6 +77,9 @@ const AddQuestion = () => {
           />
         </div>
         <div className="d-flex flex-column mb-3 align-items-start pt-1">
+          <label htmlFor="question-title" className="fw-bold me-2">
+            Topics:
+          </label>
           <Select
             isMulti
             options={topics.map((topic) => ({

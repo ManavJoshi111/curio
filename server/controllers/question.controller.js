@@ -1,3 +1,7 @@
+const {
+  getQuestionsBasedOnCondition,
+  getQuestionsByCondition,
+} = require("../DB/queries/Question");
 const sendResponse = require("../handlers/response.handler");
 const Question = require("../models/Question");
 const { generateObjectId } = require("../utils/index");
@@ -89,6 +93,44 @@ exports.getQuestion = async (req, res) => {
   } catch (err) {
     console.error(err);
     sendResponse(res, 500, false, "Failed to fetch question");
+  }
+};
+
+// Get all questions based on given topics
+exports.getQuestionByTopics = async (req, res) => {
+  try {
+    const { page, limit } = req.query;
+    const { topics } = req.body;
+    const condition = {
+      topicId: {
+        $in: topics.map((topic) => generateObjectId(topic.topicId)),
+      },
+    };
+    const [queryData, queryCount] = await Promise.all([
+      getQuestionsByCondition(
+        condition,
+        {},
+        false,
+        {
+          createdAt: -1,
+        },
+        page || 1,
+        limit || 10
+      ),
+      getQuestionsByCondition(condition, {}, true),
+    ]);
+    console.log(queryData, queryCount);
+    const response = {
+      data: queryData,
+      totalRecords: 100,
+      page: 1,
+      limit: 10,
+      totalPages: 10,
+    };
+    sendResponse(res, 200, true, "Questions fetched successfully", response);
+  } catch (err) {
+    console.log("Err: ", err);
+    sendResponse(res, 500, false, "Failed to fetch questions!");
   }
 };
 

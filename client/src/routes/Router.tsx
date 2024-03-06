@@ -10,6 +10,8 @@ import ErrorPage from "../pages/ErrorPage";
 import Profile from "../features/profile/components/profile";
 import Question from "../features/questions/components/ViewQuestion";
 import Logout from "../features/auth/Logout";
+import AddAnswer from "../features/answers/components/AddAnswer";
+import Answer from "../features/answers/components/Answers";
 
 const Router = () => {
   return (
@@ -19,7 +21,8 @@ const Router = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<PrivateRoutes component={Navbar} />}>
           <Route path="" element={<Home />} />
-          <Route path="add-question" element={<AddQuestion />} />
+          <Route path="question" element={<AddQuestion />} />
+          <Route path="answer" element={<Answer />} />
           <Route path="question/:id" element={<Question />} />
           <Route path="profile" element={<Profile />} />
           <Route path="logout" element={<Logout />} />

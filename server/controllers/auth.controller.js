@@ -8,10 +8,10 @@ const {
 } = require("../validators");
 const { generateOTP, generateToken, verifyToken } = require("../utils");
 const { sendEmail } = require("../services");
+const { getUserByCondition } = require("../DB/queries/Auth");
 
 exports.getVerificationOTP = async (req, res) => {
   try {
-    console.log("getverfication otp: ", req.body);
     const { name, email, password } = req.body;
     const { error, value } = SignupValidator.validate(req.body);
     if (error) {
@@ -19,7 +19,8 @@ exports.getVerificationOTP = async (req, res) => {
       return sendResponse(res, 400, false, error.details[0].message);
     }
 
-    let user = await User.findOne({ email });
+    let user = await getUserByCondition({ email });
+    user = user.length && user[0];
     if (user) {
       if (!user.isVerified) {
         const userOtp = generateOTP(6);
@@ -87,7 +88,8 @@ exports.verifyOTP = async (req, res) => {
     console.log("error in verifyOTP: ", error);
     return sendResponse(res, 400, false, error.details[0].message);
   }
-  const userFound = await User.findOne({ email, otp });
+  let userFound = await getUserByCondition({ email, otp });
+  userFound = userFound.length && userFound[0];
   if (userFound) {
     userFound.otp = null;
     userFound.isVerified = true;
@@ -118,7 +120,9 @@ exports.login = async (req, res) => {
       console.error("Validation Error: ", error);
       return sendResponse(res, 400, false, error.details[0].message);
     }
-    const user = await User.findOne({ email });
+    let user = await getUserByCondition({ email });
+    user = user.length && user[0];
+    console.log("USER: ", user.isVerified);
     if (!user) {
       return sendResponse(
         res,
@@ -155,7 +159,9 @@ exports.login = async (req, res) => {
 exports.getUser = async (req, res) => {
   try {
     const { _id } = req.user;
-    const user = await User.findById(_id).select("-password");
+    // const user = await User.findById(_id).select("-password");
+    let user = await getUserByCondition({ _id }, { password: 0 });
+    user = user.length && user[0];
     return sendResponse(res, 200, true, "User fetched successfully!", user);
   } catch (err) {
     console.error("Error in getUser: ", err);
