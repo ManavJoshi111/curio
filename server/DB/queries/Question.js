@@ -2,7 +2,7 @@ const Question = require("../../models/Question");
 
 exports.getQuestionsByCondition = (
   condition,
-  projection = { _id: 0 },
+  projection = {},
   count = false,
   sortObj,
   page,
@@ -12,10 +12,12 @@ exports.getQuestionsByCondition = (
     {
       $match: condition,
     },
-    {
-      $project: { _id: 0, ...projection },
-    },
   ];
+  if (Object.keys(projection).length > 0) {
+    pipeline.push({
+      $project: projection,
+    });
+  }
   if (count) {
     pipeline.push({
       $group: {
@@ -36,6 +38,5 @@ exports.getQuestionsByCondition = (
       }
     );
   }
-  console.dir({ pipeline }, { depth: null });
   return Question.aggregate(pipeline);
 };

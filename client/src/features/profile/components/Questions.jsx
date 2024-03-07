@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardBody, CardText } from "react-bootstrap";
 import { get } from "../../../utils/axios";
 import { SERVER_URL } from "../../../utils/constants";
-import { formatDate } from "../../../utils/FormatDate";
+import Card from "../../../components/Card";
+import Loading from "../../../components/Loading";
 
 const Questions = () => {
   const [titles, setTitles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuestionTitles = async () => {
@@ -28,7 +27,7 @@ const Questions = () => {
   }, []);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   if (error) {
@@ -38,21 +37,14 @@ const Questions = () => {
   return (
     <>
       <div className="question-list">
-        {titles.map(({ _id, title, createdAt }) => (
+        {titles.map(({ _id, title, createdAt }, index) => (
           <Card
-            key={title}
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate(`/question/${_id}`)}
-          >
-            <CardBody>
-              <CardText className="question-title">
-                <span className="fw-bold">{title}</span>
-              </CardText>
-              <CardText className="question-metadata">
-                <div className="text-muted">{formatDate(createdAt)}</div>
-              </CardText>
-            </CardBody>
-          </Card>
+            key={index}
+            id={_id}
+            title={title}
+            createdAt={createdAt}
+            navigateLink={`/question/${_id}`}
+          />
         ))}
       </div>
     </>

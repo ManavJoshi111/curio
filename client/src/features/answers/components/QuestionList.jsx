@@ -1,26 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { post } from "../../../utils/axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  Dropdown,
+  Form,
+  FormCheck,
+  FormControl,
+  FormGroup,
+} from "react-bootstrap";
 import Loading from "../../../components/Loading";
-import { SERVER_URL } from "../../../utils/constants";
+import { getQuestionsByTopics } from "../../questions/actions/questionActions";
+import Card from "../../../components/Card";
+import Pagination from "../../../components/Pagination";
 
 const QuestionList = () => {
-  const [loading, setLoading] = useState(false);
-  const [questionList, setQuestionList] = useState([]);
+  const dispatch = useDispatch();
+  const [queryParams, setQueryParams] = useState({
+    topics: [],
+    sortBy: "latest",
+  });
   const { user } = useSelector((state) => state.user);
+  const {
+    questionsByTopic: questionList,
+    loading,
+    error,
+  } = useSelector((state) => state.questions);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // handleQuestionList();
+  };
+
+  const handleQuestionList = (page) => {
+    dispatch(
+      getQuestionsByTopics({
+        page: page,
+        topics: user?.topics,
+      })
+    );
+  };
+
   useEffect(() => {
-    const fetchQuestionList = async () => {
-      setLoading(true);
-      const res = await post(
-        `${SERVER_URL}/api/questions/by-topic?page=&limit=`,
-        {
-          topics: user.topics.map((topic) => topic.topicId),
-        }
-      );
-      setQuestionList(res.data.data);
-      setLoading(false);
-    };
-    fetchQuestionList();
+    handleQuestionList();
   }, []);
 
   if (loading) {
@@ -31,11 +52,23 @@ const QuestionList = () => {
   }
   return (
     <div>
-      {questionList.map((question, index) => (
-        <div key={index}>
-          <h3>{question.title}</h3>
-        </div>
-      ))}
+      {questionList?.data &&
+        questionList?.data?.map((question, index) => (
+          <Card
+            key={index}
+            id={index}
+            title={question.title}
+            createdAt={question.createdAt}
+            navigateLink={`/question/${question._id}`}
+          />
+        ))}
+      <div className="mt-2">
+        <Pagination
+          handleFn={handleQuestionList}
+          currentPage={questionList.page}
+          totalPages={questionList.totalPages}
+        />
+      </div>
     </div>
   );
 };

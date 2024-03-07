@@ -4,12 +4,16 @@ export const CLOUDINARY_API_KEY = import.meta.env.VITE_CLOUDINARY_API_KEY;
 export const CLOUDINARY_API_SECRET = import.meta.env.VITE_CLOUDINARY_API_SECRET;
 export const CLOUDINARY_UPLOAD_PRESET = import.meta.env
   .VITE_CLOUDINARY_UPLOAD_PRESET;
+export const PAGINATION_LIMIT = 10;
+export const PAGINATION_DEFAULT_PAGE = 1;
+
 export const ROLES = {
   ADMIN: "admin",
   CONTENT_REVIEWER: "content reviewer",
   MODERATOR: "moderator",
   CONTRIBUTOR: "contributor",
 };
+
 export const TOOLBAR_BUTTONS = [
   { key: "mod+b", mark: "bold", type: "mark" },
   { key: "mod+i", mark: "italic", type: "mark" },

@@ -119,13 +119,12 @@ exports.getQuestionByTopics = async (req, res) => {
       ),
       getQuestionsByCondition(condition, {}, true),
     ]);
-    console.log(queryData, queryCount);
     const response = {
       data: queryData,
-      totalRecords: 100,
-      page: 1,
-      limit: 10,
-      totalPages: 10,
+      totalRecords: +queryCount?.[0].totalRecords || 0,
+      page: +page,
+      limit: +limit,
+      totalPages: Math.ceil(queryCount?.[0].totalRecords / limit) || 0,
     };
     sendResponse(res, 200, true, "Questions fetched successfully", response);
   } catch (err) {
