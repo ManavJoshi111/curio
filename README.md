@@ -12,7 +12,9 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
 - [ ] Question & Answers Module:
 
   - [x] Create Questions
-  - [ ] Answer Questions
+  - [x] View Questions
+  - [x] Answer Questions
+  - [] View Answers
   - [ ] Request Answers from Other Users
 
 - [ ] Upvote & Comment Module:
