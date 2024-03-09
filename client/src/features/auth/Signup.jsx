@@ -38,7 +38,7 @@ const Signup = () => {
       SuccessToast(response.message);
     } catch (err) {
       setLoading(false);
-      ErrorToast(err.error);
+      ErrorToast(err.message);
     }
   };
 
@@ -62,7 +62,7 @@ const Signup = () => {
       navigate("/");
       setShowOtp(false);
     } catch (err) {
-      ErrorToast(err.error);
+      ErrorToast(err.message);
     }
   };
 

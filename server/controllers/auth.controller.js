@@ -122,7 +122,6 @@ exports.login = async (req, res) => {
     }
     let user = await getUserByCondition({ email });
     user = user.length && user[0];
-    console.log("USER: ", user.isVerified);
     if (!user) {
       return sendResponse(
         res,

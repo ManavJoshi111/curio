@@ -59,7 +59,7 @@ const QuestionList = () => {
             id={index}
             title={question.title}
             createdAt={question.createdAt}
-            navigateLink={`/question/${question._id}`}
+            navigateLink={`/answer/${question._id}`}
           />
         ))}
       <div className="mt-2">

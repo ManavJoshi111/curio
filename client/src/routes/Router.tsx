@@ -8,7 +8,7 @@ import Home from "../pages/Home";
 import AddQuestion from "../features/questions/components/AddQuestion";
 import ErrorPage from "../pages/ErrorPage";
 import Profile from "../features/profile/components/profile";
-import Question from "../features/questions/components/ViewQuestion";
+import ViewQuestion from "../features/questions/components/ViewQuestion";
 import Logout from "../features/auth/Logout";
 import AddAnswer from "../features/answers/components/AddAnswer";
 import Answer from "../features/answers/components/Answers";
@@ -23,7 +23,8 @@ const Router = () => {
           <Route path="" element={<Home />} />
           <Route path="question" element={<AddQuestion />} />
           <Route path="answer" element={<Answer />} />
-          <Route path="question/:id" element={<Question />} />
+          <Route path="answer/:id" element={<AddAnswer />} />
+          <Route path="question/:id" element={<ViewQuestion />} />
           <Route path="profile" element={<Profile />} />
           <Route path="logout" element={<Logout />} />
         </Route>

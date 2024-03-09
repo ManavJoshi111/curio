@@ -9,7 +9,7 @@ const getTopics = createAsyncThunk(
       const res = await get(`${SERVER_URL}/api/topics`);
       return res;
     } catch (err) {
-      return rejectWithValue(err.error);
+      return rejectWithValue(err.message);
     }
   }
 );

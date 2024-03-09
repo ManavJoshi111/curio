@@ -20,7 +20,7 @@ const getQuestionsByTopics = createAsyncThunk(
       );
       return res;
     } catch (err) {
-      return rejectWithValue(err.error);
+      return rejectWithValue(err.message);
     }
   }
 );

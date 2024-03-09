@@ -6,11 +6,9 @@ exports.getTopics = async (req, res) => {
     const topics = await getTopicsByCondition(
       {},
       {
-        $project: {
-          topicId: "$_id",
-          topicName: "$name",
-          description: 1,
-        },
+        topicId: "$_id",
+        topicName: "$name",
+        description: 1,
       }
     );
     return sendResponse(res, 200, true, "Fetched topics successfully!", topics);

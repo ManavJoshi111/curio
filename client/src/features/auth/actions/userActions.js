@@ -8,7 +8,7 @@ const getUserData = createAsyncThunk(
       const res = await post("api/auth/get-user");
       return res;
     } catch (err) {
-      return rejectWithValue(err.error);
+      return rejectWithValue(err.message);
     }
   }
 );
