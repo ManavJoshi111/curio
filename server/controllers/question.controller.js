@@ -1,11 +1,12 @@
-const {
-  getQuestionsBasedOnCondition,
-  getQuestionsByCondition,
-} = require("../DB/queries/Question");
+const { getQuestionsByCondition } = require("../DB/queries/Question");
 const sendResponse = require("../handlers/response.handler");
-const Question = require("../models/Question");
+const {
+  PAGINATION_DEFAULT_PAGE,
+  PAGINATION_LIMIT,
+} = require("../utils/constants");
 const { generateObjectId } = require("../utils/index");
 const { questionValidator } = require("../validators/");
+const Question = require("../models/Question");
 
 // Get all questions of user
 // exports.getQuestionsByUser = async (req, res) => {
@@ -19,36 +20,52 @@ const { questionValidator } = require("../validators/");
 //     res,
 //     200,
 //     true,
-//     "Fetched questions successfully!!!",
+//     "Fetched questions successfully!",
 //     questions
 //   );
 // } catch (err) {
 //   console.log(err);
-//   sendResponse(res, 500, false, "Failed to fetch questions!!!");
+//   sendResponse(res, 500, false, "Failed to fetch questions!");
 // }
 // };
 
 // Get question titles by user
 exports.getQuestionTitlesByUser = async (req, res) => {
-  const { skip, limit } = req.query;
+  let { page, limit } = req.query;
+  page = +page || PAGINATION_DEFAULT_PAGE;
+  limit = +limit || PAGINATION_LIMIT;
   try {
-    const questions = await Question.find(
-      { userId: req.user._id },
-      { title: 1, createdAt: 1 }
-    )
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit);
+    const [queryData, queryCount] = await Promise.all([
+      getQuestionsByCondition(
+        { userId: req.user._id },
+        { title: 1, createdAt: 1 }
+      ),
+      getQuestionsByCondition(
+        { userId: req.user._id },
+        { title: 1, createdAt: 1 },
+        true,
+        { createdAt: -1 },
+        page,
+        limit
+      ),
+    ]);
+    const response = {
+      data: queryData,
+      totalRecords: +queryCount?.[0].totalRecords || 0,
+      page: +page,
+      limit: +limit,
+      totalPages: Math.ceil(queryCount?.[0].totalRecords / limit) || 0,
+    };
     sendResponse(
       res,
       200,
       true,
-      "Fetched question titles successfully!!!",
-      questions
+      "Fetched question titles successfully!",
+      response
     );
   } catch (err) {
     console.log(err);
-    sendResponse(res, 500, false, "Failed to fetch question titles!!!");
+    sendResponse(res, 500, false, "Failed to fetch question titles!");
   }
 };
 
@@ -63,21 +80,19 @@ exports.getQuestions = async (req, res) => {
   }
 
   try {
-    const questions = await Question.find(filter)
-      .sort({ createdAt: -1 })
-      .skip(parseInt(skip))
-      .limit(parseInt(limit));
-
-    sendResponse(
-      res,
-      200,
-      true,
-      "Fetched questions successfully!!!",
-      questions
+    const questions = await getQuestionsByCondition(
+      filter,
+      {},
+      false,
+      { createdAt: -1 },
+      skip ? parseInt(skip) : 1,
+      limit ? parseInt(limit) : 10
     );
+
+    sendResponse(res, 200, true, "Fetched questions successfully!", questions);
   } catch (err) {
     console.log(err);
-    sendResponse(res, 500, false, "Failed to fetch questions!!!");
+    sendResponse(res, 500, false, "Failed to fetch questions!");
   }
 };
 
@@ -111,9 +126,7 @@ exports.getQuestionByTopics = async (req, res) => {
         condition,
         {},
         false,
-        {
-          createdAt: -1,
-        },
+        { createdAt: -1 },
         page || 1,
         limit || 10
       ),

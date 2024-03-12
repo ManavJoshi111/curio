@@ -1,10 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { post } from "../../../utils/axios";
+import { post, get } from "../../../utils/axios";
 import {
   SERVER_URL,
   PAGINATION_DEFAULT_PAGE,
   PAGINATION_LIMIT,
 } from "../../../utils/constants";
+
+const getQuestionById = createAsyncThunk(
+  "questions/getById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await get(`${SERVER_URL}/api/questions/${id}`);
+      return res;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 const getQuestionsByTopics = createAsyncThunk(
   "questions/getByTopics",
@@ -25,4 +37,4 @@ const getQuestionsByTopics = createAsyncThunk(
   }
 );
 
-export { getQuestionsByTopics };
+export { getQuestionById, getQuestionsByTopics };
