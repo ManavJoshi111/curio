@@ -13,10 +13,8 @@ node_modules/
 /backend/build
 
 # Environment variables
-/client/config/dev.env
-/client/config/test.env
-/server/config/dev.env
-/server/config/prod.env
+/server/.env
+/client/.env
 
 # Logs
 *.log
