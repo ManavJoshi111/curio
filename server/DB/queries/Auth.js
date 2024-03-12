@@ -13,3 +13,6 @@ exports.getUserByCondition = (condition, projection = {}) => {
   }
   return User.aggregate(pipeline);
 };
+
+exports.updateUserByCondition = (condition, update) =>
+  User.findOneAndUpdate(condition, update);

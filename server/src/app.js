@@ -7,13 +7,17 @@ const {
   topicsRoutes,
   userRoutes,
   questionRoutes,
-  answerRoutes
+  answerRoutes,
 } = require("../routes");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 connectToDB();
+
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server is up and running" });
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/topics", topicsRoutes);

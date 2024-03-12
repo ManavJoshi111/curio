@@ -14,11 +14,11 @@
   },
   "name": "server",
   "version": "1.0.0",
-  "description": "This is a backend of the project <project-name> created by Manav H Joshi for the FSEP(Full Semester External Project)",
+  "description": "This is a backend of the project CURIO created by Manav H Joshi for the FSEP(Full Semester External Project)",
   "main": "index.js",
   "scripts": {
-    "start": "node --env-file=./config/dev.env src/index.js",
-    "dev": "nodemon --env-file=./config/dev.env src/index.js",
+    "start": "node --env-file=./.env api/index.js",
+    "dev": "nodemon --env-file=./.env api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Manav H Joshi",

@@ -8,7 +8,10 @@ const {
 } = require("../validators");
 const { generateOTP, generateToken, verifyToken } = require("../utils");
 const { sendEmail } = require("../services");
-const { getUserByCondition } = require("../DB/queries/Auth");
+const {
+  getUserByCondition,
+  updateUserByCondition,
+} = require("../DB/queries/Auth");
 
 exports.getVerificationOTP = async (req, res) => {
   try {
@@ -83,7 +86,7 @@ exports.getVerificationOTP = async (req, res) => {
 
 exports.verifyOTP = async (req, res) => {
   const { name, email, password, otp } = req.body;
-  const { error, value } = SignupValidator.validate(req.body);
+  const { error } = SignupValidator.validate(req.body);
   if (error) {
     console.log("error in verifyOTP: ", error);
     return sendResponse(res, 400, false, error.details[0].message);
@@ -94,7 +97,8 @@ exports.verifyOTP = async (req, res) => {
     userFound.otp = null;
     userFound.isVerified = true;
     const token = await generateToken(userFound._id);
-    await userFound.save();
+    console.log("Userfound: ", userFound);
+    await updateUserByCondition({ _id: userFound._id, email }, userFound);
     return sendResponse(
       res,
       200,
