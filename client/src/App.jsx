@@ -5,7 +5,6 @@ import Router from "./routes/Router";
 import Loading from "./components/Loading";
 import { ErrorToast } from "./utils/CustomToast";
 import ConnectionDown from "./pages/ConnectionDown";
-import { Navigate } from "react-router-dom";
 
 const App = () => {
   const token = localStorage.getItem("token");
