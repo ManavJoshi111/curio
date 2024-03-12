@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const HOST = process.env.MONGO_LOCAL_URI;
+const HOST = process.env.MONGO_ATLAS_URI;
 
 const connectToDB = async () => {
   try {
