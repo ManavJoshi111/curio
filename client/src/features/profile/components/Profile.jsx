@@ -121,5 +121,4 @@ const Profile = () => {
   );
 };
 
-// Define components for Question
 export default Profile;
