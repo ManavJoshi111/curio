@@ -9,10 +9,17 @@ const {
   questionRoutes,
   answerRoutes,
 } = require("../routes");
+const { CLIENT_URL } = require("../utils/constants");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 connectToDB();
 
 app.get("/", (req, res) => {
