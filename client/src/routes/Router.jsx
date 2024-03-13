@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import Home from "../pages/Home";
 import AddQuestion from "../features/questions/components/AddQuestion";
 import ErrorPage from "../pages/ErrorPage";
-import Profile from "../features/profile/components/profile";
+import Profile from "../features/profile/components/Profile";
 import ViewQuestion from "../features/questions/components/ViewQuestion";
 import Logout from "../features/auth/Logout";
 import AddAnswer from "../features/answers/components/AddAnswer";
