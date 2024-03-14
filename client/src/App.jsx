@@ -12,11 +12,6 @@ const App = () => {
   const { user, loading, error } = useSelector((state) => state.user);
   const [online, setOnline] = useState(true);
 
-  // don't remove the below log as it is used to track vercel deployment
-  useEffect(() => {
-    console.log("rendering app.js");
-  });
-
   useEffect(() => {
     const getUser = () => {
       dispath(getUserData());

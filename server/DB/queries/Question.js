@@ -3,8 +3,8 @@ const Question = require("../../models/Question");
 exports.getQuestionsByCondition = (
   condition,
   projection = {},
-  count = false,
-  sortObj,
+  count = true,
+  sortObj = {},
   page,
   limit
 ) => {

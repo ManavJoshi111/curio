@@ -38,15 +38,15 @@ exports.getQuestionTitlesByUser = async (req, res) => {
     const [queryData, queryCount] = await Promise.all([
       getQuestionsByCondition(
         { userId: req.user._id },
-        { title: 1, createdAt: 1 }
-      ),
-      getQuestionsByCondition(
-        { userId: req.user._id },
         { title: 1, createdAt: 1 },
-        true,
+        false,
         { createdAt: -1 },
         page,
         limit
+      ),
+      getQuestionsByCondition(
+        { userId: req.user._id },
+        { title: 1, createdAt: 1 }
       ),
     ]);
     const response = {
@@ -100,7 +100,7 @@ exports.getQuestions = async (req, res) => {
 exports.getQuestion = async (req, res) => {
   const { id } = req.params;
   try {
-    const question = await Question.findOne({ _id: id });
+    const question = await Question.findOne({ _id: generateObjectId(id) });
     if (!question) {
       return sendResponse(res, 404, false, "Question not found");
     }
