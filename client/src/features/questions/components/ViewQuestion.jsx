@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardBody, CardText } from "react-bootstrap";
@@ -19,12 +19,14 @@ const Question = () => {
     dispatch(getQuestionById(id));
   }, []);
 
-  if (loading) {
+  if (loading || !questionById) {
     return <Loading />;
   }
+
   if (error) {
     return ErrorToast(error.message);
   }
+
   return (
     <div className="container border p-0 border-dark">
       <Card className="question-card">
@@ -33,7 +35,12 @@ const Question = () => {
             <span className="fw-bold fs-3">{questionById.title}</span>
           </CardText>
           <div id="texteditor" className="p-2">
-            <RichText data={JSON.parse(questionById.content)} readOnly={true} />
+            {questionById?.content && (
+              <RichText
+                data={JSON.parse(questionById.content)}
+                readOnly={true}
+              />
+            )}
           </div>
           <CardText className="question-metadata">
             <div className="text-muted">

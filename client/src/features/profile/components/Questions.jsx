@@ -5,6 +5,7 @@ import { SERVER_URL } from "../../../utils/constants";
 import Card from "../../../components/Card";
 import Loading from "../../../components/Loading";
 
+// TODO : Handle pagination
 const Questions = () => {
   const [titles, setTitles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,7 @@ const Questions = () => {
       setIsLoading(true);
       try {
         const res = await get(`${SERVER_URL}/api/questions/titles`);
-        setTitles(res.data);
+        setTitles(res?.data?.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -37,7 +38,7 @@ const Questions = () => {
   return (
     <>
       <div className="question-list">
-        {titles.map(({ _id, title, createdAt }, index) => (
+        {titles?.map(({ _id, title, createdAt }, index) => (
           <Card
             key={index}
             id={_id}
