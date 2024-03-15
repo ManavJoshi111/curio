@@ -132,6 +132,9 @@ exports.getQuestionByTopics = async (req, res) => {
       ),
       getQuestionsByCondition(condition, {}, true),
     ]);
+
+    // TODO : handle case when there are no questions for given topics
+    
     const response = {
       data: queryData,
       totalRecords: +queryCount?.[0].totalRecords || 0,
