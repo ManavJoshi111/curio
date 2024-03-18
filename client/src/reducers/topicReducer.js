@@ -5,7 +5,7 @@ const topicsSlice = createSlice({
   name: "topics",
   initialState: {
     topics: [],
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {},

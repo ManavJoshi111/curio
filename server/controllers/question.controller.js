@@ -1,4 +1,7 @@
-const { getQuestionsByCondition } = require("../DB/queries/Question");
+const {
+  getQuestionsByCondition,
+  getQuestionWithAuthor,
+} = require("../DB/queries/Question");
 const sendResponse = require("../handlers/response.handler");
 const {
   PAGINATION_DEFAULT_PAGE,
@@ -100,7 +103,7 @@ exports.getQuestions = async (req, res) => {
 exports.getQuestion = async (req, res) => {
   const { id } = req.params;
   try {
-    const question = await Question.findOne({ _id: generateObjectId(id) });
+    const question = await getQuestionWithAuthor(id);
     if (!question) {
       return sendResponse(res, 404, false, "Question not found");
     }
