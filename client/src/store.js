@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./reducers/userReducer";
 import topicSlice from "./reducers/topicReducer";
-import questionSlice from "./reducers/questionReducer";
+import { questionSlice } from "./reducers/questionReducer";
 
 const store = configureStore({
   reducer: {
     user: userSlice,
     topics: topicSlice,
-    questions: questionSlice,
+    questionsByTopic: questionSlice.questionsByTopic,
+    questionById: questionSlice.questionById,
+    userQuestions: questionSlice.userQuestions,
   },
 });
 

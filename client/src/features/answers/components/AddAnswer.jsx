@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
 import RichText from "../../../components/RichText";
-import { Button } from "react-bootstrap";
+import { Button, CardText } from "react-bootstrap";
 import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
 import { post } from "../../../utils/axios";
 import { SERVER_URL } from "../../../utils/constants";
+import { formatDate } from "../../../utils/FormatDate";
+import { getQuestionById } from "../../questions/actions/questionActions";
 
 const AddAnswer = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const [question, setQuestion] = useState(null);
   const [answer, setAnswer] = useState([
     {
@@ -26,7 +28,6 @@ const AddAnswer = () => {
 
   const handleAddAnswer = async () => {
     try {
-      setLoading(true);
       if (answer.every((node) => node.children[0].text.trim() === "")) {
         ErrorToast("Answer content cannot be empty");
         return;
@@ -39,32 +40,47 @@ const AddAnswer = () => {
       navigate("/");
     } catch (err) {
       ErrorToast(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
-  const questionsByTopic = useSelector(
-    (state) => state.questions.questionsByTopic
+  const { questionById, loading, error } = useSelector(
+    (state) => state.questionById
   );
 
   useEffect(() => {
     (() => {
-      setQuestion(questionsByTopic?.data?.find((q) => q._id === id));
-      setLoading(false);
+      if (loading) {
+        dispatch(getQuestionById(id));
+      }
+      setQuestion(questionById);
     })();
   }, []);
 
   if (loading) {
     return <Loading />;
   }
-  return (
+  if (error) {
+    return <div>error</div>;
+  }
+  return Object.keys(questionById).length ? (
     <>
       <div className="container border border-dark">
-        <div className="fs-3 fw-bold">{question.title} </div>
+        <div className="fs-3 fw-bold">{questionById.title} </div>
         <div id="texteditor">
-          <RichText data={JSON.parse(question.content)} readOnly={true} />
+          <RichText data={JSON.parse(questionById.content)} readOnly={true} />
         </div>
+        <CardText className="question-metadata">
+          <div className="text-muted">
+            Asked by: {questionById.userName} on{" "}
+            {formatDate(questionById.createdAt)}
+          </div>
+          <div className="d-flex align-items-center">
+            <span className="text-muted me-2">
+              {questionById.upVotes} upvotes, {questionById.downVotes} downvotes
+            </span>
+            <span className="text-muted">{questionById.views} views</span>
+          </div>
+        </CardText>
         <div className="fs-3 fw-bold mt-4">Your answer: </div>
         <div id="texteditor">
           <RichText data={answer} setData={setAnswer} />
@@ -73,6 +89,10 @@ const AddAnswer = () => {
           Submit
         </Button>
       </div>
+    </>
+  ) : (
+    <>
+      <div>No questions found</div>
     </>
   );
 };
