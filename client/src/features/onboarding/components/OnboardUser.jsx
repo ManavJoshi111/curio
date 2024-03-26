@@ -129,7 +129,7 @@ const UserAdditionalDetails = ({
                   style={{ borderRadius: "50%" }}
                 ></img>
               )}
-              <ImageUpload setAdditionalDetails={setAdditionalDetails} />
+              <ImageUpload setData={setAdditionalDetails} />
             </Form.Group>
             <Form.Group
               controlId="bio"
