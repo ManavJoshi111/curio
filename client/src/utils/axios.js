@@ -34,3 +34,12 @@ export const post = async (url, data = {}) => {
     throw err.response.data;
   }
 };
+
+export const put = async (url, data = {}) => {
+  try {
+    const response = await instance.put(url, data);
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+};
