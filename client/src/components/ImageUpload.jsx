@@ -19,8 +19,6 @@ const ImageUpload = ({ setData }) => {
             ...prevState,
             profilePic: res.info.secure_url,
           }));
-        } else {
-          // ignore
         }
       }
     );
