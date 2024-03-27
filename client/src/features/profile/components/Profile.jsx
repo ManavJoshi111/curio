@@ -45,6 +45,10 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log("userData", userData);
+  }, [userData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -87,8 +91,17 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
         >
           <Row className="justify-content-center mb-3 align-items-center">
             <Col xs={3} className="text-center">
-              {/* Large, circular profile picture */}
-              <ImageUpload setData={handleInputChange} />
+              {console.log(user.profilePic, userData.profilePic)}
+              <div className="d-flex justify-content-center align-items-center flex-column">
+                <Image
+                  className="rounded-circle border shadow mb-2"
+                  src={userData.profilePic}
+                  alt={userData.name}
+                  width="150"
+                  height="150"
+                />
+                <ImageUpload setData={setUserData} />
+              </div>
             </Col>
           </Row>
           <Form.Group controlId="name">
