@@ -3,7 +3,7 @@ import { post, get } from "../../../utils/axios";
 import {
   SERVER_URL,
   PAGINATION_DEFAULT_PAGE,
-  PAGINATION_LIMIT,
+  PAGINATION_DEFAULT_LIMIT,
 } from "../../../utils/constants";
 
 const getQuestionById = createAsyncThunk(
@@ -25,7 +25,7 @@ const getQuestionsByTopics = createAsyncThunk(
       const res = await post(
         `${SERVER_URL}/api/questions/by-topic?page=${
           data.currentPage || PAGINATION_DEFAULT_PAGE
-        }&limit=${data.limit || PAGINATION_LIMIT}`,
+        }&limit=${data.limit || PAGINATION_DEFAULT_LIMIT}`,
         {
           topics: data.topics.map((topic) => topic.topicId),
         }
