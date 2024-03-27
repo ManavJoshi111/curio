@@ -91,7 +91,6 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
         >
           <Row className="justify-content-center mb-3 align-items-center">
             <Col xs={3} className="text-center">
-              {console.log(user.profilePic, userData.profilePic)}
               <div className="d-flex justify-content-center align-items-center flex-column">
                 <Image
                   className="rounded-circle border shadow mb-2"

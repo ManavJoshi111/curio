@@ -1,9 +1,9 @@
 import React from "react";
 import BPagination from "react-bootstrap/Pagination";
 
-const Pagination = ({ handleFn, currentPage, totalPages }) => {
+const Pagination = ({ handleFn, currentPage, totalPages, className = "" }) => {
   return (
-    <BPagination>
+    <BPagination className={className}>
       <BPagination.First onClick={() => handleFn(1)} />
       {[...Array(totalPages)].map((_, index) => (
         <BPagination.Item

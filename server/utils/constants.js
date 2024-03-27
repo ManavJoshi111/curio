@@ -4,7 +4,7 @@ let SERVER_URL = process.env.SERVER_LOCAL_URL;
 let DB_URL = process.env.MONGO_LOCAL_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRE = process.env.JWT_EXPIRE;
-const PAGINATION_LIMIT = 10;
+const PAGINATION_DEFAULT_LIMIT = 10;
 const PAGINATION_DEFAULT_PAGE = 1;
 
 if (environment === "production") {
@@ -28,6 +28,6 @@ module.exports = {
   ROLES,
   JWT_SECRET,
   JWT_EXPIRE,
-  PAGINATION_LIMIT,
+  PAGINATION_DEFAULT_LIMIT,
   PAGINATION_DEFAULT_PAGE,
 };

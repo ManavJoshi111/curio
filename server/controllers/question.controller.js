@@ -1,11 +1,12 @@
 const {
   getQuestionsByCondition,
   getQuestionWithAuthor,
+  getUserFeed: getUserFeedQuery,
 } = require("../DB/queries/Question");
 const sendResponse = require("../handlers/response.handler");
 const {
   PAGINATION_DEFAULT_PAGE,
-  PAGINATION_LIMIT,
+  PAGINATION_DEFAULT_LIMIT,
 } = require("../utils/constants");
 const { generateObjectId } = require("../utils/index");
 const { questionValidator } = require("../validators/");
@@ -36,7 +37,7 @@ const Question = require("../models/Question");
 exports.getQuestionTitlesByUser = async (req, res) => {
   let { page, limit } = req.query;
   page = +page || PAGINATION_DEFAULT_PAGE;
-  limit = +limit || PAGINATION_LIMIT;
+  limit = +limit || PAGINATION_DEFAULT_LIMIT;
   try {
     const [queryData, queryCount] = await Promise.all([
       getQuestionsByCondition(
@@ -213,6 +214,42 @@ exports.deleteQuestion = async (req, res) => {
       return sendResponse(res, 404, false, "Question not found");
     }
     sendResponse(res, 200, true, "Question deleted successfully");
+  } catch (err) {
+    console.error(err);
+    sendResponse(res, 500, false, "Failed to delete question");
+  }
+};
+
+exports.getUserFeed = async (req, res) => {
+  try {
+    let { page, limit } = ctx.query;
+    page = +page || PAGINATION_DEFAULT_PAGE;
+    limit = +limit || PAGINATION_DEFAULT_LIMIT;
+
+    const { topicIds } = req.user;
+    const condition = {
+      topicIds: { $in: topicIds },
+    };
+    const [queryData, queryCount] = await Promise.all([
+      getUserFeedQuery(condition, false),
+      getUserFeedQuery(condition, true, { createdAt: -1 }, page, limit),
+    ]);
+
+    const response = {
+      data: queryData,
+      totalRecords: +queryCount?.[0].totalRecords || 0,
+      page,
+      limit,
+      totalPages: Math.ceil(queryCount?.[0].totalRecords / limit) || 0,
+    };
+
+    sendResponse(
+      res,
+      200,
+      true,
+      "Fetched question titles successfully!",
+      response
+    );
   } catch (err) {
     console.error(err);
     sendResponse(res, 500, false, "Failed to delete question");
