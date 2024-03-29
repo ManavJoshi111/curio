@@ -54,6 +54,42 @@ code {
   margin-right: 0;
 }
 
+#hero-box {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  background: rgba(71, 71, 71, 0.1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#hero-box-title {
+  color: #252525;
+  font-family: "Fira Sans";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 150%; /* 72px */
+}
+
+#hero-box-text {
+  color: #747474;
+  font-family: "Fira Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 150%; /* 30px */
+}
+
+.feed-container {
+  background-color: #eaeaea;
+  border-radius: 1rem;
+}
+
+.feed-question {
+  background: #fff;
+  border-radius: 1rem;
+}
+
 // Required
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootswatch/dist/lux/variables";

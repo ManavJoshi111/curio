@@ -222,25 +222,25 @@ exports.deleteQuestion = async (req, res) => {
 
 exports.getUserFeed = async (req, res) => {
   try {
-    let { page, limit } = ctx.query;
+    let { page, limit } = req.query;
     page = +page || PAGINATION_DEFAULT_PAGE;
     limit = +limit || PAGINATION_DEFAULT_LIMIT;
 
-    const { topicIds } = req.user;
+    const { topics } = req.user;
     const condition = {
-      topicIds: { $in: topicIds },
+      topicIds: { $in: topics.map((topic) => topic.topicId) },
     };
     const [queryData, queryCount] = await Promise.all([
-      getUserFeedQuery(condition, false),
-      getUserFeedQuery(condition, true, { createdAt: -1 }, page, limit),
+      getUserFeedQuery(condition, false, { createdAt: -1 }, page, limit),
+      getUserFeedQuery(condition, true),
     ]);
 
     const response = {
       data: queryData,
-      totalRecords: +queryCount?.[0].totalRecords || 0,
+      totalRecords: +queryCount?.[0]?.totalRecords || 0,
       page,
       limit,
-      totalPages: Math.ceil(queryCount?.[0].totalRecords / limit) || 0,
+      totalPages: Math.ceil(queryCount?.[0]?.totalRecords / limit) || 0,
     };
 
     sendResponse(
@@ -252,6 +252,6 @@ exports.getUserFeed = async (req, res) => {
     );
   } catch (err) {
     console.error(err);
-    sendResponse(res, 500, false, "Failed to delete question");
+    sendResponse(res, 500, false, "Failed to fetch question titles");
   }
 };

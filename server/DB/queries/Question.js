@@ -78,7 +78,13 @@ exports.getQuestionWithAuthor = (questionId) => {
   ]);
 };
 
-exports.getUserFeed = (condition, count = true, sortObj = {}, page, limit) => {
+exports.getUserFeed = (
+  condition,
+  count = true,
+  sortObj = { createdAt: -1 },
+  page,
+  limit
+) => {
   const pipeline = [
     {
       $match: condition,
@@ -128,10 +134,7 @@ exports.getUserFeed = (condition, count = true, sortObj = {}, page, limit) => {
   ];
   if (count) {
     pipeline.push({
-      $group: {
-        _id: null,
-        totalRecords: { $sum: 1 },
-      },
+      $count: "totalRecords",
     });
   } else {
     pipeline.push(
