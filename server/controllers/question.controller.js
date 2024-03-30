@@ -104,7 +104,9 @@ exports.getQuestions = async (req, res) => {
 exports.getQuestion = async (req, res) => {
   const { id } = req.params;
   try {
-    const question = await getQuestionWithAuthor(id);
+    const question = await Question.findOne({
+      _id: generateObjectId(id),
+    }).populate("userId","name");
     if (!question) {
       return sendResponse(res, 404, false, "Question not found");
     }
@@ -138,7 +140,7 @@ exports.getQuestionByTopics = async (req, res) => {
     ]);
 
     // TODO : handle case when there are no questions for given topics
-    
+
     const response = {
       data: queryData,
       totalRecords: +queryCount?.[0].totalRecords || 0,

@@ -1,12 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, ListGroup, Button } from "react-bootstrap";
+import CreateSpaceModal from "./components/CreateSpaceModal";
 
 // TODO : update to a better UI and break down into smaller components
 const SpacePage = () => {
   const [userSpaces, setUserSpaces] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [discoverSpaces, setDiscoverSpaces] = useState([]);
+
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const toggleCreateModal = () => {
+    setShowCreateModal(!showCreateModal);
+  }
 
   const fetchUserSpaces = async () => {
     const userSpacesData = [
@@ -40,6 +47,12 @@ const SpacePage = () => {
     setDiscoverSpaces(discoverSpacesData);
   };
 
+  const   handleCreateSpace = (spaceData) => {
+    // You can handle space creation logic here or pass it to the parent component
+    console.log("Creating space:", spaceData);
+    if(showCreateModal) toggleCreateModal(); // Close the modal after creating the space
+  };
+
   useEffect(() => {
     fetchUserSpaces();
     fetchPendingRequests();
@@ -58,7 +71,7 @@ const SpacePage = () => {
               <Button
                 className="mt-2"
                 variant="primary"
-                onClick={() => console.log("Create a Space clicked")}
+                onClick={toggleCreateModal}
               >
                 Create a Space
               </Button>
@@ -89,6 +102,11 @@ const SpacePage = () => {
           </ListGroup>
         </Col>
       </Row>
+      <CreateSpaceModal
+        visible={showCreateModal}
+        toggleModal={toggleCreateModal}
+        handleCreate={handleCreateSpace}
+      />
     </Container>
   );
 };
