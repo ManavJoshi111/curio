@@ -13,6 +13,7 @@ import Logout from "../features/auth/Logout";
 import AddAnswer from "../features/answers/components/AddAnswer";
 import Answer from "../features/answers/components/Answers";
 import SpacePage from "../features/space/SpacePage";
+import SpaceViewPage from "../features/space/SpaceViewPage";
 
 const Router = () => {
   return (
@@ -28,6 +29,7 @@ const Router = () => {
           <Route path="question/:id" element={<ViewQuestion />} />
           <Route path="profile" element={<Profile />} />
           <Route path="space" element={<SpacePage />} />
+          <Route path="space/:id" element={<SpaceViewPage />} />
           <Route path="logout" element={<Logout />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />

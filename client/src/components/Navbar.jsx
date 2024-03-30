@@ -4,6 +4,7 @@ import ReactNavbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Image } from "react-bootstrap";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
@@ -46,11 +47,11 @@ const Navbar = () => {
                 to="/profile"
               >
                 {user && user.profilePic ? (
-                  <img
+                  <Image
+                    className="rounded-circle border shadow"
                     src={user.profilePic}
-                    alt="profile-pic"
-                    className="rounded-circle"
-                    style={{ height: "2rem" }}
+                    alt={user.name}
+                    style={{ height: "2rem" , width: "2rem"}}
                   />
                 ) : (
                   <i className="far fa-user-circle fw-bold fs-3"></i>

@@ -20,11 +20,9 @@ const QuestionList = () => {
     sortBy: "latest",
   });
   const { user } = useSelector((state) => state.user);
-  const {
-    questionsByTopic: questionList,
-    loading,
-    error,
-  } = useSelector((state) => state.questions);
+  const { questionsByTopic, loading, error } = useSelector(
+    (state) => state.questionsByTopic
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,13 +45,13 @@ const QuestionList = () => {
   if (loading) {
     return <Loading />;
   }
-  if (questionList.length === 0) {
+  if (questionsByTopic.length === 0) {
     return <div>No questions found</div>;
   }
   return (
     <div>
-      {questionList?.data &&
-        questionList?.data?.map((question, index) => (
+      {questionsByTopic?.data &&
+        questionsByTopic?.data?.map((question, index) => (
           <Card
             key={index}
             id={index}
@@ -65,8 +63,8 @@ const QuestionList = () => {
       <div className="mt-2">
         <Pagination
           handleFn={handleQuestionList}
-          currentPage={questionList.page}
-          totalPages={questionList.totalPages}
+          currentPage={questionsByTopic.page}
+          totalPages={questionsByTopic.totalPages}
         />
       </div>
     </div>

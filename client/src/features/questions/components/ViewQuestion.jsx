@@ -12,7 +12,7 @@ const Question = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { loading, error, questionById } = useSelector(
-    (state) => state.questions
+    (state) => state.questionById
   );
 
   useEffect(() => {
@@ -44,12 +44,12 @@ const Question = () => {
           </div>
           <CardText className="question-metadata">
             <div className="text-muted">
-              Asked by: {questionById.userId} on{" "}
+              Asked by: {questionById.userId?.name} on{" "}
               {formatDate(questionById.createdAt)}
             </div>
             <div className="d-flex align-items-center">
               <span className="text-muted me-2">
-                {questionById.upVotes} upvotes, {questionById.downVotes}
+                {questionById.upVotes} upvotes, {questionById.downVotes}{" "}
                 downvotes
               </span>
               <span className="text-muted">{questionById.views} views</span>

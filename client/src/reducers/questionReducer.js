@@ -4,14 +4,11 @@ import {
   getQuestionById,
 } from "../features/questions/actions/questionActions";
 
-const questionSlice = createSlice({
-  name: "questions",
+const questionsByTopicSlice = createSlice({
+  name: "questionsByTopic",
   initialState: {
-    questionsByTopic: {},
-    questions: {},
-    questionById: {},
-    userQuestions: {},
-    loading: false,
+    questionsByTopic: [],
+    loading: true,
     error: null,
   },
   reducers: {},
@@ -23,19 +20,34 @@ const questionSlice = createSlice({
       })
       .addCase(getQuestionsByTopics.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.questionsByTopic = action.payload.data;
       })
       .addCase(getQuestionsByTopics.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
-      .addCase(getQuestionById.pending, (state, action) => {
+      });
+  },
+});
+
+const questionByIdSlice = createSlice({
+  name: "questionById",
+  initialState: {
+    questionById: {},
+    loading: true,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getQuestionById.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(getQuestionById.fulfilled, (state, action) => {
         state.loading = false;
-        state.questionById = action.payload.data;
+        state.error = null;
+        state.questionById = action.payload.data?.[0];
       })
       .addCase(getQuestionById.rejected, (state, action) => {
         state.loading = false;
@@ -44,4 +56,21 @@ const questionSlice = createSlice({
   },
 });
 
-export default questionSlice.reducer;
+const userQuestionsSlice = createSlice({
+  name: "userQuestions",
+  initialState: {
+    userQuestions: [],
+    loading: true,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    // Add your extra reducers for fetching user questions here
+  },
+});
+
+export const questionSlice = {
+  questionsByTopic: questionsByTopicSlice.reducer,
+  questionById: questionByIdSlice.reducer,
+  userQuestions: userQuestionsSlice.reducer,
+};

@@ -7,6 +7,7 @@ const { authenticate } = require("../middlewares");
 // Get question by different filters
 router.get("/titles", authenticate, questionController.getQuestionTitlesByUser);
 router.post("/by-topic", authenticate, questionController.getQuestionByTopics);
+router.get("/feed", authenticate, questionController.getUserFeed);
 
 // Basic CRUD - Question
 router.post("/", authenticate, questionController.addQuestion);

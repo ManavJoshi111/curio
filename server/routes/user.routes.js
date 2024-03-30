@@ -10,4 +10,6 @@ router.post(
   userController.uploadAdditionalDetails
 );
 
+router.put("/update-profile", authenticate, userController.updateProfile);
+
 module.exports = router;

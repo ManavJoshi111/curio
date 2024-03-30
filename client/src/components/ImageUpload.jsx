@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET } from "../utils/constants";
 
-const ImageUpload = ({ setAdditionalDetails }) => {
+const ImageUpload = ({ setData }) => {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
   useEffect(() => {
@@ -15,12 +15,10 @@ const ImageUpload = ({ setAdditionalDetails }) => {
       },
       (_, res) => {
         if (res.event === "success") {
-          setAdditionalDetails((prevState) => ({
+          setData((prevState) => ({
             ...prevState,
             profilePic: res.info.secure_url,
           }));
-        } else {
-          // ignore
         }
       }
     );
@@ -28,13 +26,13 @@ const ImageUpload = ({ setAdditionalDetails }) => {
   return (
     <>
       <button
-        className="btn btn-secondary"
+        className="btn btn-sm btn-secondary"
         onClick={(e) => {
           e.preventDefault();
           return widgetRef.current.open();
         }}
       >
-        Upload Images
+        Upload Image
       </button>
     </>
   );
