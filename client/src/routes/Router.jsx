@@ -12,6 +12,7 @@ import ViewQuestion from "../features/questions/components/ViewQuestion";
 import Logout from "../features/auth/Logout";
 import AddAnswer from "../features/answers/components/AddAnswer";
 import Answer from "../features/answers/components/Answers";
+import EditQuestion from "../features/questions/components/EditQuestion";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="answer" element={<Answer />} />
           <Route path="answer/:id" element={<AddAnswer />} />
           <Route path="question/:id" element={<ViewQuestion />} />
+          <Route path="edit-question/:id" element={<EditQuestion />} />
           <Route path="profile" element={<Profile />} />
           <Route path="logout" element={<Logout />} />
         </Route>

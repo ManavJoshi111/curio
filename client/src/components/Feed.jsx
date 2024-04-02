@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Image } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
 import RichText from "../components/RichText";
+import Loading from "../components/Loading";
+import { PAGINATION_DEFAULT_LIMIT } from "../utils/constants";
 
 const renderFeedQuestion = (question, key) => {
   return (
@@ -9,10 +12,10 @@ const renderFeedQuestion = (question, key) => {
       <div className="feed-question m-2">
         <div className="container-fluid  question-title-author d-flex justify-content-between align-items-center">
           <NavLink
-            className="fs-4 text-decoration-none"
+            className="fs-4 text-decoration-none fw-bold"
             to={`/question/${question._id}`}
           >
-            {question.title}
+            {question.title.slice(0, 40) + "..."}
           </NavLink>
           <div className="askedBy-data d-flex justify-content-center align-items-center flex-column mt-2">
             <Image
@@ -38,18 +41,31 @@ const renderFeedQuestion = (question, key) => {
   );
 };
 
-const Feed = ({ questions }) => {
-  if (questions?.length) {
-    return (
-      <>
+const Feed = ({ questions, paginationData, fetchData }) => {
+  return (
+    <>
+      <InfiniteScroll
+        dataLength={paginationData.totalRecords}
+        next={() => {
+          fetchData(
+            paginationData.page + 1,
+            PAGINATION_DEFAULT_LIMIT * (paginationData.page + 1)
+          );
+        }}
+        hasMore={paginationData.page === paginationData.totalPages}
+        loader={<Loading />}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
         {questions.map((question) =>
           renderFeedQuestion(question, question._id)
         )}
-      </>
-    );
-  } else {
-    return <h1>There are not any questions in your feed!</h1>;
-  }
+      </InfiniteScroll>
+    </>
+  );
 };
 
 export default Feed;

@@ -143,7 +143,7 @@ const RichText = ({ data, setData, readOnly = false }) => {
   return (
     <Slate
       editor={editor}
-      initialValue={data}
+      initialValue={data || []}
       onChange={(value) => {
         const isAstChange = editor.operations.some(
           (op) => "set_selection" !== op.type

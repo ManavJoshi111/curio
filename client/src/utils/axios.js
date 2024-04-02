@@ -43,3 +43,12 @@ export const put = async (url, data = {}) => {
     throw err.response.data;
   }
 };
+
+export const del = async (url, data = {}) => {
+  try {
+    const response = await instance.delete(url, data);
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+};

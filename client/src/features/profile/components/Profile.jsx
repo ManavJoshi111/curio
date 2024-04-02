@@ -122,15 +122,6 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={userData.email}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
           <Form.Group controlId="interests">
             <Form.Label>Interests</Form.Label>
             <Select

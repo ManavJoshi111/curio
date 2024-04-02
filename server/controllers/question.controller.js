@@ -191,7 +191,7 @@ exports.updateQuestion = async (req, res) => {
   try {
     const question = await Question.findOneAndUpdate(
       { _id: id, userId },
-      { title: req.body.content, content: req.body.content },
+      { title: req.body.title, content: req.body.content },
       { returnDocument: "after" }
     );
     if (!question) {
