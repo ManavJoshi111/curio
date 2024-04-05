@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { generateObjectId } = require("../utils");
 
 const questionSchema = new mongoose.Schema(
   {
@@ -6,7 +7,7 @@ const questionSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 5,
-      maxlength: 100,
+      maxlength: 1000,
     },
     content: {
       type: String,

@@ -14,7 +14,7 @@ import Loading from "../components/Loading";
 const HeroSectionBox = ({ title, text }) => {
   return (
     <>
-      <div id="hero-box">
+      <div className="col-md-2 text-center flex-grow-1" id="hero-box">
         <span id="hero-box-title">{title}</span>
         <p id="hero-box-text">{text}</p>
       </div>
@@ -27,21 +27,24 @@ const Home = () => {
   const [feedQuestions, setFeedQuestions] = useState();
   const [loading, setLoading] = useState(true);
 
+  const getFeedQuestions = async (
+    page = PAGINATION_DEFAULT_PAGE,
+    limit = PAGINATION_DEFAULT_LIMIT
+  ) => {
+    try {
+      const response = await get(
+        `${SERVER_URL}/api/questions/feed?page=${page}&limit=${limit}`
+      );
+      setFeedQuestions(response.data);
+    } catch (err) {
+      console.log("Err while getting feed: ", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (user.isOnboarded) {
-      const getFeedQuestions = async (
-        page = PAGINATION_DEFAULT_PAGE,
-        limit = PAGINATION_DEFAULT_LIMIT
-      ) => {
-        try {
-          const response = await get(`${SERVER_URL}/api/questions/feed`);
-          setFeedQuestions(response.data.data);
-        } catch (err) {
-          console.log("Err while getting feed: ", err);
-        } finally {
-          setLoading(false);
-        }
-      };
       setLoading(true);
       getFeedQuestions();
     }
@@ -57,33 +60,36 @@ const Home = () => {
           className="d-flex justify-content-center align-items-center flex-column"
           fluid
         >
-          <div className="fs-1" id="hero-title">
+          <div className="fs-1 text-center" id="hero-title">
             <span className="fw-bold">Welcome to Curio!</span> Dive into
             captivating conversations.
           </div>
-          <div
-            id="hero-boxes"
-            className="mt-4 d-flex justify-content-between align-items-center w-100"
-          >
+          <div id="hero-boxes" className="mt-4 row w-100 gap-3">
             <HeroSectionBox
               title={"Explore"}
-              text={"Uncover trending treasures"}
+              text={"Uncover trending treasures with fun"}
             />
             <HeroSectionBox
-              title={"Explore"}
-              text={"Uncover trending treasures"}
+              title={"Learn"}
+              text={"Get to know new things everyday!"}
             />
+            <HeroSectionBox title={"Unleash"} text={"Unlock your inner geek"} />
             <HeroSectionBox
-              title={"Explore"}
-              text={"Uncover trending treasures"}
-            />
-            <HeroSectionBox
-              title={"Explore"}
-              text={"Uncover trending treasures"}
+              title={"Connect"}
+              text={"Connect with like-minded individuals"}
             />
           </div>
           <div className="feed-container w-100 mt-4">
-            <Feed questions={feedQuestions} />
+            <Feed
+              questions={feedQuestions.data}
+              paginationData={{
+                totalRecords: feedQuestions,
+                page: feedQuestions.page,
+                limit: feedQuestions.limit,
+                totalPages: feedQuestions.totalPages,
+              }}
+              fetchData={getFeedQuestions}
+            />
           </div>
         </Container>
       </>

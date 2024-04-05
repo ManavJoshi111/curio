@@ -187,12 +187,15 @@ exports.addQuestion = async (req, res) => {
 // Update a question by ID
 exports.updateQuestion = async (req, res) => {
   const { id } = req.params;
-  const { _id: userId } = req.user;
   try {
     const question = await Question.findOneAndUpdate(
-      { _id: id, userId },
-      { title: req.body.content, content: req.body.content },
-      { returnDocument: "after" }
+      { _id: id },
+      {
+        title: req.body.title,
+        content: req.body.content,
+        topicIds: req.body.topicIds,
+      },
+      { returnDocument: "after", upsert: false }
     );
     if (!question) {
       return sendResponse(res, 404, false, "Question not found");
