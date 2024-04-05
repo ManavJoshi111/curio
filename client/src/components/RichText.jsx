@@ -149,7 +149,7 @@ const RichText = ({ data, setData, readOnly = false }) => {
           (op) => "set_selection" !== op.type
         );
         if (isAstChange) {
-          setData(value);
+          setData(JSON.stringify(value));
         }
       }}
     >

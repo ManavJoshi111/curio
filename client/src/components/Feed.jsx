@@ -37,6 +37,7 @@ const renderFeedQuestion = (question, key) => {
           <RichText data={JSON.parse(question.content)} readOnly />
         </div>
       </div>
+      <br />
     </div>
   );
 };

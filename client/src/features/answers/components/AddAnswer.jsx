@@ -28,13 +28,13 @@ const AddAnswer = () => {
 
   const handleAddAnswer = async () => {
     try {
-      if (answer.every((node) => node.children[0].text.trim() === "")) {
+      if (!answer) {
         ErrorToast("Answer content cannot be empty");
         return;
       }
       const res = await post(`${SERVER_URL}/api/answers/`, {
         questionId: id,
-        content: JSON.stringify(answer),
+        content: answer,
       });
       SuccessToast(res.message);
       navigate("/");

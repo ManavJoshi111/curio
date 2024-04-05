@@ -40,13 +40,13 @@ const AddQuestion = () => {
       ErrorToast("Question title cannot be empty");
       return;
     }
-    if (question.every((node) => node.children[0].text.trim() === "")) {
+    if (!question) {
       ErrorToast("Question content cannot be empty");
       return;
     }
     const res = await post(`${SERVER_URL}/api/questions/`, {
       title: questionTitle,
-      content: JSON.stringify(question),
+      content: question,
       topicIds: selectedTopics,
     });
     if (res.success) {

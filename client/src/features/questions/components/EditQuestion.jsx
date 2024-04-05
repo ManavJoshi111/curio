@@ -16,16 +16,17 @@ const EditQuestion = () => {
   const { loading, error, topics } = useSelector((state) => state.topics);
   const { id } = useParams();
   const titleInputRef = useRef(null);
+  const [title, setTitle] = useState();
   const [selectedTopics, setSelectedTopics] = useState([]);
-  const [question, setQuestion] = useState(null);
+  const [questionContent, setQuestionContent] = useState(null);
 
   useEffect(() => {
     titleInputRef.current?.focus();
     dispatch(getTopics());
     get(`${SERVER_URL}/api/questions/${id}`)
       .then((res) => {
-        setQuestion(res.data?.[0]);
-        console.log(res);
+        setQuestionContent(res.data?.[0]?.content);
+        setTitle(res.data?.[0]?.title);
         setSelectedTopics(
           res.data?.[0].topics.map((topic) => ({
             label: topic.name,
@@ -39,23 +40,17 @@ const EditQuestion = () => {
   }, [id]);
 
   const handleEditQuestion = async () => {
-    const questionTitle = titleInputRef.current.value;
-    if (!questionTitle.trim()) {
+    if (!title.trim()) {
       ErrorToast("Question title cannot be empty");
       return;
     }
-    if (question.every((node) => node.children[0].text.trim() === "")) {
+    if (!questionContent?.trim()) {
       ErrorToast("Question content cannot be empty");
       return;
     }
-    console.log("Calling api: ", {
-      title: questionTitle,
-      content: question.content,
-      topicIds: selectedTopics.map((topic) => topic.value),
-    });
     const res = await put(`${SERVER_URL}/api/questions/${id}`, {
-      title: questionTitle,
-      content: JSON.stringify(question.content),
+      title,
+      content: questionContent,
       topicIds: selectedTopics.map((topic) => topic.value),
     });
     if (res.success) {
@@ -66,7 +61,7 @@ const EditQuestion = () => {
     }
   };
 
-  if (loading || !question) {
+  if (loading || !questionContent) {
     return <Loading />;
   }
 
@@ -81,9 +76,9 @@ const EditQuestion = () => {
           type="text"
           id="question-title"
           name="title"
-          ref={titleInputRef}
+          onChange={(e) => setTitle(e.target.value)}
           className="form-control p-2"
-          defaultValue={question.title}
+          defaultValue={title}
         />
       </div>
       <div className="d-flex flex-column mb-3 align-items-start pt-1">
@@ -104,8 +99,8 @@ const EditQuestion = () => {
 
       <div id="texteditor">
         <RichText
-          data={question.content && JSON.parse(question.content)}
-          setData={setQuestion}
+          data={questionContent && JSON.parse(questionContent)}
+          setData={setQuestionContent}
         />
       </div>
       <Button className="mt-3 ms-auto p-2 m-2" onClick={handleEditQuestion}>

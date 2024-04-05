@@ -63,7 +63,8 @@ const Question = () => {
               <span className="fw-bold fs-3">{questionById.title}</span>
             </CardText>
             <div className="d-flex justify-content-between align-items-center">
-              {questionById.userId === user._id && (
+              {(questionById.userId === user._id ||
+                user.role === "moderator") && (
                 <>
                   <NavLink
                     to={`/edit-question/${questionById._id}`}
