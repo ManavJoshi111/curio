@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Row,
@@ -20,7 +21,7 @@ import { getTopics } from "../../onboarding/actions/topicActions";
 import Loading from "../../../components/Loading";
 import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
 import { getUserData } from "../../auth/actions/userActions";
-import { put } from "../../../utils/axios";
+import { get, put } from "../../../utils/axios";
 import { SERVER_URL } from "../../../utils/constants";
 
 const EditProfile = ({ showModal, setShowModal, user }) => {
@@ -157,18 +158,35 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
 };
 
 const Profile = () => {
-  // Pass user data as prop
+  let [user, setUser] = useState(); // state to set the user whose profie is being rendered
+  let [loading, setLoading] = useState();
   const dispatch = useDispatch();
-  const { loading, error, user } = useSelector((state) => state.user);
+  const { id } = useParams();
+  let {
+    loading: userLoading,
+    error,
+    user: currentUser,
+  } = useSelector((state) => state.user); // loggedin user
+
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (user === null) {
-      dispatch(getUserData());
+    if (id) {
+      (async () => {
+        try {
+          const response = await get(`${SERVER_URL}/api/auth/get-user/${id}`);
+          setUser(response.data);
+        } catch (err) {
+          console.log("Error: ", err);
+        }
+      })();
+    } else {
+      setLoading(userLoading);
+      setUser(currentUser);
     }
   }, []);
 
-  if (loading) {
+  if (loading || !user) {
     return <Loading />;
   }
   if (error) {
@@ -178,10 +196,8 @@ const Profile = () => {
   return (
     <>
       <Container>
-        {/* Upper Section with User Information */}
         <Row className="justify-content-center mb-3 align-items-center">
           <Col xs={3} className="text-center">
-            {/* Large, circular profile picture */}
             <Image
               className="rounded-circle border shadow"
               src={user.profilePic}
@@ -191,20 +207,20 @@ const Profile = () => {
             />
           </Col>
           <Col xs={9}>
-            {/* Username and bio */}
             <h1 className="display-4 mb-0">{user.name}</h1>
             <p className="lead mb-1">{user.bio}</p>
-
-            <Button
-              className="btn-sm mb-1"
-              variant="primary"
-              onClick={() => {
-                setShowModal(true);
-              }}
-            >
-              Edit Profile
-            </Button>
-            {/* Additional user information */}
+            {console.log(user._id, id)}
+            {!id && (
+              <Button
+                className="btn-sm mb-1"
+                variant="primary"
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
+                Edit Profile
+              </Button>
+            )}
             <ListGroup>
               <ListGroupItem>
                 <span className="fw-bold">Contact:</span> {user.email}
@@ -224,61 +240,25 @@ const Profile = () => {
           </Col>
         </Row>
 
-        {/* Statistics */}
-        {/* <Row className="justify-content-evenly mb-3">
-        <Col>
-          <Card className="text-center">
-            <CardText>Questions</CardText>
-            <CardText>{questions.length}</CardText>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="text-center">
-            <CardText>Answers</CardText>
-            <CardText>{answers.length}</CardText>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="text-center">
-            <CardText>Spaces</CardText>
-            <CardText>{spaces.length}</CardText>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="text-center">
-            <CardText>Followers</CardText>
-            <CardText>{followers.length}</CardText>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="text-center">
-            <CardText>Following</CardText>
-            <CardText>{followedUsers.length}</CardText>
-          </Card>
-        </Col>
-      </Row> */}
-
-        {/* Activity with React Bootstrap Tabs */}
         <h2 className="text-center">Activity</h2>
         <Tabs>
-          <Tab eventKey="questions" title="QUESTIONS">
-            {/* Dynamically render question cards here */}
-            <Questions />
+          <Tab eventKey="questions" title="Questions">
+            <Questions userId={id} />
           </Tab>
-          <Tab eventKey="answers" title="ANSWERS">
+          <Tab eventKey="answers" title="Answers">
             {/* <Answers /> */}
           </Tab>
-          {/* <Tab eventKey="following" title="Following">
-          <Users />
-        </Tab>
-        <Tab eventKey="followers" title="Followers">
-          <UserCard key={user.id} user={user} />
-        </Tab>
-        <Tab eventKey="spaces" title="Spaces">
-          {spaces.map((space) => (
+          <Tab eventKey="following" title="Following">
+            {/* <Users /> */}
+          </Tab>
+          <Tab eventKey="followers" title="Followers">
+            {/* <UserCard key={user.id} user={user} /> */}
+          </Tab>
+          <Tab eventKey="spaces" title="Spaces">
+            {/* {spaces.map((space) => (
             <SpaceCard key={space.id} space={space} />
-          ))}
-        </Tab> */}
+          ))} */}
+          </Tab>
         </Tabs>
       </Container>
       {showModal && (

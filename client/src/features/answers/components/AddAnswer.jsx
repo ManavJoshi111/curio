@@ -49,9 +49,7 @@ const AddAnswer = () => {
 
   useEffect(() => {
     (() => {
-      if (loading) {
-        dispatch(getQuestionById(id));
-      }
+      dispatch(getQuestionById(id));
       setQuestion(questionById);
     })();
   }, []);

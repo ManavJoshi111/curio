@@ -1,4 +1,5 @@
 const sendResponse = require("../handlers/response.handler");
+const { generateObjectId } = require("../utils");
 const Answer = require("../models/Answer");
 const { answerValidator } = require("../validators");
 
@@ -138,5 +139,50 @@ exports.deleteAnswer = async (req, res) => {
   } catch (err) {
     console.error(err);
     sendResponse(res, 500, false, "Failed to delete answer");
+  }
+};
+
+exports.getAnswerByQuestion = async (req, res) => {
+  try {
+    const { id: questionId } = req.params;
+
+    const answers = await Answer.aggregate([
+      { $match: { questionId: generateObjectId(questionId) } },
+      { $sort: { createdAt: -1 } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: "$user",
+      },
+      {
+        $project: {
+          _id: 1,
+          content: 1,
+          createdAt: 1,
+          user: {
+            _id: 1,
+            name: 1,
+            email: 1,
+            profilePic: 1,
+          },
+        },
+      },
+    ]);
+    sendResponse(
+      res,
+      200,
+      true,
+      "Fetched answers by question successfully!!!",
+      answers
+    );
+  } catch (err) {
+    console.log("Err: ", err);
+    sendResponse(res, 500, false, "Failed to fetch answers!");
   }
 };
