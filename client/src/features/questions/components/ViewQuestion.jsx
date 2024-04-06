@@ -99,8 +99,10 @@ const Question = () => {
               </div>
             </div>
             <div className="">
-              {questionById.topics.map((topic) => (
-                <Badge key={topic?._id?.toString()} className="ms-2 m-2">{topic.name}</Badge>
+              {questionById.topicIds.map((topic, index) => (
+                <Badge key={index} className="ms-2 m-2">
+                  {topic.name}
+                </Badge>
               ))}
             </div>
             {/* request button to request an answer, show this only user is author of question */}
