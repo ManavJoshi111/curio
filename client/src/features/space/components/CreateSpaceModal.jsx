@@ -13,20 +13,15 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { ErrorToast } from "../../../utils/CustomToast";
 
 const CreateSpaceModal = ({ visible, toggleModal, handleCreate }) => {
-
   const [spaceInfo, setSpaceInfo] = useState({
-    spaceName: "",
-    spaceDescription: "",
-    spaceRules: "",
+    name: "",
+    description: "",
+    rules: "",
   });
 
   const handleCreateSpace = () => {
     // Validate input fields before creating space
-    if (
-      !spaceInfo.spaceName ||
-      !spaceInfo.spaceDescription ||
-      !spaceInfo.spaceRules
-    ) {
+    if (!spaceInfo.name || !spaceInfo.description || !spaceInfo.rules) {
       ErrorToast("Please fill in all fields");
       return;
     }
@@ -36,9 +31,9 @@ const CreateSpaceModal = ({ visible, toggleModal, handleCreate }) => {
 
     // Reset input fields
     setSpaceInfo({
-      spaceName: "",
-      spaceDescription: "",
-      spaceRules: "",
+      name: "",
+      description: "",
+      rules: "",
     });
   };
 
@@ -51,39 +46,42 @@ const CreateSpaceModal = ({ visible, toggleModal, handleCreate }) => {
   };
 
   return (
-    <Modal show={visible} onHide={toggleModal} >
+    <Modal show={visible} onHide={toggleModal}>
       <Modal.Header closeButton>
         <Modal.Title>Create a Space</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group controlId="spaceName">
+          <Form.Group controlId="name">
             <Form.Label>Space Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter space name"
-              value={spaceInfo.spaceName}
+              value={spaceInfo.name}
               onChange={handleChange}
+              name="name"
             />
           </Form.Group>
-          <Form.Group controlId="spaceDescription">
+          <Form.Group controlId="description">
             <Form.Label>Space Description</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
               placeholder="Enter space description"
-              value={spaceInfo.spaceDescription}
+              value={spaceInfo.description}
               onChange={handleChange}
+              name="description"
             />
           </Form.Group>
-          <Form.Group controlId="spaceRules">
+          <Form.Group controlId="rules">
             <Form.Label>Space Rules</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
               placeholder="Enter space rules"
-              value={spaceInfo.spaceRules}
+              value={spaceInfo.rules}
               onChange={handleChange}
+              name="rules"
             />
           </Form.Group>
         </Form>

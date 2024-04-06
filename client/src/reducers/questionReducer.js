@@ -47,7 +47,7 @@ const questionByIdSlice = createSlice({
       .addCase(getQuestionById.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.questionById = action.payload.data?.[0];
+        state.questionById = action.payload.data;
       })
       .addCase(getQuestionById.rejected, (state, action) => {
         state.loading = false;

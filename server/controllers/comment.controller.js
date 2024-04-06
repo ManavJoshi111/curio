@@ -45,24 +45,24 @@ exports.addComment = async (req, res) => {
   }
 };
 
-exports.addComment = async (req, res) => {
-  const { id } = req.params;
-  const { _id: userId } = req.user;
-  const { content } = req.body;
-  try {
-    const comment = new Comment({
-      content,
-      userId,
-      entityId: id,
-      entityType: "Question",
-    });
-    await comment.save();
-    sendResponse(res, 201, true, "Comment added successfully", comment);
-  } catch (err) {
-    console.error(err);
-    sendResponse(res, 500, false, "Failed to add comment");
-  }
-};
+// exports.addComment = async (req, res) => {
+//   const { id } = req.params;
+//   const { _id: userId } = req.user;
+//   const { content } = req.body;
+//   try {
+//     const comment = new Comment({
+//       content,
+//       userId,
+//       entityId: id,
+//       entityType: "Question",
+//     });
+//     await comment.save();
+//     sendResponse(res, 201, true, "Comment added successfully", comment);
+//   } catch (err) {
+//     console.error(err);
+//     sendResponse(res, 500, false, "Failed to add comment");
+//   }
+// };
 
 // get comments on a question/answer
 exports.getComments = async (req, res) => {
