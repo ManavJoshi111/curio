@@ -6,7 +6,12 @@ const sendResponse = require("../handlers/response.handler");
 const {
   authValidator: { SignupValidator, LoginValidator },
 } = require("../validators");
-const { generateOTP, generateToken, verifyToken } = require("../utils");
+const {
+  generateOTP,
+  generateToken,
+  verifyToken,
+  generateObjectId,
+} = require("../utils");
 const { sendEmail } = require("../services");
 const {
   getUserByCondition,
@@ -161,9 +166,10 @@ exports.login = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const { _id } = req.user;
-    // const user = await User.findById(_id).select("-password");
-    let user = await getUserByCondition({ _id }, { password: 0 });
+    const userId = req.params.id
+      ? generateObjectId(req.params.id)
+      : req.user._id;
+    let user = await getUserByCondition({ _id: userId }, { password: 0 });
     user = user.length && user[0];
     return sendResponse(res, 200, true, "User fetched successfully!", user);
   } catch (err) {

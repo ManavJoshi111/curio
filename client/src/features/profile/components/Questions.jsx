@@ -11,7 +11,7 @@ import Loading from "../../../components/Loading";
 import Pagination from "../../../components/Pagination";
 
 // TODO : Handle pagination
-const Questions = () => {
+const Questions = ({ userId }) => {
   const [titles, setTitles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,10 +19,14 @@ const Questions = () => {
   const fetchQuestionTitles = async (page, limit = 5) => {
     setIsLoading(true);
     try {
+      let baseUrl = `${SERVER_URL}/api/questions/titles`;
+      if (userId) {
+        baseUrl += `/${userId}`;
+      }
       const res = await get(
-        `${SERVER_URL}/api/questions/titles?page=${
-          page || PAGINATION_DEFAULT_PAGE
-        }&limit=${limit || PAGINATION_DEFAULT_LIMIT}`
+        `${baseUrl}?page=${page || PAGINATION_DEFAULT_PAGE}&limit=${
+          limit || PAGINATION_DEFAULT_LIMIT
+        }`
       );
       setTitles(res?.data);
     } catch (error) {
@@ -32,6 +36,7 @@ const Questions = () => {
     }
   };
   useEffect(() => {
+    console.log("INITIAL RENDER");
     fetchQuestionTitles();
   }, []);
 

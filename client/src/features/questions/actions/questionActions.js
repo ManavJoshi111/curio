@@ -24,7 +24,7 @@ const getQuestionsByTopics = createAsyncThunk(
     try {
       const res = await post(
         `${SERVER_URL}/api/questions/by-topic?page=${
-          data.currentPage || PAGINATION_DEFAULT_PAGE
+          data.page || PAGINATION_DEFAULT_PAGE
         }&limit=${data.limit || PAGINATION_DEFAULT_LIMIT}`,
         {
           topics: data.topics.map((topic) => topic.topicId),

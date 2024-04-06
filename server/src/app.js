@@ -1,4 +1,7 @@
 const express = require("express");
+const { environment } = require("../utils/constants");
+const isDev = environment !== "production";
+const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 const connectToDB = require("../DB/db");
@@ -10,6 +13,10 @@ const {
   answerRoutes,
 } = require("../routes");
 const { CLIENT_URL } = require("../utils/constants");
+
+if (isDev) {
+  app.use(morgan("tiny"));
+}
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

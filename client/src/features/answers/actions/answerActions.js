@@ -7,7 +7,7 @@ const getAnswerByQuestion = createAsyncThunk(
   async (questionId, { rejectWithValue }) => {
     try {
       const res = await get(
-        `${SERVER_URL}/api/answer/by-question/${questionId}`
+        `${SERVER_URL}/api/answers/by-question/${questionId}`
       );
       return res;
     } catch (err) {
