@@ -7,14 +7,24 @@ const notificationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    activityType: {
-      type: String,
-      required: true,
-    },
     entityId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-    },
+    }, // ID of the entity being acted upon
+    entityType: {
+      type: String,
+      required: true,
+    }, // Type of the entity (e.g., 'question', 'answer')
+    message: {
+      type: String,
+    }, // Custom message for the notification
+    isRead: {
+      type: Boolean,
+      default: false,
+    }, // Flag for notification status (read/unread)
+    link: {
+      type: String,
+    }, 
   },
   { timestamps: true }
 );

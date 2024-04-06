@@ -5,17 +5,21 @@ const commentSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
-    answerId: {
+    entityId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Answer",
-      required: true
+      required: true,
+    },
+    entityType: {
+      type: String,
+      enum: ["Question", "Answer"],
+      required: true,
     },
     content: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   { timestamps: true }
 );
