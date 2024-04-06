@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, ListGroup, Button } from "react-bootstrap";
 import CreateSpaceModal from "./components/CreateSpaceModal";
+import { Link } from "react-router-dom";
+import "../../styles/space.css";
 
 // TODO : update to a better UI and break down into smaller components
 const SpacePage = () => {
@@ -13,44 +15,61 @@ const SpacePage = () => {
 
   const toggleCreateModal = () => {
     setShowCreateModal(!showCreateModal);
-  }
+  };
 
   const fetchUserSpaces = async () => {
     const userSpacesData = [
       {
-        id: 1,
+        _id: 1,
         name: "Technology",
         description: "Discuss all things related to technology and innovation.",
       },
       {
-        id: 2,
+        _id: 2,
         name: "Health & Wellness",
         description: "Share tips and advice on leading a healthy lifestyle.",
       },
     ];
+
+    // TODO: Fetch user spaces from the server
+
     setUserSpaces(userSpacesData);
   };
 
   const fetchPendingRequests = async () => {
     const pendingRequestsData = [
-      { id: 1, name: "Space 1" },
-      { id: 2, name: "Space 2" },
+      { _id: 1, name: "Space 1" },
+      { _id: 2, name: "Space 2" },
     ];
+
+    // TODO: Fetch pending requests from the server
+
     setPendingRequests(pendingRequestsData);
   };
 
   const fetchDiscoverSpaces = async () => {
     const discoverSpacesData = [
-      { id: 1, name: "Space 3" },
-      { id: 2, name: "Space 4" },
+      { _id: 1, name: "Space 3" },
+      { _id: 2, name: "Space 4" },
     ];
+
+    //TODO: Fetch discover spaces from the server
+
     setDiscoverSpaces(discoverSpacesData);
   };
 
-  const   handleCreateSpace = (spaceData) => {
-    // You can handle space creation logic here or pass it to the parent component
+  const handleCreateSpace = (spaceData) => {
     console.log("Creating space:", spaceData);
-    if(showCreateModal) toggleCreateModal(); // Close the modal after creating the space
+    if (showCreateModal) toggleCreateModal(); // Close the modal after creating the space
+
+    // TODO: Send the space data to the server to create a new space
+
+    const newSpace = {
+      _id: userSpaces.length + 1,
+      ...spaceData,
+    };
+
+    setUserSpaces([...userSpaces, newSpace]);
   };
 
   useEffect(() => {
@@ -79,7 +98,14 @@ const SpacePage = () => {
           </Row>
           <ListGroup>
             {userSpaces.map((space) => (
-              <ListGroup.Item key={space.id}>{space.name}</ListGroup.Item>
+              <ListGroup.Item
+                as={Link}
+                to={`/space/${space._id}`}
+                key={space._id}
+                className="space-list-item"
+              >
+                {space.name}
+              </ListGroup.Item>
             ))}
           </ListGroup>
         </Col>
@@ -87,7 +113,14 @@ const SpacePage = () => {
           <h2 className="mt-4">Pending Requests</h2>
           <ListGroup>
             {pendingRequests.map((request) => (
-              <ListGroup.Item key={request.id}>{request.name}</ListGroup.Item>
+              <ListGroup.Item
+                as={Link}
+                to={`/space/${request._id}`}
+                key={request._id}
+                className="space-list-item"
+              >
+                {request.name}
+              </ListGroup.Item>
             ))}
           </ListGroup>
         </Col>
@@ -97,7 +130,14 @@ const SpacePage = () => {
           <h2 className="mt-4">Discover Spaces</h2>
           <ListGroup>
             {discoverSpaces.map((space) => (
-              <ListGroup.Item key={space.id}>{space.name}</ListGroup.Item>
+              <ListGroup.Item
+                as={Link}
+                to={`/space/${space._id}`}
+                key={space._id}
+                className="space-list-item"
+              >
+                {space.name}
+              </ListGroup.Item>
             ))}
           </ListGroup>
         </Col>

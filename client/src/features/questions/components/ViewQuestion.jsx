@@ -18,6 +18,7 @@ import RichText from "../../../components/RichText";
 import { del } from "../../../utils/axios";
 import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
 import { SERVER_URL } from "../../../utils/constants";
+import RequestModal from "../../../components/RequestCard";
 
 const Question = () => {
   const { id } = useParams();
@@ -32,7 +33,9 @@ const Question = () => {
     error: answerError,
     answers,
   } = useSelector((state) => state.answerByQuestion);
+
   const { user } = useSelector((state) => state.user);
+  const [showRequestModal, setShowRequestModal] = useState(false);
 
   useEffect(() => {
     dispatch(getQuestionById(id));
@@ -62,38 +65,56 @@ const Question = () => {
     }
   };
 
+  const requestAnswer = () => {
+    setShowRequestModal(true);
+  };
+
   return (
     <div className="container border p-0 border-dark">
       <Card className="question-card">
         <CardBody>
           <div className="d-flex justify-content-between">
-            <CardText className="question-title mx-2">
-              <span className="fw-bold fs-3">{questionById.title}</span>
-            </CardText>
             <div className="d-flex justify-content-between align-items-center">
-              {(questionById.userId === user._id ||
-                user.role === "moderator") && (
-                <>
-                  <NavLink
-                    to={`/edit-question/${questionById._id}`}
-                    className="btn btn-primary mx-2"
-                  >
-                    Edit Question
-                  </NavLink>
-                  <Button
-                    onClick={() => setShowConfirmationModal(true)}
-                    className="btn btn-danger mx-2"
-                  >
-                    Delete Question
-                  </Button>
-                </>
-              )}
+              <CardText className="question-title mx-2">
+                <span className="fw-bold fs-3">{questionById.title}</span>
+              </CardText>
+              <div className="d-flex justify-content-between align-items-center">
+                {(questionById.userId === user._id ||
+                  user.role === "moderator") && (
+                  <>
+                    <NavLink
+                      to={`/edit-question/${questionById._id}`}
+                      className="btn btn-primary mx-2"
+                    >
+                      Edit Question
+                    </NavLink>
+                    <Button
+                      onClick={() => setShowConfirmationModal(true)}
+                      className="btn btn-danger mx-2"
+                    >
+                      Delete Question
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="">
-            {questionById.topics.map((topic) => (
-              <Badge className="ms-2 m-2">{topic.name}</Badge>
-            ))}
+            <div className="">
+              {questionById.topicIds.map((topic, index) => (
+                <Badge key={index} className="ms-2 m-2">
+                  {topic.name}
+                </Badge>
+              ))}
+            </div>
+            {/* request button to request an answer, show this only user is author of question */}
+            {questionById.userId?._id === user._id && (
+              <Button
+                variant="primary"
+                className="mb-2"
+                onClick={requestAnswer}
+              >
+                Request an answer
+              </Button>
+            )}
           </div>
           <div id="texteditor" className="p-2">
             {questionById?.content && (
@@ -187,6 +208,14 @@ const Question = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* Request modal */}
+      <RequestModal
+        show={showRequestModal}
+        handleClose={() => setShowRequestModal(false)}
+        requestType="answerQuestion"
+        entityId={id}
+      />
     </div>
   );
 };
