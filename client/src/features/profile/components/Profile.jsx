@@ -46,10 +46,6 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log("userData", userData);
-  }, [userData]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -209,7 +205,6 @@ const Profile = () => {
           <Col xs={9}>
             <h1 className="display-4 mb-0">{user.name}</h1>
             <p className="lead mb-1">{user.bio}</p>
-            {console.log(user._id, id)}
             {!id && (
               <Button
                 className="btn-sm mb-1"

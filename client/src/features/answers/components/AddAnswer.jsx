@@ -14,7 +14,6 @@ const AddAnswer = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
-  const [question, setQuestion] = useState(null);
   const [answer, setAnswer] = useState([
     {
       type: "paragraph",
@@ -50,7 +49,6 @@ const AddAnswer = () => {
   useEffect(() => {
     (() => {
       dispatch(getQuestionById(id));
-      setQuestion(questionById);
     })();
   }, []);
 
@@ -60,7 +58,7 @@ const AddAnswer = () => {
   if (error) {
     return <div>error</div>;
   }
-  return Object.keys(questionById).length ? (
+  return Object.keys(questionById || {}).length ? (
     <>
       <div className="container border border-dark">
         <div className="fs-3 fw-bold">{questionById.title} </div>

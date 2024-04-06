@@ -90,6 +90,7 @@ exports.getQuestionWithAuthor = (questionId) => {
 
 exports.getUserFeed = (
   condition,
+  userId,
   count = true,
   sortObj = { createdAt: -1 },
   page,
@@ -108,11 +109,6 @@ exports.getUserFeed = (
       },
     },
     {
-      $unwind: {
-        path: "$topicIds",
-      },
-    },
-    {
       $lookup: {
         from: "users",
         localField: "userId",
@@ -126,7 +122,51 @@ exports.getUserFeed = (
       },
     },
     {
-      $sort: sortObj,
+      $sort: {
+        createdAt: -1,
+      },
+    },
+    {
+      $lookup: {
+        from: "votes",
+        let: {
+          user_id: userId,
+          entity_id: "$_id",
+        },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [
+                  {
+                    $eq: ["$$user_id", "$userId"],
+                  },
+                  {
+                    $eq: ["$$entity_id", "$entityId"],
+                  },
+                ],
+              },
+            },
+          },
+        ],
+        as: "voteDetails",
+      },
+    },
+    {
+      $unwind: {
+        path: "$voteDetails",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $addFields: {
+        isUpvoted: {
+          $eq: ["$voteDetails.voteType", "upvote"],
+        },
+        isDownvoted: {
+          $eq: ["$voteDetails.voteType", "downvote"],
+        },
+      },
     },
     {
       $project: {
@@ -139,6 +179,9 @@ exports.getUserFeed = (
         askedByUserName: "$userDetails.name",
         askedByUserId: "$userDetails._id",
         askedByUserProfile: "$userDetails.profilePic",
+        voteDetails: "$voteDetails",
+        isUpvoted: 1,
+        isDownvoted: 1,
       },
     },
   ];

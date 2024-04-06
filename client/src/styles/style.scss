@@ -89,6 +89,27 @@ code {
   border-radius: 1rem;
 }
 
+.interactions *:hover {
+  background-color: #747474;
+  cursor: pointer;
+}
+
+.upvote:hover {
+  background-color: #444444;
+}
+
+.active-upvote {
+  background-color: #444444;
+}
+
+.downvote:hover {
+  background-color: #666666;
+}
+
+.active-downvote {
+  background-color: #666666;
+}
+
 // Required
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootswatch/dist/lux/variables";

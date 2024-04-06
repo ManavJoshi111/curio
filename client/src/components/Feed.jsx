@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import RichText from "../components/RichText";
 import Loading from "../components/Loading";
 import { PAGINATION_DEFAULT_LIMIT } from "../utils/constants";
+import Interactions from "./Interactions";
 
 const renderFeedQuestion = (question, key) => {
   return (
@@ -36,6 +37,11 @@ const renderFeedQuestion = (question, key) => {
         <div className="container-fluid question-content">
           <RichText data={JSON.parse(question.content)} readOnly />
         </div>
+        <Interactions
+          entityId={question._id}
+          isUpvoted={question.isUpvoted}
+          isDownvoted={question.isDownvoted}
+        />
       </div>
       <br />
     </div>

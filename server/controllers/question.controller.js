@@ -103,9 +103,7 @@ exports.getQuestions = async (req, res) => {
 exports.getQuestion = async (req, res) => {
   const { id } = req.params;
   try {
-    const question = await Question.findOne({
-      _id: generateObjectId(id),
-    }).populate("userId","name");
+    const question = await getQuestionWithAuthor(id);
     if (!question) {
       return sendResponse(res, 404, false, "Question not found");
     }
@@ -238,8 +236,15 @@ exports.getUserFeed = async (req, res) => {
       topicIds: { $in: topics.map((topic) => topic.topicId) },
     };
     const [queryData, queryCount] = await Promise.all([
-      getUserFeedQuery(condition, false, { createdAt: -1 }, page, limit),
-      getUserFeedQuery(condition, true),
+      getUserFeedQuery(
+        condition,
+        req.user._id,
+        false,
+        { createdAt: -1 },
+        page,
+        limit
+      ),
+      getUserFeedQuery(condition, req.user._id, true),
     ]);
 
     const response = {
