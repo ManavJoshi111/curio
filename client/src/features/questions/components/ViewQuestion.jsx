@@ -8,9 +8,11 @@ import {
   CardBody,
   CardText,
   Modal,
+  Image,
 } from "react-bootstrap";
 import { formatDate } from "../../../utils/FormatDate";
 import { getQuestionById } from "../actions/questionActions";
+import { getAnswerByQuestion } from "../../answers/actions/answerActions";
 import Loading from "../../../components/Loading";
 import RichText from "../../../components/RichText";
 import { del } from "../../../utils/axios";
@@ -25,10 +27,16 @@ const Question = () => {
   const { loading, error, questionById } = useSelector(
     (state) => state.questionById
   );
+  const {
+    loading: answerLoading,
+    error: answerError,
+    answers,
+  } = useSelector((state) => state.answerByQuestion);
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getQuestionById(id));
+    dispatch(getAnswerByQuestion(id));
   }, []);
 
   if (loading || !questionById) {
@@ -110,6 +118,55 @@ const Question = () => {
           </CardText>
         </CardBody>
       </Card>
+      <h1 className="fw-bold fs-3 m-3">Discussion on the question</h1>
+      {answerLoading ? (
+        <Loading />
+      ) : (
+        <div className="feed-container">
+          {console.log("ANSWERS: ", answers)}
+          {answers.length ? (
+            answers?.map((answer) => {
+              return (
+                <>
+                  <div key={answer._id}>
+                    <div className="feed-question m-2">
+                      <div className="container-fluid  question-title-author d-flex justify-content-between align-items-center">
+                        <NavLink
+                          className="fs-4 text-decoration-none fw-bold"
+                          to={`/answer/${answer._id}`}
+                        >
+                          {formatDate(answer.createdAt)}
+                        </NavLink>
+                        <div className="askedBy-data d-flex justify-content-center align-items-center flex-column mt-2">
+                          <Image
+                            className="rounded-circle border shadow mb-2"
+                            src={answer.user.profilePic}
+                            alt={answer.user.name}
+                            width="45"
+                            height="45"
+                          />
+                          <NavLink
+                            className="fs-6 text-decoration-none"
+                            to={`/profile/${answer.user._id}`}
+                          >
+                            {answer.user.name}
+                          </NavLink>
+                        </div>
+                      </div>
+                      <div className="p-2" id="texteditor">
+                        <RichText data={JSON.parse(answer.content)} readOnly />
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                </>
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
       <Modal
         show={showConfirmationModal}
         onHide={() => setShowConfirmationModal(false)}

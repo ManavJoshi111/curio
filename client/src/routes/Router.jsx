@@ -28,6 +28,7 @@ const Router = () => {
           <Route path="question/:id" element={<ViewQuestion />} />
           <Route path="edit-question/:id" element={<EditQuestion />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="profile/:id" element={<Profile />} />
           <Route path="logout" element={<Logout />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
