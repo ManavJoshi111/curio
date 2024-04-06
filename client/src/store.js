@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./reducers/userReducer";
 import topicSlice from "./reducers/topicReducer";
 import { questionSlice } from "./reducers/questionReducer";
+import { answerSlice } from "./reducers/answerReducer";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     questionsByTopic: questionSlice.questionsByTopic,
     questionById: questionSlice.questionById,
     userQuestions: questionSlice.userQuestions,
+    answerByQuestion: answerSlice.answerByQuestion,
   },
 });
 

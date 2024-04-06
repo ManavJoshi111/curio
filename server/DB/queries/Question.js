@@ -63,6 +63,14 @@ exports.getQuestionWithAuthor = (questionId) => {
       },
     },
     {
+      $lookup: {
+        from: "topics",
+        localField: "topicIds",
+        foreignField: "_id",
+        as: "topics",
+      },
+    },
+    {
       $project: {
         title: 1,
         content: 1,
@@ -73,6 +81,8 @@ exports.getQuestionWithAuthor = (questionId) => {
         updatedAt: 1,
         userName: "$userDetails.name",
         useEmail: "$userDetails.email",
+        userId: 1,
+        topics: 1,
       },
     },
   ]);
@@ -143,9 +153,6 @@ exports.getUserFeed = (
       },
       {
         $limit: page * limit,
-      },
-      {
-        $skip: (page - 1) * limit,
       }
     );
   }

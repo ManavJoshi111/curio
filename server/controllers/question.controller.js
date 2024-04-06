@@ -35,23 +35,22 @@ const Question = require("../models/Question");
 
 // Get question titles by user
 exports.getQuestionTitlesByUser = async (req, res) => {
+  let { id: userId } = req.params;
+  userId = userId ? generateObjectId(userId) : req.user._id; // userId is passed into params only if we are getting data of another user (not currently loggedIn user)
   let { page, limit } = req.query;
   page = +page || PAGINATION_DEFAULT_PAGE;
   limit = +limit || PAGINATION_DEFAULT_LIMIT;
   try {
     const [queryData, queryCount] = await Promise.all([
       getQuestionsByCondition(
-        { userId: req.user._id },
+        { userId },
         { title: 1, createdAt: 1 },
         false,
         { createdAt: -1 },
         page,
         limit
       ),
-      getQuestionsByCondition(
-        { userId: req.user._id },
-        { title: 1, createdAt: 1 }
-      ),
+      getQuestionsByCondition({ userId }, { title: 1, createdAt: 1 }),
     ]);
     const response = {
       data: queryData,
@@ -192,12 +191,15 @@ exports.addQuestion = async (req, res) => {
 // Update a question by ID
 exports.updateQuestion = async (req, res) => {
   const { id } = req.params;
-  const { _id: userId } = req.user;
   try {
     const question = await Question.findOneAndUpdate(
-      { _id: id, userId },
-      { title: req.body.content, content: req.body.content },
-      { returnDocument: "after" }
+      { _id: id },
+      {
+        title: req.body.title,
+        content: req.body.content,
+        topicIds: req.body.topicIds,
+      },
+      { returnDocument: "after", upsert: false }
     );
     if (!question) {
       return sendResponse(res, 404, false, "Question not found");

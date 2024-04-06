@@ -22,6 +22,7 @@ const ROLES = {
 };
 
 module.exports = {
+  environment,
   CLIENT_URL,
   SERVER_URL,
   DB_URL,

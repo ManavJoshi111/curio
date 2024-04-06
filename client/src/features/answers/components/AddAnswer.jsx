@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
 import RichText from "../../../components/RichText";
-import { Button, CardText } from "react-bootstrap";
+import { Badge, Button, CardText } from "react-bootstrap";
 import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
 import { post } from "../../../utils/axios";
 import { SERVER_URL } from "../../../utils/constants";
@@ -28,13 +28,13 @@ const AddAnswer = () => {
 
   const handleAddAnswer = async () => {
     try {
-      if (answer.every((node) => node.children[0].text.trim() === "")) {
+      if (!answer) {
         ErrorToast("Answer content cannot be empty");
         return;
       }
       const res = await post(`${SERVER_URL}/api/answers/`, {
         questionId: id,
-        content: JSON.stringify(answer),
+        content: answer,
       });
       SuccessToast(res.message);
       navigate("/");
@@ -49,9 +49,7 @@ const AddAnswer = () => {
 
   useEffect(() => {
     (() => {
-      if (loading) {
-        dispatch(getQuestionById(id));
-      }
+      dispatch(getQuestionById(id));
       setQuestion(questionById);
     })();
   }, []);
@@ -66,6 +64,9 @@ const AddAnswer = () => {
     <>
       <div className="container border border-dark">
         <div className="fs-3 fw-bold">{questionById.title} </div>
+        {questionById.topics.map((topic) => (
+          <Badge className="ms-2 m-2">{topic.name}</Badge>
+        ))}
         <div id="texteditor">
           <RichText data={JSON.parse(questionById.content)} readOnly={true} />
         </div>
