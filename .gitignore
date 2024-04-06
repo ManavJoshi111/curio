@@ -15,6 +15,7 @@ node_modules/
 # Environment variables
 /server/.env
 /client/.env
+/server/config
 
 # Logs
 *.log

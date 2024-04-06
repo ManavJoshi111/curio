@@ -105,7 +105,7 @@ const Question = () => {
           </div>
           <CardText className="question-metadata">
             <div className="text-muted">
-              Asked by: {questionById.userName} on{" "}
+              Asked by: {questionById.userId?.name} on{" "}
               {formatDate(questionById.createdAt)}
             </div>
             <div className="d-flex align-items-center">

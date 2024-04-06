@@ -1,9 +1,14 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import ReactNavbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Image } from "react-bootstrap";
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <>
       <ReactNavbar
@@ -30,6 +35,9 @@ const Navbar = () => {
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/answer">
                 Add Answer
               </Nav.Link>
+              <Nav.Link className="px-3 fs-5" as={NavLink} to="/space">
+                Space
+              </Nav.Link>
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/logout">
                 Logout
               </Nav.Link>
@@ -38,7 +46,16 @@ const Navbar = () => {
                 as={NavLink}
                 to="/profile"
               >
-                <i className="far fa-user-circle fw-bold fs-3"></i>
+                {user && user.profilePic ? (
+                  <Image
+                    className="rounded-circle border shadow"
+                    src={user.profilePic}
+                    alt={user.name}
+                    style={{ height: "2rem" , width: "2rem"}}
+                  />
+                ) : (
+                  <i className="far fa-user-circle fw-bold fs-3"></i>
+                )}
               </Nav.Link>
             </Nav>
           </ReactNavbar.Collapse>
