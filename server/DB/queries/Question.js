@@ -42,7 +42,7 @@ exports.getQuestionsByCondition = (
   return Question.aggregate(pipeline);
 };
 
-exports.getQuestionWithAuthor = (questionId) => {
+exports.getQuestionWithAuthor = (questionId, userId) => {
   return Question.aggregate([
     {
       $match: {
@@ -68,6 +68,48 @@ exports.getQuestionWithAuthor = (questionId) => {
         localField: "topicIds",
         foreignField: "_id",
         as: "topics",
+      },
+    },
+    {
+      $lookup: {
+        from: "votes",
+        let: {
+          user_id: userId,
+          entity_id: "$_id",
+        },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [
+                  {
+                    $eq: ["$$user_id", "$userId"],
+                  },
+                  {
+                    $eq: ["$$entity_id", "$entityId"],
+                  },
+                ],
+              },
+            },
+          },
+        ],
+        as: "voteDetails",
+      },
+    },
+    {
+      $unwind: {
+        path: "$voteDetails",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $addFields: {
+        isUpvoted: {
+          $eq: ["$voteDetails.voteType", "upvote"],
+        },
+        isDownvoted: {
+          $eq: ["$voteDetails.voteType", "downvote"],
+        },
       },
     },
     {

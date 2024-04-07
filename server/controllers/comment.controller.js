@@ -70,7 +70,9 @@ exports.getComments = async (req, res) => {
   try {
     const comments = await Comment.find({
       entityId: id,
-    }).populate("userId", "name");
+    })
+      .populate("userId", "name email profilePic _id")
+      .sort("-createdAt -updatedAt");
     sendResponse(res, 200, true, "Comments fetched successfully", comments);
   } catch (err) {
     console.error(err);

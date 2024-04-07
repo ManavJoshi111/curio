@@ -19,6 +19,7 @@ import { del } from "../../../utils/axios";
 import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
 import { SERVER_URL } from "../../../utils/constants";
 import EditAnswer from "../../answers/components/EditAnswer";
+import Interactions from "../../../components/Interactions";
 
 const Question = () => {
   const { id } = useParams();
@@ -110,18 +111,23 @@ const Question = () => {
               />
             )}
           </div>
-          <CardText className="question-metadata">
+          <CardText className="question-metadata p-0 m-0">
+            <Interactions
+              entityId={questionById._id}
+              isDownvoted={questionById.isDownvoted}
+              isUpvoted={questionById.isUpvoted}
+            />
             <div className="text-muted">
-              Asked by: {questionById.userId?.name} on{" "}
+              Asked by: {questionById?.userName} on{" "}
               {formatDate(questionById.createdAt)}
             </div>
-            <div className="d-flex align-items-center">
+            {/* <div className="d-flex align-items-center">
               <span className="text-muted me-2">
                 {questionById.upVotes} upvotes, {questionById.downVotes}{" "}
                 downvotes
               </span>
               <span className="text-muted">{questionById.views} views</span>
-            </div>
+            </div> */}
           </CardText>
         </CardBody>
       </Card>
@@ -135,7 +141,7 @@ const Question = () => {
               return (
                 <>
                   <div key={answer._id}>
-                    <div className="feed-question m-2">
+                    <div className="feed-question m-2 mb-0">
                       <div className="container-fluid  question-title-author d-flex justify-content-between align-items-center">
                         <h1
                           className="fs-4 text-decoration-none fw-bold"
@@ -149,7 +155,6 @@ const Question = () => {
                             <Button
                               className="btn btn-primary mx-2"
                               onClick={() => {
-                                console.log("Click");
                                 setShowAnswerEditModal(true);
                               }}
                             >
@@ -198,6 +203,13 @@ const Question = () => {
                       </div>
                     </div>
                     <br />
+                    <div className="container mb-2 mt-1">
+                      <Interactions
+                        entityId={answer._id}
+                        isDownvoted={answer.isDownvoted}
+                        isUpvoted={answer.isUpvoted}
+                      />
+                    </div>
                   </div>
                 </>
               );

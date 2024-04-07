@@ -41,6 +41,7 @@ const renderFeedQuestion = (question, key) => {
           entityId={question._id}
           isUpvoted={question.isUpvoted}
           isDownvoted={question.isDownvoted}
+          entityType="Question"
         />
       </div>
       <br />

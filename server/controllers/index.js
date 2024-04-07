@@ -4,6 +4,7 @@ const userController = require("./user.controller");
 const questionController = require("./question.controller");
 const answerController = require("./answer.controller");
 const voteController = require("./vote.controller");
+const commentController = require("./comment.controller");
 
 module.exports = {
   authController,
@@ -12,4 +13,5 @@ module.exports = {
   userController,
   answerController,
   voteController,
+  commentController,
 };

@@ -2,43 +2,33 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
+import { get, post } from "../utils/axios";
 
-const CommentSection = ({ entityId }) => {
+const CommentSection = ({ entityId, entityType }) => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    // Fetch comments from the server using the entityId
-    fetchComments(entityId)
-      .then((data) => setComments(data))
-      .catch((error) => console.error("Error fetching comments:", error));
+    fetchComments(entityId);
   }, [entityId]);
 
   const fetchComments = async (entityId) => {
-    // Replace this with your actual API endpoint to fetch comments
-    const response = await fetch(`/api/comments?entityId=${entityId}`);
-    const data = await response.json();
-    return data;
+    try {
+      const response = await get(`/api/comments/${entityId}`);
+      "Resp: ", response.data;
+      setComments(response.data);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+      setComments([]);
+    }
   };
 
-  const handleReply = async (parentId, replyContent) => {
+  const handleReply = async (replyContent) => {
     try {
-      // Send the reply to the server
-      const response = await fetch("/api/comments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          parentId,
-          content: replyContent,
-        }),
+      const response = await post(`/api/comments/${entityId}`, {
+        entityType,
+        content: replyContent,
       });
-      if (!response.ok) {
-        throw new Error("Failed to send reply");
-      }
-      // Fetch the updated comments from the server
-      const updatedComments = await fetchComments(entityId);
-      setComments(updatedComments);
+      await fetchComments(entityId);
     } catch (error) {
       console.error("Error replying to comment:", error);
     }
@@ -46,10 +36,9 @@ const CommentSection = ({ entityId }) => {
 
   return (
     <Container>
-      <Row className="my-4">
+      <Row className="mt-1">
         <Col>
-          <h4>Comments</h4>
-          <CommentForm onSubmit={(content) => handleReply(0, content)} />
+          <CommentForm onSubmit={(content) => handleReply(content)} />
           {comments.map((comment) => (
             <Comment
               key={comment.id}

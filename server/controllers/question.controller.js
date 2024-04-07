@@ -103,7 +103,7 @@ exports.getQuestions = async (req, res) => {
 exports.getQuestion = async (req, res) => {
   const { id } = req.params;
   try {
-    const question = await getQuestionWithAuthor(id);
+    const question = await getQuestionWithAuthor(id, req.user._id);
     if (!question) {
       return sendResponse(res, 404, false, "Question not found");
     }

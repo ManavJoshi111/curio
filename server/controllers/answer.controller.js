@@ -2,6 +2,10 @@ const sendResponse = require("../handlers/response.handler");
 const { generateObjectId } = require("../utils");
 const Answer = require("../models/Answer");
 const { answerValidator } = require("../validators");
+const {
+  PAGINATION_DEFAULT_PAGE,
+  PAGINATION_DEFAULT_LIMIT,
+} = require("../utils/constants");
 
 // Get all answers
 // exports.getAnswersByUser = async (req, res) => {
@@ -161,6 +165,48 @@ exports.getAnswerByQuestion = async (req, res) => {
         $unwind: "$user",
       },
       {
+        $lookup: {
+          from: "votes",
+          let: {
+            user_id: generateObjectId(req.user._id),
+            entity_id: "$_id",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    {
+                      $eq: ["$$user_id", "$userId"],
+                    },
+                    {
+                      $eq: ["$$entity_id", "$entityId"],
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          as: "voteDetails",
+        },
+      },
+      {
+        $unwind: {
+          path: "$voteDetails",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $addFields: {
+          isUpvoted: {
+            $eq: ["$voteDetails.voteType", "upvote"],
+          },
+          isDownvoted: {
+            $eq: ["$voteDetails.voteType", "downvote"],
+          },
+        },
+      },
+      {
         $project: {
           _id: 1,
           content: 1,
@@ -171,6 +217,9 @@ exports.getAnswerByQuestion = async (req, res) => {
             email: 1,
             profilePic: 1,
           },
+          voteDetails: "$voteDetails",
+          isUpvoted: 1,
+          isDownvoted: 1,
           questionId: 1,
         },
       },
@@ -181,6 +230,43 @@ exports.getAnswerByQuestion = async (req, res) => {
       true,
       "Fetched answers by question successfully!!!",
       answers
+    );
+  } catch (err) {
+    console.log("Err: ", err);
+    sendResponse(res, 500, false, "Failed to fetch answers!");
+  }
+};
+
+exports.getUserAnswers = async (req, res) => {
+  try {
+    let { id: userId } = req.params;
+    userId = userId ? generateObjectId(userId) : req.user._id;
+    let { page, limit } = req.query;
+    page = +page || PAGINATION_DEFAULT_PAGE;
+    limit = +limit || PAGINATION_DEFAULT_LIMIT;
+
+    const [queryData, queryCount] = await Promise.all([
+      Answer.find({ userId })
+        .sort({ createdAt: -1 })
+        .populate("questionId", "title _id")
+        .skip((page - 1) * limit)
+        .limit(limit),
+      Answer.find({ userId }).countDocuments(),
+    ]);
+
+    const response = {
+      data: queryData,
+      totalRecords: +queryCount || 0,
+      page: +page,
+      limit: +limit,
+      totalPages: Math.ceil(+queryCount / limit) || 0,
+    };
+    sendResponse(
+      res,
+      200,
+      true,
+      "Fetched answers by user successfully!",
+      response
     );
   } catch (err) {
     console.log("Err: ", err);
