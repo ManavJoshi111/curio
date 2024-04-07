@@ -45,8 +45,6 @@ exports.getVerificationOTP = async (req, res) => {
         console.log("Current directoy: ", process.cwd());
         console.log("Current directoy: ", __dirname);
 
-        const fs = require("fs");
-
         // Read the contents of the current directory
         fs.readdir(process.cwd(), (err, files) => {
           if (err) {
@@ -63,7 +61,7 @@ exports.getVerificationOTP = async (req, res) => {
 
         const file = await fs.readFile(
           // To run the project locally without any errors, just remove '/server from the below line
-          process.cwd() + "/server/services/email-template.ejs",
+          path.join(__dirname, "../services/email-template.ejs"),
           "utf-8"
         );
         console.log("File: ", file);
