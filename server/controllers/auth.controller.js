@@ -44,7 +44,8 @@ exports.getVerificationOTP = async (req, res) => {
 
         const data = { name, otp: userOtp };
         const file = await fs.readFile(
-          process.cwd() + "/services/email-template.ejs",
+          // To run the project locally without any errors, just remove '/server from the below line
+          process.cwd() + "/server/services/email-template.ejs",
           "utf-8"
         );
         console.log("File: ", file);
@@ -79,7 +80,7 @@ exports.getVerificationOTP = async (req, res) => {
     await user.save();
     const data = { name, otp: userOtp };
     const file = await fs.readFile(
-      process.cwd() + "/services/email-template.ejs",
+      process.cwd() + "/server/services/email-template.ejs",
       "utf-8"
     );
     console.log("File: ", file);
