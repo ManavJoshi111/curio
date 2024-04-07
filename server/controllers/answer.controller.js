@@ -171,6 +171,7 @@ exports.getAnswerByQuestion = async (req, res) => {
             email: 1,
             profilePic: 1,
           },
+          questionId: 1,
         },
       },
     ]);

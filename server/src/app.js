@@ -11,6 +11,7 @@ const {
   userRoutes,
   questionRoutes,
   answerRoutes,
+  voteRoutes,
 } = require("../routes");
 const { CLIENT_URL } = require("../utils/constants");
 
@@ -38,5 +39,6 @@ app.use("/api/topics", topicsRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/answers", answerRoutes);
+app.use("/api/vote", voteRoutes);
 
 module.exports = app;

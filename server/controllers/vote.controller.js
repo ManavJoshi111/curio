@@ -1,4 +1,6 @@
 const Vote = require("../models/Vote");
+const sendResponse = require("../handlers/response.handler");
+const { generateObjectId } = require("../utils");
 
 // Toggle upvote for a question
 exports.toggleUpvote = async (req, res) => {
@@ -8,18 +10,25 @@ exports.toggleUpvote = async (req, res) => {
 
     const existingVote = await Vote.findOne({
       userId,
-      entityId: id,
-      voteType: "upvote",
+      entityId: generateObjectId(id),
     });
     if (existingVote) {
-      await existingVote.remove();
-      return sendResponse(res, 200, true, "Upvote removed successfully");
-    } else {
-      const newVote = new Vote({ userId, entityId: id, voteType: "upvote" });
-      await newVote.save();
-      return sendResponse(res, 200, true, "Upvoted successfully");
+      await Vote.deleteOne({ _id: existingVote._id });
+      if (existingVote.voteType === "downvote") {
+        const newVote = new Vote({ userId, entityId: id, voteType: "upvote" });
+        await newVote.save();
+      }
+      return sendResponse(res, 200, true, "Success!", {
+        upvoted: existingVote.voteType !== "upvote",
+      });
     }
+    const newVote = new Vote({ userId, entityId: id, voteType: "upvote" });
+    await newVote.save();
+    return sendResponse(res, 200, true, "Upvoted successfully", {
+      upvoted: true,
+    });
   } catch (error) {
+    console.log("Error: ", error);
     sendResponse(res, 500, false, "Failed to toggle upvote");
   }
 };
@@ -32,18 +41,29 @@ exports.toggleDownvote = async (req, res) => {
 
     const existingVote = await Vote.findOne({
       userId,
-      entityId: id,
-      voteType: "downvote",
+      entityId: generateObjectId(id),
     });
     if (existingVote) {
-      await existingVote.remove();
-      return sendResponse(res, 200, true, "Downvote removed successfully");
-    } else {
-      const newVote = new Vote({ userId, entityId: id, voteType: "downvote" });
-      await newVote.save();
-      return sendResponse(res, 200, true, "Downvoted successfully");
+      await Vote.deleteOne({ _id: existingVote._id });
+      if (existingVote.voteType === "upvote") {
+        const newVote = new Vote({
+          userId,
+          entityId: id,
+          voteType: "downvote",
+        });
+        await newVote.save();
+      }
+      return sendResponse(res, 200, true, "Success!", {
+        downvoted: existingVote.voteType !== "downvote",
+      });
     }
+    const newVote = new Vote({ userId, entityId: id, voteType: "downvote" });
+    await newVote.save();
+    return sendResponse(res, 200, true, "Downvoted successfully", {
+      downvoted: true,
+    });
   } catch (error) {
+    console.log("Error: ", error);
     sendResponse(res, 500, false, "Failed to toggle downvote");
   }
 };

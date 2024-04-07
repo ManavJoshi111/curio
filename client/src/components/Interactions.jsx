@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SERVER_URL } from "../utils/constants";
+import { get } from "../utils/axios";
+import { SuccessToast, ErrorToast } from "../utils/CustomToast";
 
 const Interactions = ({ entityId, isUpvoted = false, isDownvoted = false }) => {
-  const handleUpvote = () => {};
+  const [upvoted, setUpvoted] = useState(isUpvoted);
+  const [downvoted, setDownvoted] = useState(isDownvoted);
 
-  const handleDownvote = () => {};
+  const handleUpvote = async () => {
+    try {
+      const response = await get(`${SERVER_URL}/api/vote/upvote/${entityId}`);
+      setUpvoted(response.data.upvoted);
+      setDownvoted(false);
+    } catch (err) {
+      ErrorToast("Oops! There's an error, please try again after sometime!");
+    }
+  };
+
+  const handleDownvote = async () => {
+    try {
+      const response = await get(`${SERVER_URL}/api/vote/downvote/${entityId}`);
+      console.log(response.data.downvoted);
+      setDownvoted(response.data.downvoted);
+      setUpvoted(false);
+    } catch (err) {
+      ErrorToast(err.error);
+    }
+  };
 
   return (
     <div className="container-fluid interactions d-flex justify-content-start gap-1 mt-2 fs-4">
       <div
         className={
           "border border-secondary rounded upvote " +
-          (isUpvoted ? "active-upvote" : "")
+          (upvoted ? "active-upvote" : "")
         }
         onClick={handleUpvote}
       >
@@ -20,14 +42,14 @@ const Interactions = ({ entityId, isUpvoted = false, isDownvoted = false }) => {
       <div
         className={
           "border border-secondary rounded downvote " +
-          (isDownvoted ? "active-downvote" : "")
+          (downvoted ? "active-downvote" : "")
         }
-        onclick={handleDownvote}
+        onClick={handleDownvote}
       >
         👎
       </div>
       <div className="border border-secondary rounded">
-        <i class="far fa-comment p-1"></i>
+        <i className="far fa-comment p-1"></i>
       </div>
     </div>
   );

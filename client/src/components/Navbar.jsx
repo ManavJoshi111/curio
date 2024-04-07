@@ -32,7 +32,7 @@ const Navbar = () => {
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/question">
                 Add Question
               </Nav.Link>
-              <Nav.Link className="px-3 fs-5" as={NavLink} to="/answer">
+              <Nav.Link className="px-3 fs-5" as={NavLink} to="/answer-section">
                 Add Answer
               </Nav.Link>
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/space">
@@ -51,7 +51,7 @@ const Navbar = () => {
                     className="rounded-circle border shadow"
                     src={user.profilePic}
                     alt={user.name}
-                    style={{ height: "2rem" , width: "2rem"}}
+                    style={{ height: "2rem", width: "2rem" }}
                   />
                 ) : (
                   <i className="far fa-user-circle fw-bold fs-3"></i>
