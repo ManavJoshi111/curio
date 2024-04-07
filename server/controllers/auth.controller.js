@@ -1,6 +1,6 @@
 const ejs = require("ejs");
 const path = require("path");
-const fs = require("fs");
+const { promises: fs } = require("fs");
 const bcrypt = require("bcryptjs");
 const { User } = require("../models");
 const sendResponse = require("../handlers/response.handler");
@@ -34,15 +34,21 @@ exports.getVerificationOTP = async (req, res) => {
       if (!user.isVerified) {
         const userOtp = generateOTP(6);
         user.otp = userOtp;
+        user = new User({
+          name,
+          email,
+          password,
+          otp: userOtp,
+        });
         await user.save();
 
         const data = { name, otp: userOtp };
-        const directory = path.resolve(process.cwd(), "services");
-        const html = fs.readFileSync(
-          path.join(directory, "email-template.ejs"),
+        const file = await fs.readFile(
+          process.cwd() + "/services/email-template.ejs",
           "utf-8"
         );
-        const renderedTemplate = ejs.render(html, data);
+        console.log("File: ", file);
+        const renderedTemplate = ejs.render(file, data);
         console.log("Sending email");
         await sendEmail(
           email,
@@ -70,11 +76,14 @@ exports.getVerificationOTP = async (req, res) => {
       password: hashedPassword,
       otp: userOtp,
     });
-    console.log("new user is: ", user);
     await user.save();
     const data = { name, otp: userOtp };
-    const html = fs.readFileSync("./services/email-template.ejs", "utf-8");
-    const renderedTemplate = ejs.render(html, data);
+    const file = await fs.readFile(
+      process.cwd() + "/services/email-template.ejs",
+      "utf-8"
+    );
+    console.log("File: ", file);
+    const renderedTemplate = ejs.render(file, data);
     console.log("Sending email");
     await sendEmail(
       email,
