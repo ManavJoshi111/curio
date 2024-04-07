@@ -37,8 +37,9 @@ exports.getVerificationOTP = async (req, res) => {
         await user.save();
 
         const data = { name, otp: userOtp };
+        const directory = path.resolve(process.cwd(), "services");
         const html = fs.readFileSync(
-          path.join(__dirname, "services/email-template.ejs"),
+          path.join(directory, "email-template.ejs"),
           "utf-8"
         );
         const renderedTemplate = ejs.render(html, data);
