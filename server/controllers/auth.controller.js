@@ -1,4 +1,5 @@
 const ejs = require("ejs");
+const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
 const { User } = require("../models");
@@ -36,7 +37,10 @@ exports.getVerificationOTP = async (req, res) => {
         await user.save();
 
         const data = { name, otp: userOtp };
-        const html = fs.readFileSync("./services/email-template.ejs", "utf-8");
+        const html = fs.readFileSync(
+          path.join(__dirname, "services/email-template.ejs"),
+          "utf-8"
+        );
         const renderedTemplate = ejs.render(html, data);
         console.log("Sending email");
         await sendEmail(
