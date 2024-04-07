@@ -43,29 +43,12 @@ exports.getVerificationOTP = async (req, res) => {
         await user.save();
 
         const data = { name, otp: userOtp };
-        console.log("Current directoy: ", process.cwd());
-        console.log("Current directoy: ", __dirname);
-
-        // Read the contents of the current directory
-        fs.readdir(process.cwd(), (err, files) => {
-          if (err) {
-            console.error("Error reading directory:", err);
-            return;
-          }
-
-          // Log the names of files and folders
-          console.log("Files and folders in the current directory:");
-          files.forEach((file) => {
-            console.log("Filename: ", file);
-          });
-        });
 
         const file = await fs.readFile(
           // To run the project locally without any errors, just remove '/server from the below line
           path.join(__dirname, "../services/email-template.ejs"),
           "utf-8"
         );
-        console.log("File: ", file);
         const renderedTemplate = ejs.render(file, data);
         console.log("Sending email");
         await sendEmail(
@@ -97,10 +80,10 @@ exports.getVerificationOTP = async (req, res) => {
     await user.save();
     const data = { name, otp: userOtp };
     const file = await fs.readFile(
-      process.cwd() + "/server/services/email-template.ejs",
+      // To run the project locally without any errors, just remove '/server from the below line
+      path.join(__dirname, "../services/email-template.ejs"),
       "utf-8"
     );
-    console.log("File: ", file);
     const renderedTemplate = ejs.render(file, data);
     console.log("Sending email");
     await sendEmail(
