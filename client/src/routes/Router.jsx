@@ -13,6 +13,9 @@ import Logout from "../features/auth/Logout";
 import AddAnswer from "../features/answers/components/AddAnswer";
 import Answer from "../features/answers/components/Answers";
 import EditQuestion from "../features/questions/components/EditQuestion";
+import SpacePage from "../features/space/SpacePage";
+import SpaceViewPage from "../features/space/SpaceViewPage";
+import EditAnswer from "../features/answers/components/EditAnswer";
 
 const Router = () => {
   return (
@@ -23,12 +26,15 @@ const Router = () => {
         <Route path="/" element={<PrivateRoutes component={Navbar} />}>
           <Route path="" element={<Home />} />
           <Route path="question" element={<AddQuestion />} />
-          <Route path="answer" element={<Answer />} />
-          <Route path="answer/:id" element={<AddAnswer />} />
           <Route path="question/:id" element={<ViewQuestion />} />
           <Route path="edit-question/:id" element={<EditQuestion />} />
+          <Route path="answer-section" element={<Answer />} />
+          <Route path="answer/:id" element={<AddAnswer />} />
+          <Route path="edit-answer/:id" element={<EditAnswer />} />
           <Route path="profile" element={<Profile />} />
           <Route path="profile/:id" element={<Profile />} />
+          <Route path="space" element={<SpacePage />} />
+          <Route path="space/:id" element={<SpaceViewPage />} />
           <Route path="logout" element={<Logout />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />

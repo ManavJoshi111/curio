@@ -14,15 +14,15 @@ import {
   Modal,
   Form,
 } from "react-bootstrap";
-import Questions from "./Questions";
+import UserQuestions from "./UserQuestions";
 import ImageUpload from "../../../components/ImageUpload";
 import Select from "react-select";
 import { getTopics } from "../../onboarding/actions/topicActions";
 import Loading from "../../../components/Loading";
 import { ErrorToast, SuccessToast } from "../../../utils/CustomToast";
-import { getUserData } from "../../auth/actions/userActions";
 import { get, put } from "../../../utils/axios";
 import { SERVER_URL } from "../../../utils/constants";
+import UserAnswers from "../../answers/components/UserAnswers";
 
 const EditProfile = ({ showModal, setShowModal, user }) => {
   const { loading, error, topics } = useSelector((state) => state.topics);
@@ -45,10 +45,6 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
       dispatch(getTopics());
     }
   }, []);
-
-  useEffect(() => {
-    console.log("userData", userData);
-  }, [userData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -209,7 +205,6 @@ const Profile = () => {
           <Col xs={9}>
             <h1 className="display-4 mb-0">{user.name}</h1>
             <p className="lead mb-1">{user.bio}</p>
-            {console.log(user._id, id)}
             {!id && (
               <Button
                 className="btn-sm mb-1"
@@ -243,10 +238,10 @@ const Profile = () => {
         <h2 className="text-center">Activity</h2>
         <Tabs>
           <Tab eventKey="questions" title="Questions">
-            <Questions userId={id} />
+            <UserQuestions userId={id} />
           </Tab>
           <Tab eventKey="answers" title="Answers">
-            {/* <Answers /> */}
+            <UserAnswers userId={id} />
           </Tab>
           <Tab eventKey="following" title="Following">
             {/* <Users /> */}

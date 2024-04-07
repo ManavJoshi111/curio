@@ -10,34 +10,33 @@ import Card from "../../../components/Card";
 import Loading from "../../../components/Loading";
 import Pagination from "../../../components/Pagination";
 
-// TODO : Handle pagination
-const Questions = ({ userId }) => {
-  const [titles, setTitles] = useState([]);
+const UserAnswers = ({ userId }) => {
+  const [answers, setAnswers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchQuestionTitles = async (page, limit = 5) => {
+  const fetchUserAnswers = async (page, limit = 5) => {
     setIsLoading(true);
     try {
-      let baseUrl = `${SERVER_URL}/api/questions/titles`;
+      let baseUrl = "/api/answers/by-user/";
       if (userId) {
-        baseUrl += `/${userId}`;
+        baseUrl += `${userId}`;
       }
       const res = await get(
         `${baseUrl}?page=${page || PAGINATION_DEFAULT_PAGE}&limit=${
           limit || PAGINATION_DEFAULT_LIMIT
         }`
       );
-      setTitles(res?.data);
+      setAnswers(res?.data);
     } catch (error) {
       setError(error);
     } finally {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
-    console.log("INITIAL RENDER");
-    fetchQuestionTitles();
+    fetchUserAnswers();
   }, []);
 
   if (isLoading) {
@@ -50,20 +49,23 @@ const Questions = ({ userId }) => {
 
   return (
     <>
-      <div className="question-list">
-        {titles?.data?.map(({ _id, title, createdAt }, index) => (
-          <Card
-            key={index}
-            id={_id}
-            title={title}
-            createdAt={createdAt}
-            navigateLink={`/question/${_id}`}
-          />
-        ))}
+      <div className="answer-list">
+        {answers?.data?.map(
+          ({ _id, content, createdAt, questionId }, index) => (
+            <Card
+              title={questionId.title}
+              key={index}
+              id={_id}
+              content={content}
+              createdAt={createdAt}
+              navigateLink={`/question/${questionId._id}`}
+            />
+          )
+        )}
         <Pagination
-          currentPage={titles?.page}
-          handleFn={fetchQuestionTitles}
-          totalPages={titles?.totalPages}
+          currentPage={answers?.page}
+          handleFn={fetchUserAnswers}
+          totalPages={answers?.totalPages}
           className="mt-2"
         />
       </div>
@@ -71,4 +73,4 @@ const Questions = ({ userId }) => {
   );
 };
 
-export default Questions;
+export default UserAnswers;

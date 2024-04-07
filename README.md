@@ -14,12 +14,12 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
   - [x] Create Questions
   - [x] View Questions
   - [x] Answer Questions
-  - [ ] View Answers
+  - [x] View Answers
   - [ ] Request Answers from Other Users
 
-- [ ] Upvote & Comment Module:
+- [] Vote & Comment Module:
 
-  - [ ] Upvote Answers
+  - [x] Vote(Upvote & Downvote) Answers
   - [ ] Comment on Answers
 
 - [ ] Badge System Module:
@@ -29,10 +29,6 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
   - [ ] Learner Badge
   - [ ] Specialist Badge
   - [ ] Additional Badge System (TBD)
-
-- [ ] User Authorizations Module:
-  - [ ] Upvote Threshold for Commenting
-  - [ ] Badge-based Authorizations (e.g., editing questions/answers)
 
 ---
 

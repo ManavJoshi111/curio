@@ -16,7 +16,6 @@ const getAnswerByQuestionSlice = createSlice({
         state.error = null;
       })
       .addCase(getAnswerByQuestion.fulfilled, (state, action) => {
-        console.log("Fulfilled: ", action.payload.data);
         state.loading = false;
         state.answers = action.payload.data;
       })
