@@ -1,5 +1,4 @@
 const ejs = require("ejs");
-const path = require("path");
 const { promises: fs } = require("fs");
 const bcrypt = require("bcryptjs");
 const { User } = require("../models");
@@ -43,6 +42,25 @@ exports.getVerificationOTP = async (req, res) => {
         await user.save();
 
         const data = { name, otp: userOtp };
+        console.log("Current directoy: ", process.cwd());
+        console.log("Current directoy: ", __dirname);
+
+        const fs = require("fs");
+
+        // Read the contents of the current directory
+        fs.readdir(process.cwd(), (err, files) => {
+          if (err) {
+            console.error("Error reading directory:", err);
+            return;
+          }
+
+          // Log the names of files and folders
+          console.log("Files and folders in the current directory:");
+          files.forEach((file) => {
+            console.log("Filename: ", file);
+          });
+        });
+
         const file = await fs.readFile(
           // To run the project locally without any errors, just remove '/server from the below line
           process.cwd() + "/server/services/email-template.ejs",
