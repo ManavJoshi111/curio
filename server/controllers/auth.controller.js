@@ -1,5 +1,6 @@
 const ejs = require("ejs");
 const { promises: fs } = require("fs");
+const path = require("path");
 const bcrypt = require("bcryptjs");
 const { User } = require("../models");
 const sendResponse = require("../handlers/response.handler");
