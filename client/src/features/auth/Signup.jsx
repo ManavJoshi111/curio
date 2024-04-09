@@ -75,98 +75,118 @@ const Signup = () => {
   };
 
   return (
-    <Container fluid className="my-2">
-      <p className="h1 text-center p-3 text-decoration-underline">Signup</p>
-      <Row>
-        <Col col="10" md="6">
+    <Container fluid className="m-0 p-0">
+      <Row className="d-flex flex-row-reverse">
+        <Col
+          col="10"
+          md="6"
+          className="d-flex align-items-center justify-content-center vh-100 m-0 p-0"
+        >
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            src="/assets/User-Entry.svg"
+            style={{
+              marginLeft: "235px",
+              zIndex: "-100",
+              width: "100%",
+              height: "100%",
+            }}
             className="img-fluid"
             alt="Phone image"
           />
         </Col>
-        <Col col="4" md="6">
-          <>
-            <Form>
-              <Form.Group className="mb-2 fw-bold">
-                <Form.Label className="mb-1">Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  className="border border-2"
-                  size="sm"
-                  name="name"
-                  value={name}
-                  onChange={handleInputChange}
-                  disabled={showOtp}
-                />
-              </Form.Group>
-              <Form.Group className="pt-2 mb-2 fw-bold">
-                <Form.Label className="mb-1">Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  className="border border-2"
-                  size="sm"
-                  name="email"
-                  value={email}
-                  onChange={handleInputChange}
-                  disabled={showOtp}
-                />
-              </Form.Group>
-              <Form.Group className="pt-2 mb-2 fw-bold">
-                <Form.Label className="mb-1">Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  className="border border-2"
-                  size="sm"
-                  name="password"
-                  value={password}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-              {showOtp && (
-                <>
-                  <Form.Group className=" mb-2 fw-bold">
-                    <Form.Label>Enter Code: </Form.Label>
+        <Col
+          col="4"
+          md="6"
+          className="d-flex align-items-center justify-content-center shadow-lg"
+        >
+          <div className="w-100">
+            <p className="h1 text-center">Signup</p>
+            <>
+              <Form>
+                <Form.Group className="pt-2 mb-2 fw-bold d-flex w-100 justify-content-center align-items-center">
+                  <div className="d-flex justify-content-start align-items-start flex-column w-50">
+                    <Form.Label className="mb-1">Name</Form.Label>
                     <Form.Control
-                      type="number"
-                      className="border border-2"
+                      type="text"
+                      className="border border-2 rounded-4"
                       size="sm"
-                      name="otp"
-                      onChange={handleOtpChange}
+                      name="name"
+                      value={name}
+                      onChange={handleInputChange}
+                      disabled={showOtp}
                     />
-                  </Form.Group>
-                  <p className="mb-1">
-                    Resend OTP
-                    {/* Add logic to resend OTP */}
-                  </p>
-                  <Button
-                    className="mb-4 w-100"
-                    size="md"
-                    onClick={handleSignIn}
-                  >
-                    Sign in
-                  </Button>
-                </>
-              )}
-              {!showOtp && (
-                <>
-                  <p className="text-end m-0 p-1">
-                    Already Have an Account? &nbsp;
-                    <NavLink to="/login">Login</NavLink>
-                  </p>
-                  <Button
-                    className={
-                      (showOtp ? "d-none " : "") + `mb-4 w-100 btn btn-primary`
-                    }
-                    size="md"
-                    onClick={handleGetOtp}
-                  >
-                    {loading ? <Loading /> : "Get verification code"}
-                  </Button>
-                </>
-              )}
-            </Form>
-          </>
+                  </div>
+                </Form.Group>
+                <Form.Group className="pt-2 mb-2 fw-bold d-flex w-100 justify-content-center align-items-center">
+                  <div className="d-flex justify-content-start align-items-start flex-column w-50">
+                    <Form.Label className="mb-1">Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      className="border border-2 rounded-4"
+                      size="sm"
+                      name="email"
+                      value={email}
+                      onChange={handleInputChange}
+                      disabled={showOtp}
+                    />
+                  </div>
+                </Form.Group>
+                <Form.Group className="pt-2 mb-2 fw-bold d-flex w-100 justify-content-center align-items-center">
+                  <div className="d-flex justify-content-start align-items-start flex-column w-50">
+                    <Form.Label className="mb-1">Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      className="border border-2 rounded-4"
+                      size="sm"
+                      name="password"
+                      value={password}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </Form.Group>
+                {true && (
+                  <>
+                    <Form.Group className="pt-2 mb-2 fw-bold d-flex w-100 justify-content-center align-items-center">
+                      <div className="d-flex justify-content-start align-items-start flex-column w-50">
+                        <Form.Label>Enter Code: </Form.Label>
+                        <Form.Control
+                          type="number"
+                          className="border border-2 rounded-4"
+                          size="sm"
+                          name="otp"
+                          onChange={handleOtpChange}
+                        />
+                      </div>
+                    </Form.Group>
+                    <div className="d-flex justify-content-start align-items-center flex-column mt-4">
+                      <Button
+                        className="mb-2 w-50"
+                        size="md"
+                        onClick={handleSignIn}
+                      >
+                        Sign in
+                      </Button>
+                    </div>
+                  </>
+                )}
+                {!true && (
+                  <div className="d-flex justify-content-start align-items-center flex-column mt-4">
+                    <p className="text-start m-0 p-1 ps-0">
+                      Already Have an Account? &nbsp;
+                      <NavLink to="/login">Login</NavLink>
+                    </p>
+                    <Button
+                      className={(showOtp ? "d-none " : "") + `mb-2 w-50`}
+                      size="md"
+                      onClick={handleGetOtp}
+                    >
+                      {loading ? <Loading /> : "Get verification code"}
+                    </Button>
+                  </div>
+                )}
+              </Form>
+            </>
+          </div>
         </Col>
       </Row>
     </Container>

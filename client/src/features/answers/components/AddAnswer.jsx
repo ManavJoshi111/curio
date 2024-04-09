@@ -60,7 +60,7 @@ const AddAnswer = () => {
   }
   return Object.keys(questionById || {}).length ? (
     <>
-      <div className="container border border-dark">
+      <div className="container shadow-lg rounded-4 mt-4 pt-2">
         <div className="fs-3 fw-bold">{questionById.title} </div>
         {questionById.topics.map((topic) => (
           <Badge className="ms-2 m-2">{topic.name}</Badge>

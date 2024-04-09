@@ -14,7 +14,7 @@ import Loading from "../components/Loading";
 const HeroSectionBox = ({ title, text }) => {
   return (
     <>
-      <div className="col-md-2 text-center flex-grow-1" id="hero-box">
+      <div className="text-center flex-grow-0 flex-shrink-0 p-3" id="hero-box">
         <span id="hero-box-title">{title}</span>
         <p id="hero-box-text">{text}</p>
       </div>
@@ -61,25 +61,25 @@ const Home = () => {
           fluid
         >
           <div className="fs-1 text-center" id="hero-title">
-            <span className="fw-bold">Welcome to Curio!</span> Dive into
+            <span className="fw-bold">Welcome to Curio! 🚀 </span> Dive into
             captivating conversations.
           </div>
-          <div id="hero-boxes" className="mt-4 row w-100 gap-3">
+          <div
+            id="hero-boxes"
+            className="mt-4 w-100 d-flex justify-content-around align-items-between flex-wrap"
+          >
             <HeroSectionBox
               title={"Explore"}
-              text={"Uncover trending treasures with fun"}
+              text={"Uncover trending treasures"}
             />
-            <HeroSectionBox
-              title={"Learn"}
-              text={"Get to know new things everyday!"}
-            />
+            <HeroSectionBox title={"Learn"} text={"Get to know new things!"} />
             <HeroSectionBox title={"Unleash"} text={"Unlock your inner geek"} />
             <HeroSectionBox
               title={"Connect"}
-              text={"Connect with like-minded individuals"}
+              text={"Connect with individuals"}
             />
           </div>
-          <div className="feed-container w-100 mt-4">
+          <div className="feed-container mt-4">
             <Feed
               questions={feedQuestions.data}
               paginationData={{

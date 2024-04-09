@@ -106,8 +106,15 @@ const RichText = ({ data, setData, readOnly = false }) => {
     return !!match;
   };
 
-  const toggleBlock = (editor, format) => {
+  const toggleBlock = (editor, format, e) => {
     const isActive = isBlockActive(editor, format);
+    if (isActive) {
+      e.classList.remove("text-light");
+      e.classList.remove("bg-dark");
+    } else {
+      e.classList.add("text-light");
+      e.classList.add("bg-dark");
+    }
     const isList = LIST_TYPES.includes(format);
 
     Transforms.unwrapNodes(editor, {
@@ -134,10 +141,16 @@ const RichText = ({ data, setData, readOnly = false }) => {
     return marks ? marks[mark] === true : false;
   };
 
-  const toggleMark = (editor, mark) => {
-    isMarkActive(editor, mark)
-      ? Editor.removeMark(editor, mark)
-      : Editor.addMark(editor, mark, true);
+  const toggleMark = (editor, mark, e) => {
+    if (isMarkActive(editor, mark)) {
+      Editor.removeMark(editor, mark);
+      e.classList.remove("text-light");
+      e.classList.remove("bg-dark");
+    } else {
+      Editor.addMark(editor, mark, true);
+      e.classList.add("text-light");
+      e.classList.add("bg-dark");
+    }
   };
 
   return (
@@ -173,6 +186,7 @@ const RichText = ({ data, setData, readOnly = false }) => {
         renderElement={renderElement}
         style={{
           outline: "none",
+          paddingTop: "0.8rem",
         }}
         onKeyDown={(event) => {
           for (let { key, mark } of TOOLBAR_BUTTONS) {

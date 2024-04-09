@@ -61,8 +61,8 @@ const AddQuestion = () => {
   }
   return (
     <>
-      <div className="container border border-dark">
-        <div className="fs-3 fw-bold">Add A Question </div>
+      <div className="container shadow-lg rounded-4 mt-4 pt-2">
+        <div className="fs-3 fw-bold mt-0 pt-0">Add a new question </div>
         <div className="d-flex flex-column mb-3 align-items-start pt-1">
           <label htmlFor="question-title" className="fw-bold me-2">
             Title:

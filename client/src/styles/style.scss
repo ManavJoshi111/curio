@@ -13,6 +13,12 @@ $body-bg-color: #333333;
 html {
   scrollbar-width: none;
 }
+
+#root {
+  margin: 0;
+  padding: 0;
+}
+
 .form-control:focus {
   box-shadow: none;
   background-color: #3333332a;
@@ -63,7 +69,7 @@ code {
 #hero-box-title {
   color: #252525;
   font-family: "Fira Sans";
-  font-size: 36px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 800;
   line-height: 150%; /* 72px */
@@ -72,21 +78,27 @@ code {
 #hero-box-text {
   color: #747474;
   font-family: "Fira Sans";
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 800;
   line-height: 150%; /* 30px */
+  text-wrap: wrap;
 }
 
 .feed-container {
   // background-color: #eaeaea;
   border-radius: 1rem;
+  width: 90%;
 }
 
 .feed-question {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
   background: #fff;
   border-radius: 1rem;
+}
+
+.question-title {
+  width: 85%;
 }
 
 .interactions *:hover {

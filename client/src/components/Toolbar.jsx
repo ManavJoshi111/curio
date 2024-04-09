@@ -1,8 +1,6 @@
 import React from "react";
-import isHotKey from "is-hotkey";
 import { useSlate } from "slate-react";
 import { TOOLBAR_BUTTONS } from "../utils/constants";
-import { isBlock } from "slate";
 
 const Toolbar = ({ toggleMark, isMarkActive, toggleBlock, isBlockActive }) => {
   const editor = useSlate();
@@ -17,12 +15,14 @@ const Toolbar = ({ toggleMark, isMarkActive, toggleBlock, isBlockActive }) => {
   ];
 
   const buttonsData = {
-    classNames: "btn m-1 p-1 border-0 rounded-0 fw-normal btn-secondary",
+    classNames: "btn m-1 p-1 rounded-2 fw-normal btn-secondary",
     onBtnMouseOver: (e) => {
       e.classList.add("text-light");
+      e.classList.add("bg-dark");
     },
     onBtnMouseOut: (e) => {
       e.classList.remove("text-light");
+      e.classList.remove("bg-dark");
     },
   };
 
@@ -45,13 +45,13 @@ const Toolbar = ({ toggleMark, isMarkActive, toggleBlock, isBlockActive }) => {
                     ? " bg-dark text-light"
                     : "")
                 }
-                onMouseOver={(e) => buttonsData.onBtnMouseOver(e.target)}
-                onMouseOut={(e) => buttonsData.onBtnMouseOut(e.target)}
+                // onMouseOver={(e) => buttonsData.onBtnMouseOver(e.target)}
+                // onMouseOut={(e) => buttonsData.onBtnMouseOut(e.target)}
                 onClick={(e) => {
                   e.preventDefault();
                   TOOLBAR_BUTTONS[index].mark
-                    ? toggleMark(editor, icon)
-                    : toggleBlock(editor, icon);
+                    ? toggleMark(editor, icon, e.target)
+                    : toggleBlock(editor, icon, e.target);
                 }}
               >
                 <i className={`fas fa-${icon}`}></i>

@@ -11,12 +11,12 @@ const renderFeedQuestion = (question, key) => {
   return (
     <div key={key}>
       <div className="feed-question m-2">
-        <div className="container-fluid  question-title-author d-flex justify-content-between align-items-center">
+        <div className="container-fluid question-title-author d-flex justify-content-between align-items-start">
           <NavLink
-            className="fs-4 text-decoration-none fw-bold"
+            className="fs-4 text-decoration-none fw-bold question-title p-2"
             to={`/question/${question._id}`}
           >
-            {question.title.slice(0, 40) + "..."}
+            {question.title}
           </NavLink>
           <div className="askedBy-data d-flex justify-content-center align-items-center flex-column mt-2">
             <Image
@@ -33,9 +33,6 @@ const renderFeedQuestion = (question, key) => {
               {question.askedByUserName}
             </NavLink>
           </div>
-        </div>
-        <div className="container-fluid question-content">
-          <RichText data={JSON.parse(question.content)} readOnly />
         </div>
         <Interactions
           entityId={question._id}

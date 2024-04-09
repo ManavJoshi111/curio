@@ -68,14 +68,14 @@ const Question = () => {
   };
 
   return (
-    <div className="container border p-0 border-dark">
-      <Card className="question-card">
+    <div className="container shadow-lg rounded-4 mt-4 pt-2">
+      <Card className="question-card border-0">
         <CardBody>
           <div className="d-flex justify-content-between">
             <CardText className="question-title mx-2">
               <span className="fw-bold fs-3">{questionById.title}</span>
             </CardText>
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex justify-content-between align-items-start">
               {(questionById.userId === user._id ||
                 user.role === "moderator") && (
                 <>
@@ -112,15 +112,15 @@ const Question = () => {
             )}
           </div>
           <CardText className="question-metadata p-0 m-0">
+            <div className="text-muted">
+              Asked by: {questionById?.userName} on{" "}
+              {formatDate(questionById.createdAt)}
+            </div>
             <Interactions
               entityId={questionById._id}
               isDownvoted={questionById.isDownvoted}
               isUpvoted={questionById.isUpvoted}
             />
-            <div className="text-muted">
-              Asked by: {questionById?.userName} on{" "}
-              {formatDate(questionById.createdAt)}
-            </div>
             {/* <div className="d-flex align-items-center">
               <span className="text-muted me-2">
                 {questionById.upVotes} upvotes, {questionById.downVotes}{" "}
@@ -131,17 +131,17 @@ const Question = () => {
           </CardText>
         </CardBody>
       </Card>
-      <h1 className="fw-bold fs-3 m-3">Discussion on the question</h1>
+      <h1 className="fw-bold fs-3 m-3">Discussions on the question</h1>
       {answerLoading ? (
         <Loading />
       ) : (
-        <div className="feed-container">
+        <div className="feed-container w-100">
           {answers.length ? (
             answers?.map((answer) => {
               return (
                 <>
                   <div key={answer._id}>
-                    <div className="feed-question m-2 mb-0">
+                    <div className="feed-question m-2 mb-0 p-1">
                       <div className="container-fluid  question-title-author d-flex justify-content-between align-items-center">
                         <h1
                           className="fs-4 text-decoration-none fw-bold"
@@ -203,7 +203,7 @@ const Question = () => {
                       </div>
                     </div>
                     <br />
-                    <div className="container mb-2 mt-1">
+                    <div className="container mb-2">
                       <Interactions
                         entityId={answer._id}
                         isDownvoted={answer.isDownvoted}
