@@ -17,10 +17,10 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
   - [x] View Answers
   - [ ] Request Answers from Other Users
 
-- [] Vote & Comment Module:
+- [x] Vote & Comment Module:
 
   - [x] Vote(Upvote & Downvote) Answers
-  - [ ] Comment on Answers
+  - [x] Comment on Answers
 
 - [ ] Badge System Module:
 
