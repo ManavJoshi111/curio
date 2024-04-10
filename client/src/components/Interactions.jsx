@@ -31,10 +31,10 @@ const Interactions = ({ entityId, isUpvoted = false, isDownvoted = false }) => {
 
   return (
     <>
-      <div className="container-fluid interactions d-flex justify-content-end gap-1 mt-2 fs-4 p-2">
+      <div className="container-fluid interactions d-flex justify-content-end gap-2 mt-2 fs-4 p-2">
         <div
           className={
-            "border border-secondary rounded upvote fs-3" +
+            "border border-secondary rounded upvote fs-3 " +
             (upvoted ? "active-upvote" : "")
           }
           onClick={handleUpvote}
@@ -43,7 +43,7 @@ const Interactions = ({ entityId, isUpvoted = false, isDownvoted = false }) => {
         </div>
         <div
           className={
-            "border border-secondary rounded downvote fs-3" +
+            "border border-secondary rounded downvote fs-3 " +
             (downvoted ? "active-downvote" : "")
           }
           onClick={handleDownvote}
@@ -52,7 +52,7 @@ const Interactions = ({ entityId, isUpvoted = false, isDownvoted = false }) => {
         </div>
         <div
           className={
-            "border border-secondary rounded fs-3" +
+            "border border-secondary rounded fs-3 comment-section" +
             (showCommentSection ? " active-comment" : "")
           }
           onClick={() => setShowCommentSection(!showCommentSection)}

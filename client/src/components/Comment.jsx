@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { formatDate } from "../utils/FormatDate";
 
 const Comment = ({ commentData }) => {
   return (
@@ -22,11 +23,14 @@ const Comment = ({ commentData }) => {
         </div>
         <div className="comment-content ms-1 p-1">
           <NavLink
-            className="comment-username text-decoration-none"
+            className="comment-username fw-bold text-decoration-none"
             to={`/profile/${commentData?.userId?._id}`}
           >
             {commentData?.userId?.name}
           </NavLink>
+          <span className="fs-6">
+            &nbsp; ({formatDate(commentData.createdAt)})
+          </span>
           <p className="comment-text mb-0">{commentData.content}</p>
         </div>
       </Card.Body>

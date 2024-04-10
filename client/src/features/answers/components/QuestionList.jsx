@@ -53,6 +53,7 @@ const QuestionList = () => {
       {questionsByTopic?.data &&
         questionsByTopic?.data?.map((question, index) => (
           <Card
+            classes="mb-2"
             key={index}
             id={index}
             title={question.title}

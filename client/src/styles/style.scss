@@ -102,28 +102,27 @@ code {
 }
 
 .interactions *:hover {
-  background-color: #747474;
   cursor: pointer;
 }
 
 .upvote:hover {
-  background-color: #444444;
+  box-shadow: 1px 1px 1px 1px #222222;
 }
 
 .active-upvote {
-  background-color: #444444;
+  background-color: #d4ffdaa8;
 }
 
 .downvote:hover {
-  background-color: #666666;
+  box-shadow: 1px 1px 1px 1px #222222;
 }
 
 .active-downvote {
-  background-color: #666666;
+  background-color: #ffc9c9a2;
 }
 
 .active-comment {
-  background-color: #666666;
+  box-shadow: 1px 1px 1px 1px #222222;
 }
 
 // Required
