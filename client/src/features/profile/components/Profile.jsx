@@ -243,17 +243,17 @@ const Profile = () => {
           <Tab eventKey="answers" title="Answers">
             <UserAnswers userId={id} />
           </Tab>
-          <Tab eventKey="following" title="Following">
-            {/* <Users /> */}
-          </Tab>
-          <Tab eventKey="followers" title="Followers">
-            {/* <UserCard key={user.id} user={user} /> */}
-          </Tab>
-          <Tab eventKey="spaces" title="Spaces">
-            {/* {spaces.map((space) => (
+          {/* <Tab eventKey="following" title="Following">
+            <Users />
+          </Tab> */}
+          {/* <Tab eventKey="followers" title="Followers">
+            <UserCard key={user.id} user={user} />
+          </Tab> */}
+          {/* <Tab eventKey="spaces" title="Spaces">
+            {spaces.map((space) => (
             <SpaceCard key={space.id} space={space} />
-          ))} */}
-          </Tab>
+          ))}
+          </Tab> */}
         </Tabs>
       </Container>
       {showModal && (

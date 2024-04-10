@@ -14,9 +14,9 @@ const Answer = () => {
           <Tab eventKey="interests" title="Interests">
             <QuestionList />
           </Tab>
-          <Tab eventKey="question-for-you" title="For you">
+          {/* <Tab eventKey="question-for-you" title="For you">
             Questions for you
-          </Tab>
+          </Tab> */}
         </Tabs>
       </div>
     </>

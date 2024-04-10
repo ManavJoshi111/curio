@@ -144,7 +144,7 @@ const Signup = () => {
                     />
                   </div>
                 </Form.Group>
-                {true && (
+                {showOtp && (
                   <>
                     <Form.Group className="pt-2 mb-2 fw-bold d-flex w-100 justify-content-center align-items-center">
                       <div className="d-flex justify-content-start align-items-start flex-column w-50">
@@ -169,7 +169,7 @@ const Signup = () => {
                     </div>
                   </>
                 )}
-                {!true && (
+                {!showOtp && (
                   <div className="d-flex justify-content-start align-items-center flex-column mt-4">
                     <p className="text-start m-0 p-1 ps-0">
                       Already Have an Account? &nbsp;
