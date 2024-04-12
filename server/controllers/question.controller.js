@@ -2,6 +2,7 @@ const {
   getQuestionsByCondition,
   getQuestionWithAuthor,
   getUserFeed: getUserFeedQuery,
+  searchQuestion: searchQuestionQuery,
 } = require("../DB/queries/Question");
 const sendResponse = require("../handlers/response.handler");
 const {
@@ -265,5 +266,55 @@ exports.getUserFeed = async (req, res) => {
   } catch (err) {
     console.error(err);
     sendResponse(res, 500, false, "Failed to fetch question titles");
+  }
+};
+
+exports.searchQuestion = async (req, res) => {
+  try {
+    let { page, limit, content, date, topic } = req.query;
+    page = +page || PAGINATION_DEFAULT_PAGE;
+    limit = +limit || PAGINATION_DEFAULT_LIMIT;
+
+    const condition = {};
+
+    // Add content filter
+    if (content) {
+      condition.title = { $regex: content, $options: "i" };
+    }
+
+    // Add date filter
+    if (date) {
+      const startOfDay = new Date(date);
+      const endOfDay = new Date(date);
+      endOfDay.setDate(endOfDay.getDate() + 1);
+      condition.createdAt = {
+        $gte: startOfDay,
+        $lt: endOfDay,
+      };
+    }
+
+    const [queryData, queryCount] = await Promise.all([
+      searchQuestionQuery(condition, false, page, limit),
+      searchQuestionQuery(condition, true),
+    ]);
+
+    const response = {
+      data: queryData,
+      totalRecords: +queryCount?.[0]?.totalRecords || 0,
+      page,
+      limit,
+      totalPages: Math.ceil(queryCount?.[0]?.totalRecords / limit) || 0,
+    };
+
+    sendResponse(
+      res,
+      200,
+      true,
+      "Fetched search results successfully!",
+      response
+    );
+  } catch (err) {
+    console.error(err);
+    sendResponse(res, 500, false, "Failed to fetch search results");
   }
 };
