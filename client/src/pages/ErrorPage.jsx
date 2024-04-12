@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/ErrorPage.css";
 
-// this is a random commit in the main branch to know if I an push or not
 const ErrorPage = () => {
   return (
     <div className="error-page">
