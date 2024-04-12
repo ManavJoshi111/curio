@@ -54,9 +54,7 @@ const App = () => {
       return <Router />;
     } else {
       return (
-        <div className="vh-100 vw-100">
           <Loading />
-        </div>
       );
     }
   } else {
