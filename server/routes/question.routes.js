@@ -12,6 +12,7 @@ router.get(
 );
 router.post("/by-topic", authenticate, questionController.getQuestionByTopics);
 router.get("/feed", authenticate, questionController.getUserFeed);
+router.get("/search", authenticate, questionController.searchQuestion);
 
 // Basic CRUD - Question
 router.post("/", authenticate, questionController.addQuestion);

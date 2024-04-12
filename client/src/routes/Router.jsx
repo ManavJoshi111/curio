@@ -16,6 +16,7 @@ import EditQuestion from "../features/questions/components/EditQuestion";
 import SpacePage from "../features/space/SpacePage";
 import SpaceViewPage from "../features/space/SpaceViewPage";
 import EditAnswer from "../features/answers/components/EditAnswer";
+import Search from "../components/Search";
 
 const Router = () => {
   return (
@@ -33,6 +34,7 @@ const Router = () => {
           <Route path="edit-answer/:id" element={<EditAnswer />} />
           <Route path="profile" element={<Profile />} />
           <Route path="profile/:id" element={<Profile />} />
+          <Route path="search" element={<Search />} />
           <Route path="space" element={<SpacePage />} />
           <Route path="space/:id" element={<SpaceViewPage />} />
           <Route path="logout" element={<Logout />} />

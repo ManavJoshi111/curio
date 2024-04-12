@@ -61,8 +61,10 @@ const AddQuestion = () => {
   }
   return (
     <>
-      <div className="container shadow-lg rounded-4 mt-4 pt-2">
-        <div className="fs-3 fw-bold mt-0 pt-0">Add a new question </div>
+      <div className="container shadow-lg rounded-4 mt-4 pt-2 p-3">
+        <div className="fs-3 fw-bold mt-0 pt-0">
+          Add a new question <i class="fas fa-question-circle"></i>{" "}
+        </div>
         <div className="d-flex flex-column mb-3 align-items-start pt-1">
           <label htmlFor="question-title" className="fw-bold me-2">
             Title:
@@ -103,7 +105,7 @@ const AddQuestion = () => {
           <RichText data={question} setData={setQuestion} />
         </div>
         <Button className="mt-3 ms-auto p-2 m-2" onClick={handleAddQuestion}>
-          Submit
+          Submit 🚀
         </Button>
       </div>
     </>

@@ -243,3 +243,33 @@ exports.getUserFeed = (
   }
   return Question.aggregate(pipeline);
 };
+
+exports.searchQuestion = (condition, count = false, page, limit) => {
+  console.log("Condition", condition);
+  const pipeline = [
+    {
+      $match: condition,
+    },
+  ];
+
+  if (count) {
+    pipeline.push({
+      $count: "totalRecords",
+    });
+  } else {
+    pipeline.push(
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
+      {
+        $limit: page * limit,
+      },
+      {
+        $skip: (page - 1) * limit,
+      }
+    );
+  }
+  return Question.aggregate(pipeline);
+};

@@ -1,7 +1,11 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import ReactNavbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import {
+  Container,
+  Nav,
+  Navbar as ReactNavbar,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Image } from "react-bootstrap";
@@ -38,11 +42,14 @@ const Navbar = () => {
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/space">
                 Space
               </Nav.Link>
+              <Nav.Link className="px-3 fs-5" as={NavLink} to="/search">
+                Search
+              </Nav.Link>
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/logout">
                 Logout
               </Nav.Link>
               <Nav.Link
-                className="px-3 fs-5 ms-auto me-2"
+                className="px-3 fs-5 me-2 ms-auto"
                 as={NavLink}
                 to="/profile"
               >
