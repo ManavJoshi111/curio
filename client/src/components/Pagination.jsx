@@ -5,7 +5,7 @@ const Pagination = ({ handleFn, currentPage, totalPages, className = "" }) => {
   return (
     <BPagination className={className}>
       <BPagination.First onClick={() => handleFn(1)} />
-      {[...Array(totalPages)].map((_, index) => (
+      {[...Array(totalPages)].slice(0,20).map((_, index) => (
         <BPagination.Item
           key={index}
           active={index + 1 === +currentPage}
