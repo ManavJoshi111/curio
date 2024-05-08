@@ -39,9 +39,9 @@ const Navbar = () => {
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/answer-section">
                 Add Answer
               </Nav.Link>
-              <Nav.Link className="px-3 fs-5" as={NavLink} to="/space">
+              {/* <Nav.Link className="px-3 fs-5" as={NavLink} to="/space">
                 Space
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link className="px-3 fs-5" as={NavLink} to="/search">
                 Search
               </Nav.Link>

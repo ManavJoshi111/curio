@@ -156,6 +156,7 @@ const EditProfile = ({ showModal, setShowModal, user }) => {
 const Profile = () => {
   let [user, setUser] = useState(); // state to set the user whose profie is being rendered
   let [loading, setLoading] = useState();
+  const [questionCount, setQuestionCount] = useState();
   const dispatch = useDispatch();
   const { id } = useParams();
   let {
@@ -204,6 +205,20 @@ const Profile = () => {
           </Col>
           <Col xs={9}>
             <h1 className="display-4 mb-0">{user.name}</h1>
+            {questionCount > 10 && (
+              <span className="badge rounded-pill bg-success">Pro User</span>
+            )}
+            {questionCount > 5 && questionCount <= 10 && (
+              <span className="badge rounded-pill bg-warning">
+                Intermediate User
+              </span>
+            )}
+            {questionCount <= 5 && (
+              <span className="badge rounded-pill bg-info">Beginner User</span>
+            )}
+            {!questionCount && (
+              <span className="badge rounded-pill bg-primary">Loading</span>
+            )}
             <p className="lead mb-1">{user.bio}</p>
             {!id && (
               <Button
@@ -238,7 +253,7 @@ const Profile = () => {
         <h2 className="text-center">Activity</h2>
         <Tabs>
           <Tab eventKey="questions" title="Questions">
-            <UserQuestions userId={id} />
+            <UserQuestions userId={id} setQuestionCount={setQuestionCount} />
           </Tab>
           <Tab eventKey="answers" title="Answers">
             <UserAnswers userId={id} />

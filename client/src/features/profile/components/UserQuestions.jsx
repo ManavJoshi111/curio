@@ -10,8 +10,7 @@ import Card from "../../../components/Card";
 import Loading from "../../../components/Loading";
 import Pagination from "../../../components/Pagination";
 
-// TODO : Handle pagination
-const UserQuestions = ({ userId }) => {
+const UserQuestions = ({ userId, setQuestionCount }) => {
   const [titles, setTitles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -29,12 +28,14 @@ const UserQuestions = ({ userId }) => {
         }`
       );
       setTitles(res?.data);
+      setQuestionCount(res?.data?.totalRecords || 0);
     } catch (error) {
       setError(error);
     } finally {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchQuestionTitles();
   }, []);
