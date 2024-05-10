@@ -9,24 +9,23 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
   - [x] Logout
   - [x] Email Verification with OTP
 
-- [ ] Question & Answers Module:
+- [x] Question & Answers Module:
 
   - [x] Create Questions
   - [x] View Questions
   - [x] Answer Questions
   - [x] View Answers
-  - [ ] Request Answers from Other Users
 
 - [x] Vote & Comment Module:
 
   - [x] Vote(Upvote & Downvote) Answers
   - [x] Comment on Answers
 
-- [-] Badge System Module:
+- [x] Badge System Module:
 
-  - [-] Pro Badge
-  - [-] Intermediate Badge
-  - [-] Beginner Badge
+  - [x] Pro Badge
+  - [x] Intermediate Badge
+  - [x] Beginner Badge
 
 ---
 
