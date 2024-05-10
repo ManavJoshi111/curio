@@ -22,13 +22,11 @@ Curio is a platform designed to spark curiosity by enabling users to ask questio
   - [x] Vote(Upvote & Downvote) Answers
   - [x] Comment on Answers
 
-- [ ] Badge System Module:
+- [-] Badge System Module:
 
-  - [ ] Newbie Badge
-  - [ ] Explorer Badge
-  - [ ] Learner Badge
-  - [ ] Specialist Badge
-  - [ ] Additional Badge System (TBD)
+  - [-] Pro Badge
+  - [-] Intermediate Badge
+  - [-] Beginner Badge
 
 ---
 
